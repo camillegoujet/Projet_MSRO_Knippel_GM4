@@ -11,6 +11,10 @@ c.execute('''CREATE TABLE users
 c.execute('''INSERT INTO users
 VALUES('admin','mdpAdmin')''')
 
+def maBelleFonction(nombre):
+    return nombre*3
+
+
 print("wsh")
 
 def f(x) :
