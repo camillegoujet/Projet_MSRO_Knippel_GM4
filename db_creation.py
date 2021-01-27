@@ -13,6 +13,9 @@ VALUES('admin','mdpAdmin')''')
 
 print("wsh")
 
+def f(x) :
+	return x
+
 conn.commit()
 
 conn.close()
