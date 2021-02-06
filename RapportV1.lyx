@@ -1,0 +1,319 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsbook
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+algorithm2e
+tcolorbox
+foottoend
+\end_modules
+\maintain_unincluded_children false
+\language french
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\boxbgcolor #baedc3
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Projet semestriel: Découpage éléctoral
+\end_layout
+
+\begin_layout Author
+Israa BEN SASSI, Camille GOUJET et Victor LESUR
+\begin_inset Newline newline
+\end_inset
+
+à l'attention de Arnauld KNIPPEL
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Illustration du découpage éléctoral en France
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+@@@@@@@@@@@@@@
+\begin_inset Newline newline
+\end_inset
+
+@@@@@@@@@@@@@@@@@@@@@
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Partie théorique
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Section
+Généralité
+\end_layout
+
+\begin_layout Section
+Quelque définition importante
+\end_layout
+
+\begin_layout Definition
+
+\series bold
+Découpage électoral
+\series default
+ 
+\end_layout
+
+\begin_layout Definition
+Le découpage électoral est le mécanisme par lequel le territoire national
+ est subdivisé en 
+\emph on
+circonscriptions électorales
+\emph default
+, destinées à permettre et favoriser l'expression des citoyens par le vote.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark*
+En France, le mécanisme du découpage électoral est utilisé pour les élections
+ législatives, les élections sénatoriales et les élections au Conseil départemen
+tal
+\end_layout
+
+\begin_layout Definition
+
+\series bold
+Circonscription électorale
+\end_layout
+
+\begin_layout Definition
+La circonscription électorale est une division du territoire effectuée dans
+ le cadre d'une élection.
+ Chaque citoyen est rattaché à une circonscription et à une seule dans le
+ cadre d'un vote.
+ La circonscription peut être utilisée dans le cadre des scrutins majoritaires
+ ou dans le cadre des scrutins de liste (scrutins proportionnels).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+10000 électeurs, 10 circonscriptions de 1000 électeurs, deux partis A et
+ B, le premier recueillant 4000 suffrages et le second 6000.
+ 
+\end_layout
+
+\begin_layout Itemize
+6 circonscriptions gagnées par le parti A avec 53,3% des voix soit 3200
+ voix pour A et 2800 voix pour B 
+\end_layout
+
+\begin_layout Itemize
+4 circonscriptions gagnées par le parti B avec 80% des voix, soit 800 voix
+ pour A et 3200 voix pour B.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Le parti B perd les élections bien qu'il soit largement majoritaire en nombre
+ de voix.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Modéliser le découpage
+\end_layout
+
+\begin_layout Standard
+Grace a l'exemple ci-dessus on remarque que le découpage électoral peut
+ grandement influencer le résultat d'une élection.
+ Bien modéliser ce découpage est alors essentiel que notre but soit de favoriser
+ un camp ou d'essayer de crée des conditions les plus équitable possible.
+ Pour commencer nous allons vous proposer la modélisation suivante.
+\end_layout
+
+\begin_layout Standard
+Chaque circonscription se décompose en brique élémentaire que sont des quartiers
+ (le prof utilisait un autre mot).
+ Ces quartiers seront dans notre modèle tous de même taille (contenant le
+ même nombre de votants) et assimilé a des nœuds d'un graphe.
+ Chaque quartier est relier par des arrêtes au autre quartiers limitrophe.
+ Pour simplifier nous allons postuler qu'il y a deux parties A et B.
+ Ainsi on attribua un poids a chaque nœuds correspondant a un réel entre
+ 0 et 1 qui traduit le pourcentage de votant qui soutiennent le parti A.
+ Donc si le poids est de 0 tout les votants soutiennent le parti B et si
+ le poids est de 1 tout les votants soutiennent le parti A.
+\end_layout
+
+\begin_layout Standard
+Créé les circonscriptions a partir du graphe revient a résoudre un problème
+ de classification (supervisé / non supervisé ??) Pour rajouter un minimum
+ de réalisme on peut exiger que les circonscription soit d'un seul tenant.
+ C'est a dire rajouté une contrainte de connexité entre les nœuds d'une
+ même classe.
+\end_layout
+
+\begin_layout Standard
+Si l'on reprend l'exemple d'avant de 10000 électeurs a répartir sur 10 circonscr
+iptions de 1000 électeurs.
+ On peut imaginer que les électeurs se répartisse sur des quartiers de 100
+ électeurs ou tous soutiennent soit un parti soit l'autre ce qui donne 40
+ quartier pour le parti A et 60 pour le parti B.
+ Dans l'exemple ...
+\end_layout
+
+\end_body
+\end_document
