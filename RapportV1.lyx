@@ -277,46 +277,43 @@ Modéliser le découpage
 \end_layout
 
 \begin_layout Standard
-Grace a l'exemple ci-dessus on remarque que le découpage électoral peut
+Grâce à l'exemple ci-dessus, on remarque que le découpage électoral peut
  grandement influencer le résultat d'une élection.
- Bien modéliser ce découpage est alors essentiel que notre but soit de favoriser
- un camp ou d'essayer de crée des conditions les plus équitable possible.
- Pour commencer nous allons vous proposer la modélisation suivante.
+ Bien modéliser ce découpage est alors essentiel, que notre but soit de favoriser
+ un camp ou d'essayer de créer des conditions les plus équitables possible.
+ Pour commencer, nous allons vous proposer la modélisation suivante :
 \end_layout
 
 \begin_layout Standard
-Chaque circonscription se décompose en brique élémentaire que sont les cantons.
+Chaque circonscription se décompose en "brique" élémentaire que sont les cantons.
  Ces cantons seront dans notre modèle tous de même taille (contenant le
- même nombre de votants) et assimilé a des nœuds d'un graphe.
- Chaque quartier est relier par des arrêtes au autre quartiers limitrophe.
- Pour simplifier nous allons postuler qu'il y a deux parties A et B.
- Ainsi on attribua un poids a chaque nœuds correspondant a un réel entre
- 0 et 1 qui traduit le pourcentage de votant qui soutiennent le parti A.
- Donc si le poids est de 0 tout les votants soutiennent le parti B et si
- le poids est de 1 tout les votants soutiennent le parti A.
+ même nombre de votants) et assimilés à des nœuds d'un graphe.
+ Chaque quartier est relié par des arêtes aux autres quartiers limitrophes.
+ Pour simplifier, nous allons considérer seulement deux partis A et B.
+ Ainsi, on attribua un poids à chaque nœud correspondant à un réel entre
+ 0 et 1 qui traduit le pourcentage de votants qui soutiennent le parti A.
+ Donc si le poids est de 0, tous les votants soutiennent le parti B et si
+ le poids est de 1, tous les votants soutiennent le parti A.
 \end_layout
 
 \begin_layout Standard
-Créé les circonscriptions a partir du graphe revient a résoudre un problème
- de classification non supervisé.
- Pour rajouter un minimum de réalisme on peut exiger que les circonscription
- soit d'un seul tenant.
- C'est a dire rajouté une contrainte de connexité entre les nœuds d'une
+Créer les circonscriptions à partir du graphe revient à résoudre un problème
+ de classification non supervisée.
+ Pour rajouter un minimum de réalisme, on peut exiger que les circonscriptions
+ soit d'un seul tenant, c'est-à-dire rajouter une contrainte de connexité entre les nœuds d'une
  même classe.
 \end_layout
 
 \begin_layout Standard
-Si l'on reprend l'exemple d'avant de 10000 électeurs a répartir sur 10 circonscr
-iptions de 1000 électeurs.
- On peut imaginer que les électeurs se répartisse sur des cantons de 200
+Si l'on reprend l'exemple précédent de 10 000 électeurs à répartir sur 10 circonscriptions de 1000 électeurs, on peut imaginer que les électeurs se répartissent sur des cantons de 200
  électeurs ou 16 cantons soutiennent le parti B (poids 0), 28 soutiennent
  le parti A (poids 1) et 6 sont des cantons de poids 0,33.
- Alors on peut répartir c'est cantons de façon a obtenir 4 circonscriptions
- avec un canton B et 4 cantons A et 6 circonscription avec 2 cantons A,
- 2cantons B et un canton de poids 0,33.
- Avec cette répartition le parti B remporte une majorité de circonscription
- sans pour autant remporter le plus de voix.
- Cette répartition est représenter par le graphe ci-dessous.
+ Alors on peut répartir ces cantons de façon à obtenir 4 circonscriptions
+ avec un canton B et 4 cantons A et 6 circonscriptions avec 2 cantons A,
+ 2 cantons B et un canton de poids 0,33.
+ Avec cette répartition, le parti B remporte une majorité de circonscriptions
+ sans pour autant remporter le plus grand nombre de voix.
+ Cette répartition est représentée par le graphe ci-dessous :
 \end_layout
 
 \begin_layout Standard
