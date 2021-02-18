@@ -87,7 +87,7 @@ foottoend
 \begin_body
 
 \begin_layout Title
-Projet semestriel: Découpage éléctoral
+PROJET SEMESTRIEL : DÉCOUPAGE ÉLECTORAL
 \end_layout
 
 \begin_layout Author
@@ -107,7 +107,7 @@ Israa BEN SASSI, Camille GOUJET et Victor LESUR
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -154,15 +154,106 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Abstract
-@@@@@@@@@@@@@@
+Le découpage électoral est le mécanisme par lequel le territoire national
+ est subdivisé en circonscriptions électorales, destinées à permettre et
+ favoriser l'expression des citoyens par le vote.
+ 
 \begin_inset Newline newline
 \end_inset
 
-@@@@@@@@@@@@@@@@@@@@@
+Ce découpage est l'objet récurrent de polémiques, sinon d'actions en justice.
+ Car il est orchestré au niveau de chaque État par les gouverneurs et ceux-ci
+ ont la fâcheuse tendance à faire en sorte de favoriser leur parti.
+ Par exemple, en façonnant des circonscriptions qui fragmentent l'électorat
+ de leur adversaire, pour limiter son nombre d'élus.
+ Ou, au contraire, en rassemblant dans une seule et même circonscription
+ un maximum de votes adverses : ainsi, même avec 80% des voix, cela ne fera
+ jamais qu'un seul élu dans la circonscription.
+ C'est ce que l'on appelle 
+\begin_inset Quotes fld
+\end_inset
+
+gâcher des voix
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Il arrive ainsi qu'à l'échelle d'un pays, un parti a moins d'élus qu'un
+ autre alors qu'il a eu plus de voix.
+ Un exemple? Une certaine Hillary Clinton a perdu la présidentielle en 2016
+ avec plus de 2 millions de votes d'avance sur son adversaire.
 \begin_inset Newline newline
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Ce projet consiste à étudier une ou plusieurs méthodes pour le découpage
+ électoral, et à essayer de mesurer dans quelle mesure peut-on influencer
+ le résultat d'élections par ce découpage.
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Dans un premier temps, nous nous intéresserons à l'histoire de ce mécanisme
+ et redéfinirons quelques notions de base pour que la compréhension du lecteur
+ pour le reste du projet soit optimale.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Nous étudierons ensuite à partir de situations simples et faciles à modéliser
+ de petites bases de données.
+ À partir de celles-ci, nous modéliserons des programmes linéaires en nombres
+ entiers que nous tenterons de résoudre pour en mesurer l'écart des résultats
+ possibles et donc la manipulation partisane que l'on peut en faire pour
+ un camp ou un autre..
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Nous généraliserons nos modèles à des bases de données de plus en plus conséquen
+tes et complexes et en étudierons les aspects.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Enfin, nous tenterons de remédier au problème d'équité qui pèse
+\begin_inset space ~
+\end_inset
+
+sur les partis à chaque nouvelle élection en élaborant une modélisation
+ la plus équitable et représentative possible.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Afin de mener à bien ce projet, nous nous munierons d'un solveur tel que
+ CPLEX pour nous assister dans la résolution de optimisation linéaire.
+\end_layout
+
+\begin_layout Abstract
 \begin_inset Newpage newpage
 \end_inset
 
@@ -181,7 +272,15 @@ Introduction
 Généralités
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
+Histoire 
+\end_layout
+
+\begin_layout Standard
+wsh Victor ça va ou quoi?
+\end_layout
+
+\begin_layout Subsection
 Quelques définitions importantes
 \end_layout
 
