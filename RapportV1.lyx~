@@ -127,7 +127,7 @@ Illustration du découpage éléctoral en France
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -420,7 +420,7 @@ Chaque circonscription se décompose en "brique" élémentaire que sont les
  cantons.
  Ces cantons seront dans notre modèle tous de même taille (contenant le
  même nombre de votants) et assimilés à des nœuds d'un graphe.
- Chaque quartier est relié par des arêtes aux autres cantons limitrophes.
+ Chaque canton est relié par des arêtes aux autres cantons limitrophes.
  Pour simplifier, nous allons considérer seulement deux partis A et B.
  Ainsi, on attribua un poids à chaque nœud correspondant à un réel entre
  0 et 1 qui traduit le pourcentage de votants qui soutiennent le parti A.

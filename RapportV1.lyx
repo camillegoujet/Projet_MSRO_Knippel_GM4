@@ -485,7 +485,7 @@ La fonction économique
 \begin_layout Standard
 Un problème d'optimisation combinatoire est défini par : un énoncé, une
  fonction économique et un sens.
- Dans notre cas l'énoncé, c'est à dire les données, correspond au graphe
+ Dans notre cas l'énoncé, c'est-à-dire les données, correspond au graphe
  
 \begin_inset Formula $G=(X,U)$
 \end_inset
@@ -495,11 +495,12 @@ Un problème d'optimisation combinatoire est défini par : un énoncé, une
 \begin_inset Formula $X=\{x_{1},x_{2},\dots,x_{n}\}$
 \end_inset
 
- l'ensemble des nœuds de notre graphe tel que chaque 
+ l'ensemble des nœuds de notre graphe, tel que chaque 
 \begin_inset Formula $x_{i}$
 \end_inset
 
- correspond a un cantons et on lui associe les variables 
+ correspond à un canton.
+ On lui associe les variables 
 \begin_inset Formula $nbV_{i},pV_{i}$
 \end_inset
 
@@ -517,25 +518,25 @@ Notre objectif est de définir
 \end_inset
 
  est un ensemble connexe de 
+\begin_inset Formula $X,$
+\end_inset
+
+ où un élément de 
 \begin_inset Formula $X$
 \end_inset
 
- ou un élément de 
-\begin_inset Formula $X$
-\end_inset
-
- n'appartient a un seul 
+ n'appartient qu'à un seul 
 \begin_inset Formula $K$
 \end_inset
 
 .
- Plaçons nous dans un premier temps de la situation ou notre objectif est
- de faire gagner le parti A.
+ Plaçons nous dans un premier temps dans la situation où notre objectif
+ est de faire gagner le parti A.
  Nous pouvons commencer par définir la fonction 
 \begin_inset Formula $p$
 \end_inset
 
- qui calcul le poids du parti A dans un cantons donné.
+ qui calcule le poids du parti A dans un canton donné.
 \begin_inset Formula 
 \begin{align*}
 p: & X\rightarrow\mathbb{R^{+}}\\
@@ -595,13 +596,13 @@ Ainsi la fonction
 \begin_inset Formula $f(K)=1$
 \end_inset
 
-) ou si c'est le parti B qui remporte la circonscription (
+), ou si c'est le parti B qui remporte la circonscription (
 \begin_inset Formula $f(K)=0$
 \end_inset
 
 ).
  Si notre objectif est de faire gagner le plus de circonscriptions au parti
- A on peut définir le problème suivant :
+ A, on peut définir le problème suivant :
 \begin_inset Formula 
 \[
 max\stackrel[j=1]{k}{\sum}f(K_{j})
@@ -613,8 +614,8 @@ max\stackrel[j=1]{k}{\sum}f(K_{j})
 \end_layout
 
 \begin_layout Standard
-Inversement si notre objectif est de faire gagner le plus de circonscriptions
- au parti B il suffit de poser :
+Inversement, si notre objectif est de faire gagner le plus de circonscriptions
+ au parti B, il suffit de poser :
 \begin_inset Formula 
 \[
 min\stackrel[j=1]{k}{\sum}f(K_{j})
@@ -627,10 +628,10 @@ min\stackrel[j=1]{k}{\sum}f(K_{j})
 
 \begin_layout Standard
 Remarquons que dans notre formulation nous avons posé une contrainte de
- façon a ce que les circonscription soit d'un seul tenant mais nous n'avons
- pas imposé de contrainte de taille sur les circonscription.
+ façon à ce que les circonscription soient d'un seul tenant, mais nous n'avons
+ pas imposé de contrainte de taille sur les circonscriptions.
  Pour cela nous pouvons nous inspirer des contraintes qui existent sur la
- taille des circonscriptions eu France.
+ taille des circonscriptions en France.
  La règle est que le nombre de votants d'une circonscription doit être compris
  entre 
 \begin_inset Formula $80\%$
@@ -658,7 +659,7 @@ Remarquons que dans notre formulation nous avons posé une contrainte de
 
 \begin_layout Standard
 Notons aussi que si notre objectif n'est pas de favoriser un camp ou un
- autre alors l'utilisation de la fonction 
+ autre, alors l'utilisation de la fonction 
 \begin_inset Formula $f$
 \end_inset
 
