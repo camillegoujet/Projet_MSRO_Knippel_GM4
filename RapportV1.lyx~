@@ -262,7 +262,7 @@ Afin de mener à bien ce projet, nous nous munierons d'un solveur tel que
 \end_layout
 
 \begin_layout Part
-Partie théorique
+PARTIE THÉORIQUE
 \end_layout
 
 \begin_layout Chapter
@@ -375,7 +375,11 @@ Circonscription électorale
 \begin_layout Definition
 La circonscription électorale est une division du territoire effectuée dans
  le cadre d'une élection.
- Chaque citoyen est rattaché à une circonscription et à une seule dans le
+ 
+\begin_inset Newline newline
+\end_inset
+
+Chaque citoyen est rattaché à une circonscription et à une seule dans le
  cadre d'un vote.
  La circonscription peut être utilisée dans le cadre des scrutins majoritaires
  ou dans le cadre des scrutins de liste (scrutins proportionnels).
@@ -442,11 +446,7 @@ Grâce à l'exemple ci-dessus, on remarque que le découpage électoral peut
 
 \begin_layout Standard
 Chaque circonscription se décompose en "brique" élémentaire que sont les
- 
-\series bold
-cantons
-\series default
-.
+ cantons.
  Ces cantons seront dans notre modèle assimilés à des nœuds d'un graphe.
  Chaque canton est relié par des arêtes aux autres cantons limitrophes.
  Pour simplifier, nous allons considérer seulement deux partis A et B.
@@ -454,6 +454,14 @@ cantons
  0 et 1 qui traduit le pourcentage de votants qui soutiennent le parti A.
  Donc si le poids est de 0, tous les votants soutiennent le parti B et si
  le poids est de 1, tous les votants soutiennent le parti A.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -466,10 +474,21 @@ Créer les circonscriptions à partir du graphe revient à résoudre un problèm
  En effet, chaque circonscription ayant un seul élu, on peut influencer
  le nombre d'élus obtenu par un parti en découpant différemment les circonscript
 ions.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
  Pour rajouter un minimum de réalisme, on peut exiger que les circonscriptions
  soit d'un seul tenant, c'est-à-dire rajouter une 
 \series bold
 contrainte de connexité entre les nœuds d'une même classe.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
@@ -610,7 +629,7 @@ pourcentage de votants qui soutiennent le parti A
 
 \end_layout
 
-\begin_layout Remark
+\begin_layout Standard
 Notre objectif est de définir 
 \begin_inset Formula $k$
 \end_inset
@@ -696,10 +715,7 @@ La fonction
 \end_inset
 
  sur le nombre totale de votant dans cette même circonscription.
-\end_layout
-
-\begin_layout Standard
-Ceci nous permet de définir fonction économique 
+ Ceci nous permet de définir fonction économique 
 \begin_inset Formula $f$
 \end_inset
 
