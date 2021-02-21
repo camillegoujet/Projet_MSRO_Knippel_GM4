@@ -91,11 +91,11 @@ PROJET SEMESTRIEL : DÉCOUPAGE ÉLECTORAL
 \end_layout
 
 \begin_layout Author
-ISRAA BEN SASSI, CAMILLE GOUJET ET VICTOR LESUR
+Israa BEN SASSI, Camille GOUJET et Victor LESUR
 \begin_inset Newline newline
 \end_inset
 
-À L'ATTENTION DE ARNAUD KNIPPEL
+à l'attention de Arnauld KNIPPEL
 \begin_inset Newline newline
 \end_inset
 
@@ -127,7 +127,7 @@ Illustration du découpage éléctoral en France
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
@@ -195,8 +195,8 @@ gâcher des voix
 
 
 \series bold
-Ce projet consiste à étudier une ou plusieurs méthodes de découpage électoral,
- et à essayer de comprendre et démontrer dans quelle mesure on peut influencer
+Ce projet consiste à étudier une ou plusieurs méthodes pour le découpage
+ électoral, et à essayer de mesurer dans quelle mesure peut-on influencer
  le résultat d'élections par ce découpage.
 \series default
 
@@ -250,8 +250,7 @@ sur les partis à chaque nouvelle élection en élaborant une modélisation
 \end_inset
 
 Afin de mener à bien ce projet, nous nous munierons d'un solveur tel que
- CPLEX pour nous assister dans la résolution de problèmes d'optimisation
- linéaire.
+ CPLEX pour nous assister dans la résolution de optimisation linéaire.
 \end_layout
 
 \begin_layout Abstract
@@ -279,41 +278,25 @@ Histoire
 
 \begin_layout Standard
 Le découpage électoral partisan des circonscriptions, aussi connu sous le
- nom de 
-\begin_inset Quotes fld
-\end_inset
-
-gerrymandering
-\begin_inset Quotes frd
-\end_inset
-
-, est une pratique qui n'est pas récente et qui est sûrement concomitante
- d'élections de représentants dans ces circonscriptions.
+ nom de gerrymandering, est une pratique qui n'est pas récente et qui est
+ sûrement concomitante d'élections de représentants dans ces circonscriptions.
  Néanmoins, c'est avec l'apparition des démocraties représentatives modernes,
  d'abord les États-Unis puis la France, que la question est mis sur le devant
  de la scène.
- Ainsi, le terme 
-\begin_inset Quotes fld
-\end_inset
-
-gerrymandering
-\begin_inset Quotes frd
-\end_inset
-
- nous vient des USA et fait référence à un découpage effectué par le gouverneur
- Elbridge Gerry.
+ Ainsi, le terme gerrymandering nous vient des USA et fait référence à un
+ découpage effectué par le gouverneur Elbridge Gerry.
  Ce découpage était si bizarre qu'il rappelait la forme d'une salamandre,
  d’où le mot-valise gerrymandering (composé de Gerry et salamandre).
 \end_layout
 
 \begin_layout Standard
 De nos jours avec des outils de recensement d'une plus grande précision
- et des outils informatiques puissants, le découpage partisan fait toujours
- débat.
- En France, par exemple, il y a eu trois découpages électoraux sous la cinquième
- République (soit en 1958, 1986 et 2010).
- Dans ces trois cas, le gouvernement n'a nécessité uniquement d'une majorité
- absolue au parlement et non d'une majorité qualifiée (celle-ci est nécessaire
+ et des outils informatique puissant, le découpage partisan fait toujours
+ débats.
+ En France par exemple il y a eu trois découpage électoraux sous la cinquième
+ république (soit en 1958, 1986 et 2010).
+ Dans c'est trois cas le gouvernement nécessite unique d'avoir la majorité
+ absolue au parlement et non une majorité qualifié (celle-ci est nécessaire
  pour un changement de constitution par exemple)
 \begin_inset Foot
 status open
@@ -325,7 +308,7 @@ source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
 \end_inset
 
 .
- Ainsi, il est plus facile au gouvernement de procéder au gerrymandering.
+ Ainsi il est plus facile au gouvernement de procéder au gerrymandering.
 \end_layout
 
 \begin_layout Subsection
@@ -363,7 +346,7 @@ circonscriptions électorales
 \begin_layout Remark*
 En France, le mécanisme du découpage électoral est utilisé pour les élections
  législatives, les élections sénatoriales et les élections au Conseil départemen
-tal.
+tal
 \end_layout
 
 \begin_layout Definition
@@ -389,8 +372,8 @@ La circonscription électorale est une division du territoire effectuée dans
 \end_layout
 
 \begin_layout Example*
-10 000 électeurs, 10 circonscriptions de 1 000 électeurs, deux partis A
- et B, le premier recueillant 4 000 suffrages et le second 6 000.
+10000 électeurs, 10 circonscriptions de 1000 électeurs, deux partis A et
+ B, le premier recueillant 4000 suffrages et le second 6000.
  
 \end_layout
 
@@ -430,29 +413,14 @@ Grâce à l'exemple ci-dessus, on remarque que le découpage électoral peut
  favoriser un camp ou d'essayer de créer des conditions les plus équitables
  possible.
  Pour commencer, nous allons vous proposer la modélisation suivante :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
 Chaque circonscription se décompose en "brique" élémentaire que sont les
- 
-\series bold
-cantons
-\series default
-.
- Ces cantons seront dans notre modèle tous de même taille (
-\series bold
-contenant le même nombre de votants
-\series default
-) et assimilés à des nœuds d'un graphe.
- Chaque canton est relié par des arêtes aux autres cantons limitrophes.
+ cantons.
+ Ces cantons seront dans notre modèle tous de même taille (contenant le
+ même nombre de votants) et assimilés à des nœuds d'un graphe.
+ Chaque quartier est relié par des arêtes aux autres quartiers limitrophes.
  Pour simplifier, nous allons considérer seulement deux partis A et B.
  Ainsi, on attribua un poids à chaque nœud correspondant à un réel entre
  0 et 1 qui traduit le pourcentage de votants qui soutiennent le parti A.
@@ -461,56 +429,23 @@ contenant le même nombre de votants
 \end_layout
 
 \begin_layout Standard
-
-\series bold
 Créer les circonscriptions à partir du graphe revient à résoudre un problème
  de classification non supervisée.
-
-\series default
  Pour rajouter un minimum de réalisme, on peut exiger que les circonscriptions
- soit d'un seul tenant, c'est-à-dire rajouter une 
-\series bold
-contrainte de connexité entre les nœuds d'une même classe.
+ soit d'un seul tenant, c'est-à-dire rajouter une contrainte de connexité
+ entre les nœuds d'une même classe.
 \end_layout
 
 \begin_layout Standard
-Si l'on reprend l'exemple précédent de 
-\series bold
-10 000 électeurs
-\series default
- à répartir sur 
-\series bold
-10 circonscriptions de 1 000 électeurs
-\series default
-, on peut imaginer que les électeurs se répartissent sur des 
-\series bold
-cantons de 200 électeurs
-\series default
- où 16 cantons soutiennent le parti B (poids 0), 28 soutiennent le parti
- A (poids 1) et 6 sont des cantons de poids 0,33.
- 
-\begin_inset Newline newline
-\end_inset
-
-Alors on peut répartir ces cantons de façon à obtenir :
-\end_layout
-
-\begin_layout Standard
-- 4 circonscriptions avec un canton B et 4 cantons A 
-\end_layout
-
-\begin_layout Standard
-- 6 circonscriptions avec 2 cantons A, 2 cantons B et un canton de poids
- 0,33.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Avec cette répartition, le parti B remporte une majorité de circonscriptions
+Si l'on reprend l'exemple précédent de 10 000 électeurs à répartir sur 10
+ circonscriptions de 1000 électeurs, on peut imaginer que les électeurs
+ se répartissent sur des cantons de 200 électeurs ou 16 cantons soutiennent
+ le parti B (poids 0), 28 soutiennent le parti A (poids 1) et 6 sont des
+ cantons de poids 0,33.
+ Alors on peut répartir ces cantons de façon à obtenir 4 circonscriptions
+ avec un canton B et 4 cantons A et 6 circonscriptions avec 2 cantons A,
+ 2 cantons B et un canton de poids 0,33.
+ Avec cette répartition, le parti B remporte une majorité de circonscriptions
  sans pour autant remporter le plus grand nombre de voix.
  Cette répartition est représentée par le graphe ci-dessous :
 \end_layout
@@ -541,293 +476,6 @@ Graphe modélisant la situation
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-La fonction économique
-\end_layout
-
-\begin_layout Standard
-Un problème d'optimisation combinatoire est défini par : 
-\end_layout
-
-\begin_layout Standard
-- un énoncé
-\end_layout
-
-\begin_layout Standard
-- une fonction économique 
-\end_layout
-
-\begin_layout Standard
-- un sens.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Dans notre cas, l'énoncé, c'est-à-dire les données, correspond au graphe
- 
-\begin_inset Formula $G=(X,U)$
-\end_inset
-
- décrit ci-dessus.
- Soit 
-\begin_inset Formula $X=\{x_{1},x_{2},\dots,x_{n}\}$
-\end_inset
-
- l'ensemble des nœuds de notre graphe, tel que chaque 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- correspond à un canton.
- On lui associe les variables 
-\begin_inset Formula $nbV_{i},pV_{i}$
-\end_inset
-
- qui sont respectivement le 
-\series bold
-nombre de votants
-\series default
- 
-\series bold
-du canton 
-\series default
-et le 
-\series bold
-pourcentage de votants qui soutiennent le parti A
-\series default
-.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Notre objectif est de définir 
-\begin_inset Formula $k$
-\end_inset
-
- circonscriptions tel que 
-\begin_inset Formula $K$
-\end_inset
-
- est un ensemble connexe de 
-\begin_inset Formula $X,$
-\end_inset
-
- où un élément de 
-\begin_inset Formula $X$
-\end_inset
-
- n'appartient qu'à un seul 
-\begin_inset Formula $K$
-\end_inset
-
-.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-DEFINIR PLUS PRECISEMENT K
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Plaçons nous dans un premier temps dans la situation où notre objectif est
- de 
-\series bold
-faire gagner le parti A
-\series default
- :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
- Nous pouvons commencer par définir la fonction 
-\begin_inset Formula $p$
-\end_inset
-
- qui calcule le 
-\series bold
-poids du parti A dans un canton donné.
-\series default
-
-\begin_inset Formula 
-\begin{align*}
-p: & X\rightarrow\mathbb{R^{+}}\\
- & K\rightarrow p(K)
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-p(K)=\frac{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}}
-\]
-
-\end_inset
-
-Ceci nous permet de définir fonction économique 
-\begin_inset Formula $f$
-\end_inset
-
- suivante :
-\begin_inset Formula 
-\begin{align*}
-f: & X\rightarrow\mathbb{R^{+}}\\
- & K\rightarrow f(K)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-f(K) & =\begin{cases}
-1 & \text{si }p(K)>0,5\\
-0 & \text{\text{sinon}}
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Ainsi la fonction 
-\begin_inset Formula $f$
-\end_inset
-
- nous dit si c'est le parti A remporte la circonscription 
-\begin_inset Formula $K$
-\end_inset
-
- (
-\begin_inset Formula $f(K)=1$
-\end_inset
-
-) ou si c'est le parti B qui remporte la circonscription (
-\begin_inset Formula $f(K)=0$
-\end_inset
-
-).
- 
-\begin_inset Newline newline
-\end_inset
-
-Si notre objectif est de faire gagner le plus de circonscriptions au parti
- A, on peut définir le problème suivant :
-\begin_inset Formula 
-\[
-max\stackrel[j=1]{k}{\sum}f(K_{j})
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Inversement, si notre objectif est de faire gagner le plus de circonscriptions
- au parti B, il suffit de poser :
-\begin_inset Formula 
-\[
-min\stackrel[j=1]{k}{\sum}f(K_{j})
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Remarquons que dans notre formulation, nous avons posé une contrainte de
- façon à ce que les circonscriptions soient d'un seul tenant mais nous n'avons
- pas imposé de contrainte de taille sur les circonscriptions.
- 
-\begin_inset Newline newline
-\end_inset
-
-Pour cela, nous pouvons nous inspirer des contraintes qui existent sur la
- taille des circonscriptions en France.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-La règle est que le nombre de votants d'une circonscription doit être compris
- entre 
-\begin_inset Formula $80\%$
-\end_inset
-
- et 
-\begin_inset Formula $120\%$
-\end_inset
-
- du nombre moyen de votants
-\series default
-.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-On peut ainsi définir la contrainte suivante pour un 
-\begin_inset Formula $K$
-\end_inset
-
- donné : 
-\begin_inset Formula 
-\[
-\frac{0,8}{n}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\leq\frac{1,20}{n}\stackrel[i=1]{n}{\sum}nbV_{i}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Notons aussi que si notre objectif n'est pas de favoriser un camp ou un
- autre, alors l'utilisation de la fonction 
-\begin_inset Formula $f$
-\end_inset
-
- n'a pas d’intérêt.
- 
-\begin_inset Newline newline
-\end_inset
-
-Il faudrait définir une nouvelle fonction économique tout en gardant la
- contrainte sur la taille que l'on vient d'énoncer.
 \end_layout
 
 \end_body
