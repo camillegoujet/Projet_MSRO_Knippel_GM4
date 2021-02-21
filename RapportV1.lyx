@@ -127,7 +127,7 @@ Illustration du découpage éléctoral en France
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -291,12 +291,12 @@ Le découpage électoral partisan des circonscriptions, aussi connu sous le
 
 \begin_layout Standard
 De nos jours avec des outils de recensement d'une plus grande précision
- et des outils informatique puissant, le découpage partisan fait toujours
- débats.
- En France par exemple il y a eu trois découpage électoraux sous la cinquième
+ et des outils informatiques puissants, le découpage partisan fait toujours
+ débat.
+ En France, par exemple, il y a eu trois découpages électoraux sous la cinquième
  république (soit en 1958, 1986 et 2010).
- Dans c'est trois cas le gouvernement nécessite unique d'avoir la majorité
- absolue au parlement et non une majorité qualifié (celle-ci est nécessaire
+ Dans ces trois cas, le gouvernement n'a nécessité uniquement d'une majorité
+ absolue au parlement et non d'une majorité qualifiée (celle-ci est nécessaire
  pour un changement de constitution par exemple)
 \begin_inset Foot
 status open
@@ -308,7 +308,7 @@ source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
 \end_inset
 
 .
- Ainsi il est plus facile au gouvernement de procéder au gerrymandering.
+ Ainsi, il est plus facile au gouvernement de procéder au gerrymandering.
 \end_layout
 
 \begin_layout Subsection
@@ -420,7 +420,7 @@ Chaque circonscription se décompose en "brique" élémentaire que sont les
  cantons.
  Ces cantons seront dans notre modèle tous de même taille (contenant le
  même nombre de votants) et assimilés à des nœuds d'un graphe.
- Chaque quartier est relié par des arêtes aux autres quartiers limitrophes.
+ Chaque canton est relié par des arêtes aux autres cantons limitrophes.
  Pour simplifier, nous allons considérer seulement deux partis A et B.
  Ainsi, on attribua un poids à chaque nœud correspondant à un réel entre
  0 et 1 qui traduit le pourcentage de votants qui soutiennent le parti A.
@@ -476,6 +476,195 @@ Graphe modélisant la situation
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+La fonction économique
+\end_layout
+
+\begin_layout Standard
+Un problème d'optimisation combinatoire est défini par : un énoncé, une
+ fonction économique et un sens.
+ Dans notre cas l'énoncé, c'est à dire les données, correspond au graphe
+ 
+\begin_inset Formula $G=(X,U)$
+\end_inset
+
+ décrit ci-dessus.
+ Soit 
+\begin_inset Formula $X=\{x_{1},x_{2},\dots,x_{n}\}$
+\end_inset
+
+ l'ensemble des nœuds de notre graphe tel que chaque 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ correspond a un cantons et on lui associe les variables 
+\begin_inset Formula $nbV_{i},pV_{i}$
+\end_inset
+
+ qui sont respectivement le nombre de votants et le pourcentage de votants
+ qui soutiennent le parti A.
+\end_layout
+
+\begin_layout Standard
+Notre objectif est de définir 
+\begin_inset Formula $k$
+\end_inset
+
+ circonscriptions tel que 
+\begin_inset Formula $K$
+\end_inset
+
+ est un ensemble connexe de 
+\begin_inset Formula $X$
+\end_inset
+
+ ou un élément de 
+\begin_inset Formula $X$
+\end_inset
+
+ n'appartient a un seul 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Plaçons nous dans un premier temps de la situation ou notre objectif est
+ de faire gagner le parti A.
+ Nous pouvons commencer par définir la fonction 
+\begin_inset Formula $p$
+\end_inset
+
+ qui calcul le poids du parti A dans un cantons donné.
+\begin_inset Formula 
+\begin{align*}
+p: & X\rightarrow\mathbb{R^{+}}\\
+ & K\rightarrow f(K)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p(K)=\frac{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}}
+\]
+
+\end_inset
+
+Ceci nous permet de définir fonction économique 
+\begin_inset Formula $f$
+\end_inset
+
+ suivante :
+\begin_inset Formula 
+\begin{align*}
+f: & X\rightarrow\mathbb{R^{+}}\\
+ & K\rightarrow f(K)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(K) & =\begin{cases}
+1 & \text{si }p(K)>0,5\\
+0 & \text{\text{sinon}}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ainsi la fonction 
+\begin_inset Formula $f$
+\end_inset
+
+ nous dit si le parti A remporte la circonscription 
+\begin_inset Formula $K$
+\end_inset
+
+ (
+\begin_inset Formula $f(K)=1$
+\end_inset
+
+) ou si c'est le parti B qui remporte la circonscription (
+\begin_inset Formula $f(K)=0$
+\end_inset
+
+).
+ Si notre objectif est de faire gagner le plus de circonscriptions au parti
+ A on peut définir le problème suivant :
+\begin_inset Formula 
+\[
+max\stackrel[j=1]{k}{\sum}f(K_{j})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inversement si notre objectif est de faire gagner le plus de circonscriptions
+ au parti B il suffit de poser :
+\begin_inset Formula 
+\[
+min\stackrel[j=1]{k}{\sum}f(K_{j})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remarquons que dans notre formulation nous avons posé une contrainte de
+ façon a ce que les circonscription soit d'un seul tenant mais nous n'avons
+ pas imposé de contrainte de taille sur les circonscription.
+ Pour cela nous pouvons nous inspirer des contraintes qui existent sur la
+ taille des circonscriptions eu France.
+ La règle est que le nombre de votants d'une circonscription doit être compris
+ entre 
+\begin_inset Formula $80\%$
+\end_inset
+
+ et 
+\begin_inset Formula $120\%$
+\end_inset
+
+ du nombre moyen de votants.
+ On peut ainsi définir la contrainte suivante pour un 
+\begin_inset Formula $K$
+\end_inset
+
+ donné : 
+\begin_inset Formula 
+\[
+\frac{0,8}{n}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\leq\frac{1,20}{n}\stackrel[i=1]{n}{\sum}nbV_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notons aussi que si notre objectif n'est pas de favoriser un camp ou un
+ autre alors l'utilisation de la fonction 
+\begin_inset Formula $f$
+\end_inset
+
+ n'a pas d’intérêt.
+ Il faudrait définir une nouvelle fonction économique tout en gardant la
+ contrainte sur la taille que l'on vient d'énoncer.
 \end_layout
 
 \end_body
