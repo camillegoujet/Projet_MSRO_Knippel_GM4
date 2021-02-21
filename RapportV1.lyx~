@@ -447,11 +447,7 @@ Chaque circonscription se décompose en "brique" élémentaire que sont les
 cantons
 \series default
 .
- Ces cantons seront dans notre modèle tous de même taille (
-\series bold
-contenant le même nombre de votants
-\series default
-) et assimilés à des nœuds d'un graphe.
+ Ces cantons seront dans notre modèle assimilés à des nœuds d'un graphe.
  Chaque canton est relié par des arêtes aux autres cantons limitrophes.
  Pour simplifier, nous allons considérer seulement deux partis A et B.
  Ainsi, on attribua un poids à chaque nœud correspondant à un réel entre
@@ -467,6 +463,9 @@ Créer les circonscriptions à partir du graphe revient à résoudre un problèm
  de classification non supervisée.
 
 \series default
+ En effet, chaque circonscription ayant un seul élu, on peut influencer
+ le nombre d'élus obtenu par un parti en découpant différemment les circonscript
+ions.
  Pour rajouter un minimum de réalisme, on peut exiger que les circonscriptions
  soit d'un seul tenant, c'est-à-dire rajouter une 
 \series bold
@@ -611,7 +610,7 @@ pourcentage de votants qui soutiennent le parti A
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Remark
 Notre objectif est de définir 
 \begin_inset Formula $k$
 \end_inset
@@ -687,6 +686,19 @@ p(K)=\frac{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1
 
 \end_inset
 
+La fonction 
+\begin_inset Formula $p(K)$
+\end_inset
+
+ nous donne le rapport du nombre de personne votant pour le parti A dans
+ la circonscription 
+\begin_inset Formula $K$
+\end_inset
+
+ sur le nombre totale de votant dans cette même circonscription.
+\end_layout
+
+\begin_layout Standard
 Ceci nous permet de définir fonction économique 
 \begin_inset Formula $f$
 \end_inset
@@ -778,6 +790,8 @@ Pour cela, nous pouvons nous inspirer des contraintes qui existent sur la
 \begin_inset Newline newline
 \end_inset
 
+
+\series bold
 La règle est que le nombre de votants d'une circonscription doit être compris
  entre 
 \begin_inset Formula $80\%$
@@ -787,15 +801,25 @@ La règle est que le nombre de votants d'une circonscription doit être compris
 \begin_inset Formula $120\%$
 \end_inset
 
- du nombre moyen de votants.
- On peut ainsi définir la contrainte suivante pour un 
+ du nombre moyen de votants
+\series default
+.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+On peut ainsi définir la contrainte suivante pour un 
 \begin_inset Formula $K$
 \end_inset
 
  donné : 
 \begin_inset Formula 
 \[
-\frac{0,8}{n}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\leq\frac{1,20}{n}\stackrel[i=1]{n}{\sum}nbV_{i}
+\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i}
 \]
 
 \end_inset
@@ -810,7 +834,11 @@ Notons aussi que si notre objectif n'est pas de favoriser un camp ou un
 \end_inset
 
  n'a pas d’intérêt.
- Il faudrait définir une nouvelle fonction économique tout en gardant la
+ 
+\begin_inset Newline newline
+\end_inset
+
+Il faudrait définir une nouvelle fonction économique tout en gardant la
  contrainte sur la taille que l'on vient d'énoncer.
 \end_layout
 
