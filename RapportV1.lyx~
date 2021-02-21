@@ -488,10 +488,6 @@ contrainte de connexité entre les nœuds d'une même classe.
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 Si l'on reprend l'exemple précédent de 
 \series bold
 10 000 électeurs
@@ -507,6 +503,10 @@ cantons de 200 électeurs
  où 16 cantons soutiennent le parti B (poids 0), 28 soutiennent le parti
  A (poids 1) et 6 sont des cantons de poids 0,33.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -630,6 +630,8 @@ pourcentage de votants qui soutiennent le parti A
 \end_layout
 
 \begin_layout Standard
+
+\series bold
 Notre objectif est de définir 
 \begin_inset Formula $k$
 \end_inset
@@ -652,14 +654,8 @@ Notre objectif est de définir
 
 .
  
-\begin_inset Newline newline
-\end_inset
+\series default
 
-
-\begin_inset Newline newline
-\end_inset
-
-DEFINIR PLUS PRECISEMENT K
 \begin_inset Newline newline
 \end_inset
 
@@ -709,13 +705,21 @@ La fonction
 \begin_inset Formula $p(K)$
 \end_inset
 
- nous donne le rapport du nombre de personne votant pour le parti A dans
+ nous donne le rapport du nombre de personnes votant pour le parti A dans
  la circonscription 
 \begin_inset Formula $K$
 \end_inset
 
- sur le nombre totale de votant dans cette même circonscription.
- Ceci nous permet de définir fonction économique 
+ sur le nombre total de votants dans cette même circonscription.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ceci nous permet de définir fonction économique 
 \begin_inset Formula $f$
 \end_inset
 
@@ -767,6 +771,10 @@ Ainsi la fonction
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
 Si notre objectif est de faire gagner le plus de circonscriptions au parti
  A, on peut définir le problème suivant :
 \begin_inset Formula 
@@ -803,6 +811,10 @@ Remarquons que dans notre formulation, nous avons posé une contrainte de
 Pour cela, nous pouvons nous inspirer des contraintes qui existent sur la
  taille des circonscriptions en France.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 

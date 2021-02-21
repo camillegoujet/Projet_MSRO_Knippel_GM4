@@ -105,11 +105,19 @@ ISRAA BEN SASSI, CAMILLE GOUJET ET VICTOR LESUR
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/israbensassi/Documents/GM4/Semestre8/Projet Semestriel/Rapport/1200px-French_dec_2010.png
+	scale 60
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -280,11 +288,7 @@ Histoire
 \begin_layout Standard
 Le découpage électoral partisan des circonscriptions, aussi connu sous le
  nom de 
-\begin_inset Quotes fld
-\end_inset
-
-gerrymandering
-\begin_inset Quotes frd
+\begin_inset Formula $« gerrymandering »$
 \end_inset
 
 , est une pratique qui n'est pas récente et qui est sûrement concomitante
@@ -538,9 +542,16 @@ Avec cette répartition, le parti B remporte une majorité de circonscriptions
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/israbensassi/Documents/GM4/Semestre8/Projet Semestriel/Rapport/GrapheExemple.png
+	scale 60
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
