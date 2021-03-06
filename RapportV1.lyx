@@ -257,7 +257,7 @@ sur les partis à chaque nouvelle élection en élaborant une modélisation
 \begin_inset Newline newline
 \end_inset
 
-Afin de mener à bien ce projet, nous nous munierons d'un solveur tel que
+Afin de mener à bien ce projet, nous nous munirons d'un solveur tel que
  CPLEX pour nous assister dans la résolution de problèmes d'optimisation
  linéaire.
 \end_layout
@@ -320,7 +320,7 @@ De nos jours avec des outils de recensement d'une plus grande précision
  absolue au parlement et non d'une majorité qualifiée (celle-ci est nécessaire
  pour un changement de constitution par exemple)
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
@@ -330,6 +330,29 @@ source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
 
 .
  Ainsi, il est plus facile au gouvernement de procéder au gerrymandering.
+ Néanmoins le gouvernement ne peut faire ce qu'il veut.
+ En France, tout découpage électoral doit être sur une base 
+\begin_inset Quotes fld
+\end_inset
+
+essentiellement démographique
+\begin_inset Quotes frd
+\end_inset
+
+, comme l'indique le conseil constitutionnel
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+source : https://www.cairn.info/revue-pouvoirs-2013-3-page-117.htm
+\end_layout
+
+\end_inset
+
+.
+ De fait, comme nous le verrons plus tard, le nombre d'habitants d'une circonscr
+iption doit être compris entre 80 et 120% de la moyenne des circonscriptions
+ de la même région.
 \end_layout
 
 \begin_layout Subsection
@@ -643,12 +666,16 @@ pourcentage de votants qui soutiennent le parti A
 \begin_layout Standard
 
 \series bold
-Notre objectif est de définir 
+Notre objectif est de définir un nombre 
 \begin_inset Formula $k$
 \end_inset
 
- circonscriptions tel que 
-\begin_inset Formula $K$
+ de circonscriptions tel que 
+\begin_inset Formula $\forall j\in\{1,\dots,k\}$
+\end_inset
+
+ 
+\begin_inset Formula $K_{j}$
 \end_inset
 
  est un ensemble connexe de 
@@ -660,7 +687,7 @@ Notre objectif est de définir
 \end_inset
 
  n'appartient qu'à un seul 
-\begin_inset Formula $K$
+\begin_inset Formula $K_{j}$
 \end_inset
 
 .
@@ -699,7 +726,7 @@ poids du parti A dans un canton donné.
 \begin_inset Formula 
 \begin{align*}
 p: & X\rightarrow\mathbb{R^{+}}\\
- & K\rightarrow p(K)
+ & K_{j}\rightarrow p(K_{j})
 \end{align*}
 
 \end_inset
@@ -707,18 +734,18 @@ p: & X\rightarrow\mathbb{R^{+}}\\
 
 \begin_inset Formula 
 \[
-p(K)=\frac{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}}
+p(K_{j})=\frac{\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}}
 \]
 
 \end_inset
 
 La fonction 
-\begin_inset Formula $p(K)$
+\begin_inset Formula $p(K_{j})$
 \end_inset
 
  nous donne le rapport du nombre de personnes votant pour le parti A dans
  la circonscription 
-\begin_inset Formula $K$
+\begin_inset Formula $K_{j}$
 \end_inset
 
  sur le nombre total de votants dans cette même circonscription.
@@ -738,7 +765,7 @@ Ceci nous permet de définir fonction économique
 \begin_inset Formula 
 \begin{align*}
 f: & X\rightarrow\mathbb{R^{+}}\\
- & K\rightarrow f(K)
+ & K_{j}\rightarrow f(K_{j})
 \end{align*}
 
 \end_inset
@@ -749,8 +776,8 @@ f: & X\rightarrow\mathbb{R^{+}}\\
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-f(K) & =\begin{cases}
-1 & \text{si }p(K)>0,5\\
+f(K_{j}) & =\begin{cases}
+1 & \text{si }p(K_{j})>0,5\\
 0 & \text{\text{sinon}}
 \end{cases}
 \end{align*}
@@ -766,15 +793,15 @@ Ainsi la fonction
 \end_inset
 
  nous dit si c'est le parti A remporte la circonscription 
-\begin_inset Formula $K$
+\begin_inset Formula $K_{j}$
 \end_inset
 
  (
-\begin_inset Formula $f(K)=1$
+\begin_inset Formula $f(K_{j})=1$
 \end_inset
 
 ) ou si c'est le parti B qui remporte la circonscription (
-\begin_inset Formula $f(K)=0$
+\begin_inset Formula $f(K_{j})=0$
 \end_inset
 
 ).
@@ -852,13 +879,13 @@ La règle est que le nombre de votants d'une circonscription doit être compris
 \end_inset
 
 On peut ainsi définir la contrainte suivante pour un 
-\begin_inset Formula $K$
+\begin_inset Formula $K_{j}$
 \end_inset
 
  donné : 
 \begin_inset Formula 
 \[
-\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K]{n}{\sum}nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i}
+\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i}
 \]
 
 \end_inset
