@@ -278,10 +278,6 @@ Introduction
 \end_layout
 
 \begin_layout Section
-Généralités
-\end_layout
-
-\begin_layout Subsection
 Histoire 
 \end_layout
 
@@ -320,7 +316,7 @@ De nos jours avec des outils de recensement d'une plus grande précision
  absolue au parlement et non d'une majorité qualifiée (celle-ci est nécessaire
  pour un changement de constitution par exemple)
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
@@ -330,9 +326,32 @@ source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
 
 .
  Ainsi, il est plus facile au gouvernement de procéder au gerrymandering.
+ Néanmoins le gouvernement ne peut faire ce qu'il veut.
+ En France, tout découpage électoral doit être sur une base 
+\begin_inset Quotes fld
+\end_inset
+
+essentiellement démographique
+\begin_inset Quotes frd
+\end_inset
+
+, comme l'indique le conseil constitutionnel
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+source : https://www.cairn.info/revue-pouvoirs-2013-3-page-117.htm
 \end_layout
 
-\begin_layout Subsection
+\end_inset
+
+.
+ De fait, comme nous le verrons plus tard, le nombre d'habitants d'une circonscr
+iption doit être compris entre 80 et 120% de la moyenne des circonscriptions
+ de la même région.
+\end_layout
+
+\begin_layout Section
 Quelques définitions importantes
 \end_layout
 
@@ -427,8 +446,12 @@ Le parti B perd les élections bien qu'il soit largement majoritaire en nombre
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Modéliser le découpage
+\end_layout
+
+\begin_layout Section
+Application sur l'exemple
 \end_layout
 
 \begin_layout Standard
@@ -572,32 +595,47 @@ Graphe modélisant la situation
 
 \end_layout
 
+\begin_layout Section
+Modélisation du découpage
+\end_layout
+
 \begin_layout Subsection
 La fonction économique
 \end_layout
 
-\begin_layout Standard
+\begin_layout Definition
 Un problème d'optimisation combinatoire est défini par : 
 \end_layout
 
-\begin_layout Standard
-- un énoncé
+\begin_layout Itemize
+un énoncé
 \end_layout
 
-\begin_layout Standard
-- une fonction économique 
+\begin_layout Itemize
+une fonction économique 
 \end_layout
 
-\begin_layout Standard
-- un sens.
+\begin_layout Itemize
+un sens.
  
 \begin_inset Newline newline
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
+
+\end_layout
+
+\begin_layout Subsubsection
+énoncé:
+\end_layout
+
+\begin_layout Paragraph
 Dans notre cas, l'énoncé, c'est-à-dire les données, correspond au graphe
  
 \begin_inset Formula $G=(X,U)$
@@ -731,9 +769,100 @@ La fonction
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Subsubsection
+La fonction économique
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+usepackage{tcolorbox}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newtcbtheorem[number within=subsubsection]{mydef}{fonction économique}%
+ {colback=grey!10,colframe=blue!35!black,fonttitle=
+\backslash
+bfseries}{th}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{mydef}
+\end_layout
+
+\begin_layout Plain Layout
+
+Ceci nous permet de définir fonction économique  suivante :
+\end_layout
+
+\begin_layout Plain Layout
+
+f:&X
+\backslash
+rightarrow
+\backslash
+mathbb{R^{+}}
+\backslash
+
+\backslash
+&K_{j}
+\backslash
+rightarrow f(K_{j})
+\end_layout
+
+\begin_layout Plain Layout
+
+f(K_{j})&=
+\backslash
+begin{cases}
+1 & 
+\backslash
+text{si }p(K_{j})>0,5
+\backslash
+
+\backslash
+
+0 & 
+\backslash
+text{
+\backslash
+text{sinon}}
+
+\backslash
+end{cases}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Ainsi la fonction f nous dit si c'est le parti A remporte la circonscription
+ K_{j}(f(K_{j})=1) ou si c'est le parti B qui remporte la circonscription
+ (f(K_{j})=0).
+ 
+\end_layout
+
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 Ceci nous permet de définir fonction économique 
 \begin_inset Formula $f$
 \end_inset

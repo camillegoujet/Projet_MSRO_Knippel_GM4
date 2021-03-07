@@ -1038,37 +1038,5 @@ Il faudrait définir une nouvelle fonction économique tout en gardant la
 Le choix de variables
 \end_layout
 
-\begin_layout Chapter
-La classification des données
-\end_layout
-
-\begin_layout Section
-Interêt
-\end_layout
-
-\begin_layout Section
-Classification non supervisée
-\end_layout
-
-\begin_layout Subsection
-Principe
-\end_layout
-
-\begin_layout Subsection
-Application
-\end_layout
-
-\begin_layout Part
-Partie pratique
-\end_layout
-
-\begin_layout Chapter
-Utilisation d'un solveur 
-\end_layout
-
-\begin_layout Chapter
-Algorithme de classification non supervisée
-\end_layout
-
 \end_body
 \end_document
