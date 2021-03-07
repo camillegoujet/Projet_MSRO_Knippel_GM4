@@ -768,8 +768,8 @@ faire gagner le parti A
 
  qui calcule le 
 \series bold
-poids du parti A dans un canton donné, soit la probabilité de votants pour
- le parti A dans ce canton.
+poids du parti A dans une circonscription donné, soit la probabilité de
+ votants pour le parti A dans cette circonscription.
 \begin_inset Newline newline
 \end_inset
 
@@ -1036,6 +1036,10 @@ La règle est que le nombre de votants d'une circonscription doit être compris
 
  du nombre moyen de votants
 \series default
+ 
+\series bold
+dans une circonscription
+\series default
 .
  
 \begin_inset Newline newline
@@ -1079,12 +1083,45 @@ Il faudrait définir une nouvelle fonction économique tout en gardant la
 Le choix de variables
 \end_layout
 
+\begin_layout Standard
+Dans cette partie nous aimerions passer de la formulation ci-dessus a une
+ formulation d'un problème de classification non supervisée.
+ En effet nous avons 
+\begin_inset Formula $n$
+\end_inset
+
+ éléments 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ avec 
+\begin_inset Formula $p$
+\end_inset
+
+ caractéristique.
+ Ces dernière sont : le nombre de votant, le proportion de vote pour les
+ partis et les connexions entre les différents 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ soit pour un canton donné la colonne dans la matrice d’adjacence associé
+ d’où 
+\begin_inset Formula $p=n+2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
 \begin_layout Chapter
 La classification des données
 \end_layout
 
 \begin_layout Section
-Interêt
+Intérêt
 \end_layout
 
 \begin_layout Section
@@ -1100,7 +1137,7 @@ Application
 \end_layout
 
 \begin_layout Part
-Partie pratique
+PARTIE PRATIQUE
 \end_layout
 
 \begin_layout Chapter
