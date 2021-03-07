@@ -1084,7 +1084,7 @@ Le choix de variables
 \end_layout
 
 \begin_layout Standard
-Dans cette partie nous aimerions passer de la formulation ci-dessus à une
+Dans cette partie, nous aimerions passer de la formulation ci-dessus à une
  formulation d'un problème de classification non supervisée.
  En effet, nous avons 
 \begin_inset Formula $n$
@@ -1099,8 +1099,8 @@ Dans cette partie nous aimerions passer de la formulation ci-dessus à une
 \end_inset
 
  caractéristiques.
- Ces dernières sont : le nombre de votant, la proportion de votes pour les
- partis et les connexions entre les différents 
+ Ces dernières sont : le nombre de votants, la proportion de votes pour
+ les partis et les connexions entre les différents 
 \begin_inset Formula $x_{i}$
 \end_inset
 

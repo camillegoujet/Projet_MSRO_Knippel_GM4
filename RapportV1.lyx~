@@ -1084,9 +1084,9 @@ Le choix de variables
 \end_layout
 
 \begin_layout Standard
-Dans cette partie nous aimerions passer de la formulation ci-dessus a une
+Dans cette partie nous aimerions passer de la formulation ci-dessus à une
  formulation d'un problème de classification non supervisée.
- En effet nous avons 
+ En effet, nous avons 
 \begin_inset Formula $n$
 \end_inset
 
@@ -1098,21 +1098,49 @@ Dans cette partie nous aimerions passer de la formulation ci-dessus a une
 \begin_inset Formula $p$
 \end_inset
 
- caractéristique.
- Ces dernière sont : le nombre de votant, le proportion de vote pour les
+ caractéristiques.
+ Ces dernières sont : le nombre de votant, la proportion de votes pour les
  partis et les connexions entre les différents 
 \begin_inset Formula $x_{i}$
 \end_inset
 
- soit pour un canton donné la colonne dans la matrice d’adjacence associé
+, soit pour un canton donné la colonne dans la matrice d’adjacence associée,
  d’où 
 \begin_inset Formula $p=n+2$
 \end_inset
 
 .
+ On peut donc définir une matrice de données 
+\begin_inset Formula $D=(d_{ik})$
+\end_inset
+
+, avec 
+\begin_inset Formula $1\leq i\leq n$
+\end_inset
+
+ et 
+\begin_inset Formula $1\leq k\leq p$
+\end_inset
+
+.
+ On veut donc trouver les critères qui nous permettent d'obtenir la meilleure
+ partition des éléments.
 \end_layout
 
 \begin_layout Standard
+Nous pouvons formuler le problème général de la classification non supervisée
+ de la façon suivante :
+\begin_inset Formula 
+\[
+\begin{cases}
+Min\underset{1\leq i<j\leq n}{\sum}w_{ij}x_{ij}\\
+x_{ij}+x_{jk}-x_{ik}\leq1 & \forall(i,j,k)\in C\\
+x_{ij}\in\{0,1\}\forall i,j & 1\leq i<j\leq n
+\end{cases}
+\]
+
+\end_inset
+
 
 \end_layout
 
