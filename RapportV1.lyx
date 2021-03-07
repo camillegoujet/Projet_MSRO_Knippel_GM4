@@ -170,8 +170,9 @@ Le découpage électoral est le mécanisme par lequel le territoire national
 \end_inset
 
 Ce découpage est l'objet récurrent de polémiques, sinon d'actions en justice.
- Car il est orchestré au niveau de chaque État par les gouverneurs et ceux-ci
- ont la fâcheuse tendance à faire en sorte de favoriser leur parti.
+ Car il est orchestré, par exemple aux Etats Unis, au niveau de chaque État
+ par les gouverneurs et ceux-ci ont la fâcheuse tendance à faire en sorte
+ de favoriser leur parti.
  Par exemple, en façonnant des circonscriptions qui fragmentent l'électorat
  de leur adversaire, pour limiter son nombre d'élus.
  Ou, au contraire, en rassemblant dans une seule et même circonscription
@@ -303,7 +304,39 @@ gerrymandering
  nous vient des USA et fait référence à un découpage effectué par le gouverneur
  Elbridge Gerry.
  Ce découpage était si bizarre qu'il rappelait la forme d'une salamandre,
- d’où le mot-valise gerrymandering (composé de Gerry et salamandre).
+ d’où le mot-valise 
+\begin_inset Quotes fld
+\end_inset
+
+gerrymandering
+\begin_inset Quotes frd
+\end_inset
+
+ (composé de 
+\begin_inset Quotes fld
+\end_inset
+
+Gerry
+\begin_inset Quotes frd
+\end_inset
+
+ et de 
+\begin_inset Quotes fld
+\end_inset
+
+salamander
+\begin_inset Quotes frd
+\end_inset
+
+ du français 
+\begin_inset Quotes fld
+\end_inset
+
+salamandre
+\begin_inset Quotes frd
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -326,7 +359,7 @@ source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
 
 .
  Ainsi, il est plus facile au gouvernement de procéder au gerrymandering.
- Néanmoins le gouvernement ne peut faire ce qu'il veut.
+ Néanmoins, le gouvernement ne peut faire ce qu'il veut.
  En France, tout découpage électoral doit être sur une base 
 \begin_inset Quotes fld
 \end_inset
@@ -451,13 +484,13 @@ Modéliser le découpage
 \end_layout
 
 \begin_layout Section
-Application sur l'exemple
+Application sur l'exemple donné
 \end_layout
 
 \begin_layout Standard
 Grâce à l'exemple ci-dessus, on remarque que le découpage électoral peut
  grandement influencer le résultat d'une élection.
- Bien modéliser ce découpage est alors essentiel, que notre but soit de
+ Bien modéliser ce découpage est alors essentiel; que notre but soit de
  favoriser un camp ou d'essayer de créer des conditions les plus équitables
  possible.
  Pour commencer, nous allons vous proposer la modélisation suivante :
@@ -565,7 +598,7 @@ Avec cette répartition, le parti B remporte une majorité de circonscriptions
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -600,7 +633,7 @@ Modélisation du découpage
 \end_layout
 
 \begin_layout Subsection
-Le problème d'optiimisation
+Problème d'optimisation
 \end_layout
 
 \begin_layout Definition
@@ -632,7 +665,7 @@ un sens.
 \end_layout
 
 \begin_layout Subsubsection
-énoncé:
+Énoncé:
 \end_layout
 
 \begin_layout Paragraph
@@ -735,9 +768,34 @@ faire gagner le parti A
 
  qui calcule le 
 \series bold
-poids du parti A dans un canton donné.
-\series default
+poids du parti A dans un canton donné, soit la probabilité de votants pour
+ le parti A dans ce canton.
+\begin_inset Newline newline
+\end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series default
+Le résultat 
+\begin_inset Formula $p(K_{j})$
+\end_inset
+
+ nous donne en fait le rapport du nombre de personnes votant pour le parti
+ A dans la circonscription 
+\begin_inset Formula $K_{j}$
+\end_inset
+
+ sur le nombre total de votants dans cette même circonscription : 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 p: & X\rightarrow\mathbb{R^{+}}\\
@@ -752,20 +810,6 @@ p: & X\rightarrow\mathbb{R^{+}}\\
 p(K_{j})=\frac{\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}}
 \]
 
-\end_inset
-
-La fonction 
-\begin_inset Formula $p(K_{j})$
-\end_inset
-
- nous donne le rapport du nombre de personnes votant pour le parti A dans
- la circonscription 
-\begin_inset Formula $K_{j}$
-\end_inset
-
- sur le nombre total de votants dans cette même circonscription.
- 
-\begin_inset Newline newline
 \end_inset
 
 
@@ -831,20 +875,17 @@ rightarrow f(K_{j})
 
 f(K_{j})&=
 \backslash
-begin{cases}
-1 & 
+begin{cases}1 & 
 \backslash
 text{si }p(K_{j})>0,5
 \backslash
 
 \backslash
-
 0 & 
 \backslash
 text{
 \backslash
 text{sinon}}
-
 \backslash
 end{cases}
 \end_layout
@@ -995,6 +1036,10 @@ La règle est que le nombre de votants d'une circonscription doit être compris
 
  du nombre moyen de votants
 \series default
+ 
+\series bold
+dans une circonscription
+\series default
 .
  
 \begin_inset Newline newline
@@ -1059,7 +1104,7 @@ Application
 \end_layout
 
 \begin_layout Part
-Partie pratique
+PARTIE PRATIQUE
 \end_layout
 
 \begin_layout Chapter
