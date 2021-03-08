@@ -108,16 +108,9 @@ ISRAA BEN SASSI, CAMILLE GOUJET ET VICTOR LESUR
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
-\begin_inset Graphics
-	filename /Users/israbensassi/Documents/GM4/Semestre8/Projet Semestriel/Rapport/1200px-French_dec_2010.png
-	scale 60
-
-\end_inset
-
-
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -602,7 +595,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/israbensassi/Documents/GM4/Semestre8/Projet Semestriel/Rapport/GrapheExemple.png
+	filename GrapheExemple.png
 	scale 60
 
 \end_inset
