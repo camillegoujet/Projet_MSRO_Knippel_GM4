@@ -114,7 +114,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Illustration du découpage éléctoral en France
+Illustration du découpage électoral en France
 \end_layout
 
 \end_inset
@@ -732,7 +732,6 @@ Notre objectif est de définir un nombre
 \end_inset
 
 .
- 
 \series default
 
 \begin_inset Newline newline
@@ -792,7 +791,7 @@ Le résultat
 \begin_inset Formula 
 \begin{align*}
 p: & X\rightarrow\mathbb{R^{+}}\\
- & K_{j}\rightarrow p(K_{j})
+ & K_{j}\mapsto p(K_{j})
 \end{align*}
 
 \end_inset
@@ -921,7 +920,7 @@ Ceci nous permet de définir fonction économique
 \begin_inset Formula 
 \begin{align*}
 f: & X\rightarrow\mathbb{R^{+}}\\
- & K_{j}\rightarrow f(K_{j})
+ & K_{j}\mapsto f(K_{j})
 \end{align*}
 
 \end_inset
@@ -933,7 +932,7 @@ f: & X\rightarrow\mathbb{R^{+}}\\
 \begin_inset Formula 
 \begin{align*}
 f(K_{j}) & =\begin{cases}
-1 & \text{si }p(K_{j})>0,5\\
+1 & \text{si }p(K_{j})\geq0,5\\
 0 & \text{\text{sinon}}
 \end{cases}
 \end{align*}
@@ -1074,63 +1073,97 @@ Il faudrait définir une nouvelle fonction économique tout en gardant la
 
 \begin_layout Subsection
 Le choix de variables
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Dans cette partie, nous aimerions passer de la formulation ci-dessus à une
- formulation d'un problème de classification non supervisée.
- En effet, nous avons 
-\begin_inset Formula $n$
+Afin de pouvoir formuler le problème sous forme d'un problème mathématique
+ nous avons besoin de définir les variables que nous allons utiliser.
+ Définissons simplement les variables binaires 
+\begin_inset Formula $x_{ij}$
 \end_inset
 
- éléments 
-\begin_inset Formula $x_{i}$
+ tel que pour le 
+\begin_inset Formula $i^{ème}$
 \end_inset
 
- avec 
-\begin_inset Formula $p$
+ canton et la 
+\begin_inset Formula $j^{ème}$
 \end_inset
 
- caractéristiques.
- Ces dernières sont : le nombre de votants, la proportion de votes pour
- les partis et les connexions entre les différents 
-\begin_inset Formula $x_{i}$
-\end_inset
-
-, soit pour un canton donné la colonne dans la matrice d’adjacence associée,
- d’où 
-\begin_inset Formula $p=n+2$
-\end_inset
-
-.
- On peut donc définir une matrice de données 
-\begin_inset Formula $D=(d_{ik})$
-\end_inset
-
-, avec 
-\begin_inset Formula $1\leq i\leq n$
-\end_inset
-
- et 
-\begin_inset Formula $1\leq k\leq p$
-\end_inset
-
-.
- On veut donc trouver les critères qui nous permettent d'obtenir la meilleure
- partition des éléments.
-\end_layout
-
-\begin_layout Standard
-Nous pouvons formuler le problème général de la classification non supervisée
- de la façon suivante :
+ circonscription on ai :
 \begin_inset Formula 
 \[
-\begin{cases}
-Min\underset{1\leq i<j\leq n}{\sum}w_{ij}x_{ij}\\
-x_{ij}+x_{jk}-x_{ik}\leq1 & \forall(i,j,k)\in C\\
-x_{ij}\in\{0,1\}\forall i,j & 1\leq i<j\leq n
+x_{ij}=\begin{cases}
+1 & \text{si }x_{i}\in K_{j}\\
+0 & \text{sinon}
 \end{cases}
 \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On peut remarquer que cette variable traduit l'appartenance d'un canton
+ à une circonscription.
+ Ce qui implique de devoir énoncer ces deux contraintes suivantes :
+\begin_inset Formula 
+\begin{align*}
+\forall i & \stackrel[j=1]{k}{\sum}x_{ij}=1\\
+\forall j\in\{1,\dots,k\} & \stackrel[i=1]{n}{\sum}x_{ij}\geq1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La première imposant a chaque canton d'appartenir a une et une seule circonscrip
+tion et la seconde obligeant chaque circonscription a contenir au-moins
+ un canton.
+ Cet dernier contrainte peut par ailleurs être modifié pour forcer les circonscr
+iptions a chacune contenir un nombre de canton que l'on pourra définir.
+\end_layout
+
+\begin_layout Standard
+En explicitant les variables de la sorte on peut alors redéfinir la fonction
+ 
+\begin_inset Formula $p(K_{j})$
+\end_inset
+
+ précédente
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p(K_{j})=\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On peut donc formuler notre problème mathématique
+\begin_inset Formula 
+\begin{align*}
+ & \max\left(z\right)=\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
+ & \begin{cases}
+\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
+\end{cases}
+\end{align*}
 
 \end_inset
 
