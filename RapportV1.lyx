@@ -1124,11 +1124,23 @@ On peut remarquer que cette variable traduit l'appartenance d'un canton
 \end_layout
 
 \begin_layout Standard
-La première imposant a chaque canton d'appartenir a une et une seule circonscrip
-tion et la seconde obligeant chaque circonscription a contenir au-moins
+La première imposant à chaque canton d'appartenir a une et une seule circonscrip
+tion et la seconde obligeant chaque circonscription à contenir au-moins
  un canton.
- Cet dernier contrainte peut par ailleurs être modifié pour forcer les circonscr
-iptions a chacune contenir un nombre de canton que l'on pourra définir.
+ Cet dernière contrainte peut par ailleurs être modifiée pour forcer les
+ circonscriptions 
+\emph on
+a #chacune 
+\begin_inset Quotes fld
+\end_inset
+
+de
+\begin_inset Quotes frd
+\end_inset
+
+ contenir
+\emph default
+ un nombre de canton que l'on pourra définir.
 \end_layout
 
 \begin_layout Standard
