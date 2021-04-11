@@ -1174,6 +1174,46 @@ x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
 
 \end_layout
 
+\begin_layout Standard
+La dernière contrainte qui nous manque est celle de la connexité.
+ C'est-à-dire que pour tout couple de sommets appartenant à une même classe,
+ il existe un chemin pour aller de l'un à l'autre ne contenant que des sommets
+ de leur classe.
+ Pour expliciter cette notion, posons 
+\begin_inset Formula $G_{j}=(K_{j},U_{j})$
+\end_inset
+
+ où 
+\begin_inset Formula $K_{j}$
+\end_inset
+
+est l'ensemble des sommets d'une circonscription et 
+\begin_inset Formula $U_{j}$
+\end_inset
+
+ est l'ensemble des arcs reliant les sommets de 
+\begin_inset Formula $K_{j}$
+\end_inset
+
+, alors nous voulons que 
+\begin_inset Formula $\forall j\in\{1,\dots,k\}$
+\end_inset
+
+ et 
+\begin_inset Formula $\forall(x_{i},x_{i'})\in K_{j}^{2}$
+\end_inset
+
+ 
+\begin_inset Formula $x_{i}\longleftrightarrow x_{i'}$
+\end_inset
+
+ dans 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Chapter
 La classification des données
 \end_layout
