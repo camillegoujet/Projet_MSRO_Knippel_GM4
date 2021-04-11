@@ -1159,7 +1159,7 @@ p(K_{j})=\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackr
 On peut donc formuler notre problème mathématique
 \begin_inset Formula 
 \begin{align*}
- & \max\left(z\right)=\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
+ & \max\left(z\right)=\stackrel[j=1]{k}{\sum}\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
  & \begin{cases}
 \stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
 \stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
