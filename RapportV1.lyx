@@ -503,7 +503,7 @@ Chaque circonscription se décompose en "brique" élémentaire que sont les
  Ces cantons seront dans notre modèle assimilés à des nœuds d'un graphe.
  Chaque canton est relié par des arêtes aux autres cantons limitrophes.
  Pour simplifier, nous allons considérer seulement deux partis A et B.
- Ainsi, on attribua un poids à chaque nœud correspondant à un réel entre
+ Ainsi, on attribue un poids à chaque nœud correspondant à un réel entre
  0 et 1 qui traduit le pourcentage de votants qui soutiennent le parti A.
  Donc si le poids est de 0, tous les votants soutiennent le parti B et si
  le poids est de 1, tous les votants soutiennent le parti A.
