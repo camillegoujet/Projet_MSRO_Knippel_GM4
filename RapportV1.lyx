@@ -1124,27 +1124,19 @@ On peut remarquer que cette variable traduit l'appartenance d'un canton
 \end_layout
 
 \begin_layout Standard
-La première imposant à chaque canton d'appartenir a une et une seule circonscrip
+La première imposant à chaque canton d'appartenir à une et une seule circonscrip
 tion et la seconde obligeant chaque circonscription à contenir au-moins
  un canton.
  Cet dernière contrainte peut par ailleurs être modifiée pour forcer les
- circonscriptions 
+ circonscriptions à
 \emph on
-a #chacune 
-\begin_inset Quotes fld
-\end_inset
-
-de
-\begin_inset Quotes frd
-\end_inset
-
- contenir
+ 
 \emph default
- un nombre de canton que l'on pourra définir.
+chacune contenir, un nombre de canton que l'on pourra définir.
 \end_layout
 
 \begin_layout Standard
-En explicitant les variables de la sorte on peut alors redéfinir la fonction
+En explicitant les variables de la sorte, on peut alors redéfinir la fonction
  
 \begin_inset Formula $p(K_{j})$
 \end_inset
@@ -1167,7 +1159,7 @@ p(K_{j})=\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackr
 On peut donc formuler notre problème mathématique
 \begin_inset Formula 
 \begin{align*}
- & \max\left(z\right)=\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
+ & \max\left(z\right)=\stackrel[j=1]{k}{\sum}\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
  & \begin{cases}
 \stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
 \stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
@@ -1180,6 +1172,46 @@ x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+La dernière contrainte qui nous manque est celle de la connexité.
+ C'est-à-dire que pour tout couple de sommets appartenant à une même classe,
+ il existe un chemin pour aller de l'un à l'autre ne contenant que des sommets
+ de leur classe.
+ Pour expliciter cette notion, posons 
+\begin_inset Formula $G_{j}=(K_{j},U_{j})$
+\end_inset
+
+ où 
+\begin_inset Formula $K_{j}$
+\end_inset
+
+est l'ensemble des sommets d'une circonscription et 
+\begin_inset Formula $U_{j}$
+\end_inset
+
+ est l'ensemble des arcs reliant les sommets de 
+\begin_inset Formula $K_{j}$
+\end_inset
+
+, alors nous voulons que 
+\begin_inset Formula $\forall j\in\{1,\dots,k\}$
+\end_inset
+
+ et 
+\begin_inset Formula $\forall(x_{i},x_{i'})\in K_{j}^{2}$
+\end_inset
+
+ 
+\begin_inset Formula $x_{i}\longleftrightarrow x_{i'}$
+\end_inset
+
+ dans 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Chapter
