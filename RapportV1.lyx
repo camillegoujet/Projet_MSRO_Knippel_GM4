@@ -691,7 +691,7 @@ du canton
 \series default
 et le 
 \series bold
-pourcentage de votants qui soutiennent le parti A
+pourcentage/proportion de votants qui soutiennent le parti A
 \series default
 .
 \begin_inset Newline newline
@@ -715,7 +715,7 @@ Notre objectif est de définir un nombre
 \begin_inset Formula $\forall j\in\{1,\dots,k\}$
 \end_inset
 
- 
+, 
 \begin_inset Formula $K_{j}$
 \end_inset
 
@@ -760,7 +760,7 @@ faire gagner le parti A
 
  qui calcule le 
 \series bold
-poids du parti A dans une circonscription donné, soit la probabilité de
+poids du parti A dans une circonscription donnée, soit la proportion de
  votants pour le parti A dans cette circonscription.
 \begin_inset Newline newline
 \end_inset
@@ -912,7 +912,7 @@ end{mydef}
 \end_layout
 
 \begin_layout Standard
-Ceci nous permet de définir fonction économique 
+Ceci nous permet de définir la fonction économique 
 \begin_inset Formula $f$
 \end_inset
 
@@ -1007,7 +1007,8 @@ Remarquons que dans notre formulation, nous avons posé une contrainte de
 
 Pour cela, nous pouvons nous inspirer des contraintes qui existent sur la
  taille des circonscriptions en France.
- 
+ Celles-ci sont un peu abstraites mais recommande des tailles de circonscription
+s (en nombre de votants) significativement égales.
 \begin_inset Newline newline
 \end_inset
 
@@ -1017,8 +1018,8 @@ Pour cela, nous pouvons nous inspirer des contraintes qui existent sur la
 
 
 \series bold
-La règle est que le nombre de votants d'une circonscription doit être compris
- entre 
+La règle que nous nous fixons alors est que le nombre de votants d'une circonscr
+iption doit être compris entre 
 \begin_inset Formula $80\%$
 \end_inset
 
@@ -1033,7 +1034,6 @@ La règle est que le nombre de votants d'une circonscription doit être compris
 dans une circonscription
 \series default
 .
- 
 \begin_inset Newline newline
 \end_inset
 
@@ -1080,9 +1080,13 @@ Le choix de variables
 \end_layout
 
 \begin_layout Standard
-Afin de pouvoir formuler le problème sous forme d'un problème mathématique
+Afin de pouvoir formuler le problème sous forme d'un problème mathématique,
  nous avons besoin de définir les variables que nous allons utiliser.
- Définissons simplement les variables binaires 
+ 
+\begin_inset Newline newline
+\end_inset
+
+Définissons simplement les variables binaires 
 \begin_inset Formula $x_{ij}$
 \end_inset
 
@@ -1094,7 +1098,7 @@ Afin de pouvoir formuler le problème sous forme d'un problème mathématique
 \begin_inset Formula $j^{ème}$
 \end_inset
 
- circonscription on ai :
+ circonscription, on ait :
 \begin_inset Formula 
 \[
 x_{ij}=\begin{cases}
@@ -1114,8 +1118,8 @@ On peut remarquer que cette variable traduit l'appartenance d'un canton
  Ce qui implique de devoir énoncer ces deux contraintes suivantes :
 \begin_inset Formula 
 \begin{align*}
-\forall i & \stackrel[j=1]{k}{\sum}x_{ij}=1\\
-\forall j\in\{1,\dots,k\} & \stackrel[i=1]{n}{\sum}x_{ij}\geq1
+\forall i\in\{1,\dots,n\}, & \stackrel[j=1]{k}{\sum}x_{ij}=1\\
+\forall j\in\{1,\dots,k\}, & \stackrel[i=1]{n}{\sum}x_{ij}\geq1
 \end{align*}
 
 \end_inset
@@ -1127,12 +1131,20 @@ On peut remarquer que cette variable traduit l'appartenance d'un canton
 La première imposant à chaque canton d'appartenir à une et une seule circonscrip
 tion et la seconde obligeant chaque circonscription à contenir au-moins
  un canton.
- Cet dernière contrainte peut par ailleurs être modifiée pour forcer les
+ 
+\begin_inset Newline newline
+\end_inset
+
+Cette dernière contrainte peut par ailleurs être modifiée pour forcer les
  circonscriptions à
 \emph on
  
 \emph default
-chacune contenir, un nombre de canton que l'on pourra définir.
+chacune contenir, un nombre de cantons que l'on pourra définir.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1141,7 +1153,7 @@ En explicitant les variables de la sorte, on peut alors redéfinir la fonction
 \begin_inset Formula $p(K_{j})$
 \end_inset
 
- précédente
+ précédente :
 \end_layout
 
 \begin_layout Standard
@@ -1156,7 +1168,7 @@ p(K_{j})=\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackr
 \end_layout
 
 \begin_layout Standard
-On peut donc formuler notre problème mathématique
+Et ainsi reformuler notre problème mathématique sous la forme suivante :
 \begin_inset Formula 
 \begin{align*}
  & \max\left(z\right)=\stackrel[j=1]{k}{\sum}\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
@@ -1178,24 +1190,104 @@ x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
 La dernière contrainte qui nous manque est celle de la connexité.
  C'est-à-dire que pour tout couple de sommets appartenant à une même classe,
  il existe un chemin pour aller de l'un à l'autre ne contenant que des sommets
- de leur classe.
- Pour expliciter cette notion, posons 
-\begin_inset Formula $G_{j}=(K_{j},U_{j})$
+ de leur classe d'appartenance.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Pour expliciter cette notion, posons 
+\begin_inset Formula 
+\[
+G_{j}=(K_{j},U_{j})
+\]
+
 \end_inset
 
  où 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+ le sous-graphe représentant la circonscription 
+\begin_inset Formula $j$
+\end_inset
+
+, 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset Formula $K_{j}$
 \end_inset
 
-est l'ensemble des sommets d'une circonscription et 
+ l'ensemble des sommets d'une circonscription 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
 \begin_inset Formula $U_{j}$
 \end_inset
 
- est l'ensemble des arcs reliant les sommets de 
+ l'ensemble des arcs reliant les sommets de 
 \begin_inset Formula $K_{j}$
 \end_inset
 
-, alors nous voulons que 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Nous voulons que 
 \begin_inset Formula $\forall j\in\{1,\dots,k\}$
 \end_inset
 
