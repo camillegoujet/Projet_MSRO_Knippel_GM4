@@ -1184,10 +1184,225 @@ x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
 \end_inset
 
 
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
-La dernière contrainte qui nous manque est celle de la connexité.
+
+\begin_inset Newline newline
+\end_inset
+
+Afin d'appliquer des algorithmes rapides d'optimisation (par exemple ceux
+ du logiciel CPLEX), il nous faut maintenant linéariser la formule du problème.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour cela, nous voulons prioritairement changer le 
+\emph on
+quotient
+\emph default
+ de la formule en 
+\emph on
+produit
+\emph default
+ (plus gérable pour la résolution de programmations linéaires) :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+\emph on
+1ère étape :
+\series default
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Posons tout d'abord 
+\begin_inset Formula $z_{j}=\begin{cases}
+1 & si\,\,\,\,\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\geq0.5\\
+0 & si\,\,\,\,\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}<0.5
+\end{cases}\,\,\,\,$
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+On peut remarquer que 
+\begin_inset Formula $\forall j\in\{1,\dots,k\},$
+\end_inset
+
+
+\series bold
+
+\begin_inset Formula $z_{j}\leq\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}+\frac{1}{2}$
+\end_inset
+
+
+\series default
+ ,
+\begin_inset Newline newline
+\end_inset
+
+Multiplions maintenant notre inégalité par 
+\begin_inset Formula $\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}$
+\end_inset
+
+ :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{j}\times\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ainsi, nous obtenons une condition quadratique.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+\emph on
+2ème étape :
+\series default
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La deuxième étape consiste à transformer notre condition quadratique en
+ condition linéaire.
+\begin_inset Newline newline
+\end_inset
+
+Pour cela, on introduit 3 nouvelles contraintes impliquant une nouvelle
+ variable 
+\begin_inset Formula $y_{ij}$
+\end_inset
+
+ .
+\begin_inset Newline newline
+\end_inset
+
+L'objectif de l'introduction de cette variable est d'obtenir le même comportemen
+t que si on gardait la formule avec le produit des 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+avec les 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+ mais dans une formulation linéaire.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Posons alors 
+\begin_inset Formula $\begin{cases}
+y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij})\\
+y_{ij}\geq z_{j}+x_{ij}-1
+\end{cases}$
+\end_inset
+
+ ,
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ainsi, le problème devient :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\,\,\,
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{cases}
+\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,k\}\\
+y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij}) & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Finalement, on obtient une formulation mathématique de notre problème sous
+ forme linéaire.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La dernière contrainte qu'il nous manque est celle de la connexité.
  C'est-à-dire que pour tout couple de sommets appartenant à une même classe,
  il existe un chemin pour aller de l'un à l'autre ne contenant que des sommets
  de leur classe d'appartenance.
@@ -1311,191 +1526,7 @@ Nous voulons que
 \begin_inset Newline newline
 \end_inset
 
-Afin d'appliquer des algorithmes rapides d'optimisation (par exemple ceux
- du logiciel CPLEX), il nous faut maintenant linéariser la formule du problème.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Pour cela, nous voulons prioritairement changer le quotient de la formule
- en produit (plus gérable pour la résolution de programmations linéaires)
- :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\series bold
-\emph on
-1ère étape :
-\series default
-\emph default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Posons tout d'abord 
-\begin_inset Formula $z_{j}=\begin{cases}
-1 & si\,\,\,\,\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\geq0.5\\
-0 & si\,\,\,\,\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}<0.5
-\end{cases}\,\,\,\,$
-\end_inset
-
-,
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-On peut remarquer que 
-\begin_inset Formula $\forall j\in\{1,\dots,k\},$
-\end_inset
-
-
-\begin_inset Formula $z_{j}\leq\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}+\frac{1}{2}$
-\end_inset
-
-,
-\begin_inset Newline newline
-\end_inset
-
-Multiplions maintenant notre inégalité par 
-\begin_inset Formula $\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}$
-\end_inset
-
- :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\[
-z_{j}\times\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Ainsi, nous obtenons une condition quadratique.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-La deuxième étape consiste à transformer notre condition quadratique en
- condition linéaire.
-\begin_inset Newline newline
-\end_inset
-
-Pour cela, on introduit 3 nouvelles contraintes impliquant une nouvelle
- variable 
-\begin_inset Formula $y_{ij}$
-\end_inset
-
- :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-L'objectif de l'introduction de cette variable est d'obtenir le même comportemen
-t que si on gardait la formule avec le produit des 
-\begin_inset Formula $z_{j}$
-\end_inset
-
-avec les 
-\begin_inset Formula $x_{ij}$
-\end_inset
-
- mais dans une formulation linéaire.
-\begin_inset Newline newline
-\end_inset
-
-Posons alors 
-\begin_inset Formula $\begin{cases}
-y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij})\\
-y_{ij}\geq z_{j}+x_{ij}-1
-\end{cases}$
-\end_inset
-
- ,
-\begin_inset Newline newline
-\end_inset
-
-Ainsi, le problème devient :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\,\,\,
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\begin{cases}
-\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
-\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
-\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
-\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
-x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
-z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,k\}\\
-y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
-\stackrel[i=1]{n}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
-y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij}) & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
-y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
-\end{cases}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Finalement, on obtient une formulation mathématique de notre problème sous
- forme linéaire.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Il ne nous reste plus que la contrainte de connexité à mettre en place.
- Pour commencer, on se contentera de calculer la distance entre 2 cantons
+Pour commencer, on se contentera de calculer la distance entre 2 cantons
  ( 2 noeuds du graphe associé au problème)
 \begin_inset Newline newline
 \end_inset
@@ -1530,6 +1561,18 @@ où
 \end_inset
 
  du graphe
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Les distances 
+\begin_inset Formula $d_{ik}$
+\end_inset
+
+seront des données du problème.
 \end_layout
 
 \begin_layout Chapter
@@ -1558,6 +1601,190 @@ PARTIE PRATIQUE
 
 \begin_layout Chapter
 Utilisation d'un solveur 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nous décidons d'utiliser CPLEX via l'API Python.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Afin de prendre en main ce solveur, nous allons tout d'abord essayer de
+ résoudre le problème sur un 
+\emph on
+toy example.
+\begin_inset Newline newline
+\end_inset
+
+
+\emph default
+On décide de le construire nous-mêmes pour pouvoir vérifier les résultats
+ en introduisant peu de valeurs et que ces valeurs soient simples.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+On rappelle que l'on a 
+\begin_inset Formula $n\,cantons$
+\end_inset
+
+ et 
+\begin_inset Formula $k\,circonscriptions$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+Les données 
+\begin_inset Formula $nbV_{i},pV_{i}$
+\end_inset
+
+ appartenant au canton 
+\begin_inset Formula $i$
+\end_inset
+
+ respectivement le nombre de votants du canton et le pourcentage/proportion
+ de votants qui soutiennent le parti A.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ici, on choisit donc :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\begin{cases}
+2\,circonscriptions & ==>k=2\\
+5\,cantons & ==>n=5
+\end{cases}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour les 
+\begin_inset Formula $nbV_{i},pV_{i},$
+\end_inset
+
+on choisit arbitrairement :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\begin{cases}
+nbV_{1}=5 & pV_{1}=0.4\\
+nbV_{2}=6 & pV_{2}=0.6\\
+nbV_{3}=5 & pV_{3}=0.7\\
+nbV_{4}=6 & pV_{4}=0.2\\
+nbV_{5}=7 & pV_{5}=0.9
+\end{cases}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Toy_Example.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Situation initiale à résoudre 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+On a donc :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\max\left(z\right)=z_{1}+z_{2}\,\,\,
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{cases}
+x_{i1}+x_{i2}=1 & \forall i\in\{1,\dots,5\}\\
+x_{1j}+x_{2j}+x_{3j}+x_{4j}+x_{5j}\geq1 & \forall j\in\{1,\dots,2\}\\
+x_{1j}nbV_{1}+x_{2j}nbV_{2}+x_{3j}nbV_{3}+x_{4j}nbV_{4}+x_{5j}nbV_{5}\,\,\leq\,\,\frac{1,20}{2}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,2\}\\
+x_{1j}nbV_{1}+x_{2j}nbV_{2}+x_{3j}nbV_{3}+x_{4j}nbV_{4}+x_{5j}nbV_{5\,\,}\geq\,\,\frac{0,8}{2}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,2\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,2\}\\
+z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,2\}\\
+y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+\stackrel[i=1]{5}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{5}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{5}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij}) & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}
+\end{cases}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
