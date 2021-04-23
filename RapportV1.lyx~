@@ -1787,6 +1787,11 @@ y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}
 
 \end_layout
 
+\begin_layout Standard
+L'objectif est à présent de mettre ce programme linéaire sous la forme d'un
+ problème résoluble en machine.
+\end_layout
+
 \begin_layout Chapter
 Algorithme de classification non supervisée
 \end_layout
