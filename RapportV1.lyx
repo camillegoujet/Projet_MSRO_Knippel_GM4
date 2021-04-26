@@ -1573,6 +1573,26 @@ Les distances
 \end_inset
 
 seront des données du problème.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Proposition isra : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+d_{ik} & \leq D\,\,On\,se\,limite\,à\,un\,rayon\,D\,de\,distance\,entre\,les\,villes\\
+x_{ij}+x_{kj} & =\,2\,\,Les\,deux\,cantons\,sont\,dans\,la\,même\,circonscription\,\lor k\neq i,\,k\in\{1..n\}
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
