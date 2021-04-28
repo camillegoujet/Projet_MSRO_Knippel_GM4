@@ -111,6 +111,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename cover-r4x3w1000-5f6115303c0f7-trump-et-edward.jpg
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -375,6 +384,53 @@ source : https://www.cairn.info/revue-pouvoirs-2013-3-page-117.htm
  De fait, comme nous le verrons plus tard, le nombre d'habitants d'une circonscr
 iption doit être compris entre 80 et 120% de la moyenne des circonscriptions
  de la même région.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename The_Gerry-Mander_Edit.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Illustration historique du phénomène du 
+\begin_inset Quotes fld
+\end_inset
+
+gerrymandering
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1580,7 +1636,19 @@ seront des données du problème.
 \begin_inset Newline newline
 \end_inset
 
-Proposition isra : 
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Proposition pour linéariser la contrainte de connexité ?? : 
 \end_layout
 
 \begin_layout Standard
@@ -1630,6 +1698,10 @@ Utilisation d'un solveur
 \begin_layout Standard
 Nous décidons d'utiliser CPLEX via l'API Python.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -1735,27 +1807,29 @@ nbV_{5}=7 & pV_{5}=0.9
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Toy_Example.png
-	lyxscale 30
-	scale 30
+	filename Toy Example.png
+	lyxscale 50
+	scale 50
 	rotateOrigin center
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Situation initiale à résoudre 
+Situation initiale à résoudre avec un 
+\emph on
+toy example
+\emph default
+ 
 \end_layout
 
 \end_inset
@@ -1763,6 +1837,14 @@ Situation initiale à résoudre
 
 \end_layout
 
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -1805,11 +1887,39 @@ y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}
 \end_inset
 
 
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
+
+\begin_inset Newline newline
+\end_inset
+
 L'objectif est à présent de mettre ce programme linéaire sous la forme d'un
  problème résoluble en machine.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour la résolution de ce problème, il faut ouvrir la page HTML 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+Resolution_CPLEX_DecoupageElectoral
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ crée à partir du Jupyter Notebook que nous avons utilisé.
 \end_layout
 
 \begin_layout Chapter
