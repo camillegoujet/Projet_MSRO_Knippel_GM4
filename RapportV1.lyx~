@@ -1701,6 +1701,10 @@ Nous décidons d'utiliser CPLEX via l'API Python.
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
 Afin de prendre en main ce solveur, nous allons tout d'abord essayer de
  résoudre le problème sur un 
 \emph on
@@ -1892,6 +1896,30 @@ y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}
 
 L'objectif est à présent de mettre ce programme linéaire sous la forme d'un
  problème résoluble en machine.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour la résolution de ce problème, il faut ouvrir la page HTML 
+\begin_inset Quotes fld
+\end_inset
+
+
+\emph on
+Resolution_CPLEX_DecoupageElectoral
+\emph default
+
+\begin_inset Quotes frd
+\end_inset
+
+ crée à partir du Jupyter Notebook que nous avons utilisé.
 \end_layout
 
 \begin_layout Chapter
