@@ -40,7 +40,7 @@ foottoend
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -66,6 +66,8 @@ foottoend
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2cm
+\rightmargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -1397,7 +1399,8 @@ avec les
 
 Posons alors 
 \begin_inset Formula $\begin{cases}
-y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij})\\
+y_{ij}\leq z_{j}\\
+y_{ij}\leq x_{ij}\\
 y_{ij}\geq z_{j}+x_{ij}-1
 \end{cases}$
 \end_inset
@@ -1438,7 +1441,8 @@ x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\
 z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,k\}\\
 y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
 \stackrel[i=1]{n}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
-y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij}) & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq z_{j} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq x_{ij} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
 y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
 \end{cases}
 \]
@@ -1463,6 +1467,32 @@ La dernière contrainte qu'il nous manque est celle de la connexité.
  il existe un chemin pour aller de l'un à l'autre ne contenant que des sommets
  de leur classe d'appartenance.
  
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+\emph on
+3e étape :
+\series default
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Contrainte de connexité 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -1567,10 +1597,14 @@ Nous voulons que
 \end_inset
 
  
-\begin_inset Formula $x_{i}\longleftrightarrow x_{i'}$
+\begin_inset Formula $\exists$
 \end_inset
 
- dans 
+un chemin entre 
+\begin_inset Formula $x_{i}\,\,et\,\,x_{i'}$
+\end_inset
+
+dans 
 \begin_inset Formula $G_{j}$
 \end_inset
 
@@ -1583,14 +1617,16 @@ Nous voulons que
 \end_inset
 
 Pour commencer, on se contentera de calculer la distance entre 2 cantons
- ( 2 noeuds du graphe associé au problème)
+ (2 noeuds du graphe associé au problème).
+ Cela nous permettra en fait d'assurer l'obtention de circonscriptions bien
+ formées et d'éviter les répartitions trop en longueur :
 \begin_inset Newline newline
 \end_inset
 
 
 \begin_inset Formula 
 \[
-x_{ij}\times x_{kj}\times d_{ik}\leq D
+x_{ij}\times x_{lj}\times d_{il}\leq D
 \]
 
 \end_inset
@@ -1605,7 +1641,7 @@ où D = distance maximale que l'on se fixe pour la résolution de notre problèm
 
 \begin_layout Standard
 où 
-\begin_inset Formula $d_{ik}$
+\begin_inset Formula $d_{il}$
 \end_inset
 
 = distance entre les sommets 
@@ -1613,7 +1649,7 @@ où
 \end_inset
 
  et 
-\begin_inset Formula $k$
+\begin_inset Formula $l$
 \end_inset
 
  du graphe
@@ -1621,11 +1657,11 @@ où
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 Les distances 
-\begin_inset Formula $d_{ik}$
+\begin_inset Formula $d_{il}$
 \end_inset
 
 seront des données du problème.
@@ -1636,7 +1672,55 @@ seront des données du problème.
 \begin_inset Newline newline
 \end_inset
 
+Il ne nous reste plus alors qu'à linéariser cette dernière contrainte pour
+ atteindre la formulation finale de notre problème.
+ Pour cela, de la même façon que nous avons rajouté la variable 
+\begin_inset Formula $y_{ij}$
+\end_inset
 
+ lors de l'étape 2, nous introduisons ici la variable 
+\begin_inset Formula $w_{ijl}$
+\end_inset
+
+ telle que :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\begin{cases}
+w_{ijl}\leq x_{ij}\\
+w_{ijl}\leq x_{lj}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1
+\end{cases}$
+\end_inset
+
+ , 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Donc pour la contrainte de connexité/répartition homogène des cantons dans
+ une circonscritpion donne:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\begin{cases}
+w_{ijl}\leq x_{ij}\\
+w_{ijl}\leq x_{kj}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1\\
+d_{il}\leq D
+\end{cases}$
+\end_inset
+
+ 
 \begin_inset Newline newline
 \end_inset
 
@@ -1648,39 +1732,50 @@ seront des données du problème.
 \begin_inset Newline newline
 \end_inset
 
-Proposition pour linéariser la contrainte de connexité ?? : 
+Finalement, le problème s'écrit : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-d_{ik} & \leq D\,\,On\,se\,limite\,à\,un\,rayon\,D\,de\,distance\,entre\,les\,villes\\
-x_{ij}+x_{kj} & =\,2\,\,Les\,deux\,cantons\,sont\,dans\,la\,même\,circonscription\,\lor k\neq i,\,k\in\{1..n\}
-\end{align*}
+\[
+\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\,\,\,
+\]
 
 \end_inset
 
 
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Chapter
-La classification des données
-\end_layout
 
-\begin_layout Section
-Intérêt
-\end_layout
+\begin_inset Formula 
+\[
+\begin{cases}
+\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,k\}\\
+y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq z_{j} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq x_{ij} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+d_{il}\leq D & \forall i,l\in\{1,\dots,n\}²\\
+w_{ijl}\leq x_{ij} & \forall(i,l,j)\in\{1,\dots,n\}²\times\{1,\dots,k\}\\
+w_{ijl}\leq x_{lj} & \forall(i,l,j)\in\{1,\dots,n\}²\times\{1,\dots,k\}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1 & \forall(i,l,j)\in\{1,\dots,n\}²\times\{1,\dots,k\}
+\end{cases}
+\]
 
-\begin_layout Section
-Classification non supervisée
-\end_layout
+\end_inset
 
-\begin_layout Subsection
-Principe
-\end_layout
 
-\begin_layout Subsection
-Application
 \end_layout
 
 \begin_layout Part
@@ -1689,10 +1784,12 @@ PARTIE PRATIQUE
 
 \begin_layout Chapter
 Utilisation d'un solveur 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Section
+Application du solveur sur un 
+\emph on
+toy example
 \end_layout
 
 \begin_layout Standard
@@ -1715,7 +1812,7 @@ toy example.
 
 \emph default
 On décide de le construire nous-mêmes pour pouvoir vérifier les résultats
- en introduisant peu de valeurs et que ces valeurs soient simples.
+ en introduisant peu de valeurs et des valeurs simples.
 \begin_inset Newline newline
 \end_inset
 
@@ -1879,8 +1976,13 @@ x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,2\}\
 z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,2\}\\
 y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
 \stackrel[i=1]{5}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{5}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{5}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
-y_{ij}\leq\frac{1}{2}(z_{j}+x_{ij}) & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
-y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}
+y_{ij}\leq z_{j} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\leq x_{ij} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+d_{il}\leq D & \forall i,l\in\{1,\dots,5\}²\\
+w_{ijl}\leq x_{ij} & \forall(i,l,j)\in\{1,\dots,5\}²\times\{1,\dots,2\}\\
+w_{ijl}\leq x_{lj} & \forall(i,l,j)\in\{1,\dots,5\}²\times\{1,\dots,2\}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1 & \forall(i,l,j)\in\{1,\dots,5\}²\times\{1,\dots,2\}
 \end{cases}
 \]
 
@@ -1907,6 +2009,8 @@ L'objectif est à présent de mettre ce programme linéaire sous la forme d'un
 \begin_inset Newline newline
 \end_inset
 
+
+\series bold
 Pour la résolution de ce problème, il faut ouvrir la page HTML 
 \begin_inset Quotes fld
 \end_inset
@@ -1920,10 +2024,88 @@ Resolution_CPLEX_DecoupageElectoral
 \end_inset
 
  crée à partir du Jupyter Notebook que nous avons utilisé.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
-\begin_layout Chapter
-Algorithme de classification non supervisée
+\begin_layout Section
+Application du solveur sur un problème plus réaliste 
+\end_layout
+
+\begin_layout Standard
+Ayant constaté l'efficacité de notre modélisation sur un jeu de données
+ simple, on veut maintenant élargir les possibilités que l'on peut en faire
+ en introduisant un jeu de données plus important.
+ Cela nous permet de nous rapprocher d'une situation complètement réaliste
+ et donc de rendre notre modèle utile à tous.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+GO VICTOR 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Conclusion
+\end_layout
+
+\begin_layout Standard
+Bien que nos jeux de données soient trop pauvres pour ressortir des informations
+ pertinentes qui pourraient être appliquées lors d'une réelle élection politique
+, notre modèle mathématique de découpage électoral est globalement réussi.
+\end_layout
+
+\begin_layout Standard
+En effet, le découpage et le partitionnement d'une circonscription peut
+ paraître anodin.
+ Il nécessite pourtant d'être traité avec une minutie et un détail certain
+ car son rôle est d'une importance insoupsçonnée par la plupart des gens
+ et fondamentale dans le résultat d'un scrutin.
+\end_layout
+
+\begin_layout Standard
+Notre travail a permis de mettre en évidence qu'avec la même situation mais
+ un découpage différent, on pouvait former la victoire écrasante du parti
+ A à sa défaite en quelques modifications.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+C'est avec une énorme frustration que nous nous voyons dans l'obligation
+ de clore notre travail ici pour le moment n'ayant pas eu l'opportunité
+ d'aborder ensemble des situations engageant plus de 2 partis politiques.
+ Nous avions également dans l'idée d'enrichir les connaissances dans ce
+ domaine en allant plus loin et en proposant un modèle de découpage qui
+ se voudrait le moins subjectif et partisan possible.
+\begin_inset Newline newline
+\end_inset
+
+Nous remercions Monsieur Knippel de nous avoir permis d'appliquer nos compétence
+s en optimisation et modélisation mathématique à des problèmes contemporains
+ qui nous touchent et nous passionnent personnellement.
+ Nous prévoyons d'enrichir nos jeux de données de quelques exemples d'élections
+ passées afin de le perfectionner quand le temps le permettra.
+ 
 \end_layout
 
 \end_body
