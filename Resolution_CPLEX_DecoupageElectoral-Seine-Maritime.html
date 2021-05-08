@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Resolution_CPLEX_DecoupageElectoral</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Resolution_CPLEX_DecoupageElectoral-Seine-Maritime</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14259,7 +14259,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="R&#233;solution-du-mod&#232;le-sur-le-toy-example-cr&#233;&#233;">R&#233;solution du mod&#232;le sur le toy example cr&#233;&#233;<a class="anchor-link" href="#R&#233;solution-du-mod&#232;le-sur-le-toy-example-cr&#233;&#233;">&#182;</a></h1>
+<h1 id="R&#233;solution-du-mod&#232;le-sur-les-donn&#233;es-r&#233;elles-de-les-communes-de-la-Seine-Maritime">R&#233;solution du mod&#232;le sur les donn&#233;es r&#233;elles de les communes de la Seine-Maritime<a class="anchor-link" href="#R&#233;solution-du-mod&#232;le-sur-les-donn&#233;es-r&#233;elles-de-les-communes-de-la-Seine-Maritime">&#182;</a></h1>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
@@ -14302,21 +14302,10 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#On entre ensuite les constantes du problème</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Chargement de la bibliothèque csv afin de pouvoir lire par la suite</span>
+<span class="c1"># le fichier csv</span>
 
-<span class="c1"># Cas où on les entre à la main : </span>
-<span class="n">pVi</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
-<span class="n">nbVi</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-<span class="n">d</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">33</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">39</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span>
-    <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-
-<span class="n">D</span> <span class="o">=</span> <span class="mi">25</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nbVi</span><span class="p">)</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="kn">import</span> <span class="nn">csv</span>
 </pre></div>
 
      </div>
@@ -14328,6 +14317,46 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#On entre ensuite les constantes du problème</span>
+<span class="n">nomCommunes</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">nbVi</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">pVi</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">latitude</span> <span class="o">=</span><span class="p">[]</span>
+<span class="n">longitude</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;communes76.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+    <span class="n">spamreader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">spamreader</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="p">:</span> 
+            <span class="n">i</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="c1">#print(row[0], row[1], row[2], row[3], row[4])</span>
+            <span class="n">nomCommunes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">nbVi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">pVi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="n">latitude</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="n">longitude</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+        <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nbVi</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1">#Le departement Seine-Maritime compte 35 circonscriptions depuis le redécoupage </span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#On insère ici toutes les variables nécessaires : les zj, xij et yij, wilj</span>
@@ -14343,7 +14372,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">binary_var_matrix</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">key_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -14357,7 +14386,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">binary_var_list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">key_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -14371,10 +14400,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">binary_var_cube</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">key_format</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#w = m.binary_var_cube(range(1,n+1),range(1,n+1), range(1,k+1), name=&quot;w&quot;, key_format=None)</span>
 </pre></div>
 
      </div>
@@ -14396,7 +14425,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#permet de vérifier si z est de la bonne forme </span>
@@ -14420,7 +14449,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[docplex.mp.Var(type=B,name=&#39;z_1&#39;), docplex.mp.Var(type=B,name=&#39;z_2&#39;)]
+<pre>[docplex.mp.Var(type=B,name=&#39;z_1&#39;), docplex.mp.Var(type=B,name=&#39;z_2&#39;), docplex.mp.Var(type=B,name=&#39;z_3&#39;)]
 </pre>
 </div>
 </div>
@@ -14432,7 +14461,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#permet de comprendre comment fonctionne les différents indiçages dans docplex </span>
@@ -14465,14 +14494,14 @@ a.anchor-link {
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#permet de vérifier si w est de la bonne forme </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="c1">#print(w)</span>
 </pre></div>
 
      </div>
@@ -14480,31 +14509,10 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>{(1, 1, 1): docplex.mp.Var(type=B,name=&#39;w_1_1_1&#39;), (1, 1, 2): docplex.mp.Var(type=B,name=&#39;w_1_1_2&#39;), (1, 2, 1): docplex.mp.Var(type=B,name=&#39;w_1_2_1&#39;), (1, 2, 2): docplex.mp.Var(type=B,name=&#39;w_1_2_2&#39;), (1, 3, 1): docplex.mp.Var(type=B,name=&#39;w_1_3_1&#39;), (1, 3, 2): docplex.mp.Var(type=B,name=&#39;w_1_3_2&#39;), (1, 4, 1): docplex.mp.Var(type=B,name=&#39;w_1_4_1&#39;), (1, 4, 2): docplex.mp.Var(type=B,name=&#39;w_1_4_2&#39;), (1, 5, 1): docplex.mp.Var(type=B,name=&#39;w_1_5_1&#39;), (1, 5, 2): docplex.mp.Var(type=B,name=&#39;w_1_5_2&#39;), (2, 1, 1): docplex.mp.Var(type=B,name=&#39;w_2_1_1&#39;), (2, 1, 2): docplex.mp.Var(type=B,name=&#39;w_2_1_2&#39;), (2, 2, 1): docplex.mp.Var(type=B,name=&#39;w_2_2_1&#39;), (2, 2, 2): docplex.mp.Var(type=B,name=&#39;w_2_2_2&#39;), (2, 3, 1): docplex.mp.Var(type=B,name=&#39;w_2_3_1&#39;), (2, 3, 2): docplex.mp.Var(type=B,name=&#39;w_2_3_2&#39;), (2, 4, 1): docplex.mp.Var(type=B,name=&#39;w_2_4_1&#39;), (2, 4, 2): docplex.mp.Var(type=B,name=&#39;w_2_4_2&#39;), (2, 5, 1): docplex.mp.Var(type=B,name=&#39;w_2_5_1&#39;), (2, 5, 2): docplex.mp.Var(type=B,name=&#39;w_2_5_2&#39;), (3, 1, 1): docplex.mp.Var(type=B,name=&#39;w_3_1_1&#39;), (3, 1, 2): docplex.mp.Var(type=B,name=&#39;w_3_1_2&#39;), (3, 2, 1): docplex.mp.Var(type=B,name=&#39;w_3_2_1&#39;), (3, 2, 2): docplex.mp.Var(type=B,name=&#39;w_3_2_2&#39;), (3, 3, 1): docplex.mp.Var(type=B,name=&#39;w_3_3_1&#39;), (3, 3, 2): docplex.mp.Var(type=B,name=&#39;w_3_3_2&#39;), (3, 4, 1): docplex.mp.Var(type=B,name=&#39;w_3_4_1&#39;), (3, 4, 2): docplex.mp.Var(type=B,name=&#39;w_3_4_2&#39;), (3, 5, 1): docplex.mp.Var(type=B,name=&#39;w_3_5_1&#39;), (3, 5, 2): docplex.mp.Var(type=B,name=&#39;w_3_5_2&#39;), (4, 1, 1): docplex.mp.Var(type=B,name=&#39;w_4_1_1&#39;), (4, 1, 2): docplex.mp.Var(type=B,name=&#39;w_4_1_2&#39;), (4, 2, 1): docplex.mp.Var(type=B,name=&#39;w_4_2_1&#39;), (4, 2, 2): docplex.mp.Var(type=B,name=&#39;w_4_2_2&#39;), (4, 3, 1): docplex.mp.Var(type=B,name=&#39;w_4_3_1&#39;), (4, 3, 2): docplex.mp.Var(type=B,name=&#39;w_4_3_2&#39;), (4, 4, 1): docplex.mp.Var(type=B,name=&#39;w_4_4_1&#39;), (4, 4, 2): docplex.mp.Var(type=B,name=&#39;w_4_4_2&#39;), (4, 5, 1): docplex.mp.Var(type=B,name=&#39;w_4_5_1&#39;), (4, 5, 2): docplex.mp.Var(type=B,name=&#39;w_4_5_2&#39;), (5, 1, 1): docplex.mp.Var(type=B,name=&#39;w_5_1_1&#39;), (5, 1, 2): docplex.mp.Var(type=B,name=&#39;w_5_1_2&#39;), (5, 2, 1): docplex.mp.Var(type=B,name=&#39;w_5_2_1&#39;), (5, 2, 2): docplex.mp.Var(type=B,name=&#39;w_5_2_2&#39;), (5, 3, 1): docplex.mp.Var(type=B,name=&#39;w_5_3_1&#39;), (5, 3, 2): docplex.mp.Var(type=B,name=&#39;w_5_3_2&#39;), (5, 4, 1): docplex.mp.Var(type=B,name=&#39;w_5_4_1&#39;), (5, 4, 2): docplex.mp.Var(type=B,name=&#39;w_5_4_2&#39;), (5, 5, 1): docplex.mp.Var(type=B,name=&#39;w_5_5_1&#39;), (5, 5, 2): docplex.mp.Var(type=B,name=&#39;w_5_5_2&#39;)}
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Vérification simple d&#39;un calcul nécessaire à l&#39;écriture de nos contraintes </span>
@@ -14528,7 +14536,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>5x_1_1+6x_2_1+5x_3_1+6x_4_1+7x_5_1
+<pre>1165x_1_1+634x_2_1+496x_3_1+3221x_4_1+180x_5_1+669x_6_1+685x_7_1+184x_8_1+197x_9_1+960x_10_1+1441x_11_1+536x_12_1+525x_13_1+442x_14_1+1211x_15_1+527x_16_1+354x_17_1+293x_18_1+167x_19_1+333x_20_1+2708x_21_1+201x_22_1+458x_23_1+120x_24_1+466x_25_1+2271x_26_1+734x_27_1+403x_28_1+311x_29_1+691x_30_1+119x_31_1+1097x_32_1+318x_33_1+363x_34_1+696x_35_1+156x_36_1+312x_37_1+267x_38_1+1024x_39_1+1895x_40_1+197x_41_1+108x_42_1+526x_43_1+368x_44_1+666x_45_1+12053x_46_1+237x_47_1+408x_48_1+492x_49_1+254x_50_1+492x_51_1+415x_52_1+633x_53_1+685x_54_1+1987x_55_1+682x_56_1+465x_57_1+670x_58_1+55x_59_1+464x_60_1+255x_61_1+194x_62_1+178x_63_1+173x_64_1+483x_65_1+675x_66_1+113x_67_1+118x_68_1+358x_69_1+227x_70_1+621x_71_1+562x_72_1+1124x_73_1+210x_74_1+672x_75_1+345x_76_1+298x_77_1+8237x_78_1+651x_79_1+104x_80_1+664x_81_1+1210x_82_1+2960x_83_1+6474x_84_1+287x_85_1+551x_86_1+303x_87_1+13115x_88_1+192x_89_1+466x_90_1+521x_91_1+331x_92_1+11719x_93_1+609x_94_1+3418x_95_1+664x_96_1+262x_97_1+175x_98_1
 </pre>
 </div>
 </div>
@@ -14540,7 +14548,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#idem </span>
@@ -14564,7 +14572,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>x_1_1+x_1_2
+<pre>x_1_1+x_1_2+x_1_3
 </pre>
 </div>
 </div>
@@ -14581,7 +14589,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Additionner les éléments sur les colonnes</span>
@@ -14601,17 +14609,110 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[docplex.mp.LinearConstraint[](x_1_1+x_1_2,EQ,1),
- docplex.mp.LinearConstraint[](x_2_1+x_2_2,EQ,1),
- docplex.mp.LinearConstraint[](x_3_1+x_3_2,EQ,1),
- docplex.mp.LinearConstraint[](x_4_1+x_4_2,EQ,1),
- docplex.mp.LinearConstraint[](x_5_1+x_5_2,EQ,1)]</pre>
+<pre>[docplex.mp.LinearConstraint[](x_1_1+x_1_2+x_1_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_2_1+x_2_2+x_2_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_3_1+x_3_2+x_3_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_4_1+x_4_2+x_4_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_5_1+x_5_2+x_5_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_6_1+x_6_2+x_6_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_7_1+x_7_2+x_7_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_8_1+x_8_2+x_8_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_9_1+x_9_2+x_9_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_10_1+x_10_2+x_10_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_11_1+x_11_2+x_11_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_12_1+x_12_2+x_12_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_13_1+x_13_2+x_13_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_14_1+x_14_2+x_14_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_15_1+x_15_2+x_15_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_16_1+x_16_2+x_16_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_17_1+x_17_2+x_17_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_18_1+x_18_2+x_18_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_19_1+x_19_2+x_19_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_20_1+x_20_2+x_20_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_21_1+x_21_2+x_21_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_22_1+x_22_2+x_22_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_23_1+x_23_2+x_23_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_24_1+x_24_2+x_24_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_25_1+x_25_2+x_25_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_26_1+x_26_2+x_26_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_27_1+x_27_2+x_27_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_28_1+x_28_2+x_28_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_29_1+x_29_2+x_29_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_30_1+x_30_2+x_30_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_31_1+x_31_2+x_31_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_32_1+x_32_2+x_32_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_33_1+x_33_2+x_33_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_34_1+x_34_2+x_34_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_35_1+x_35_2+x_35_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_36_1+x_36_2+x_36_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_37_1+x_37_2+x_37_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_38_1+x_38_2+x_38_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_39_1+x_39_2+x_39_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_40_1+x_40_2+x_40_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_41_1+x_41_2+x_41_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_42_1+x_42_2+x_42_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_43_1+x_43_2+x_43_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_44_1+x_44_2+x_44_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_45_1+x_45_2+x_45_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_46_1+x_46_2+x_46_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_47_1+x_47_2+x_47_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_48_1+x_48_2+x_48_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_49_1+x_49_2+x_49_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_50_1+x_50_2+x_50_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_51_1+x_51_2+x_51_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_52_1+x_52_2+x_52_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_53_1+x_53_2+x_53_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_54_1+x_54_2+x_54_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_55_1+x_55_2+x_55_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_56_1+x_56_2+x_56_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_57_1+x_57_2+x_57_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_58_1+x_58_2+x_58_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_59_1+x_59_2+x_59_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_60_1+x_60_2+x_60_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_61_1+x_61_2+x_61_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_62_1+x_62_2+x_62_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_63_1+x_63_2+x_63_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_64_1+x_64_2+x_64_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_65_1+x_65_2+x_65_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_66_1+x_66_2+x_66_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_67_1+x_67_2+x_67_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_68_1+x_68_2+x_68_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_69_1+x_69_2+x_69_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_70_1+x_70_2+x_70_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_71_1+x_71_2+x_71_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_72_1+x_72_2+x_72_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_73_1+x_73_2+x_73_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_74_1+x_74_2+x_74_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_75_1+x_75_2+x_75_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_76_1+x_76_2+x_76_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_77_1+x_77_2+x_77_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_78_1+x_78_2+x_78_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_79_1+x_79_2+x_79_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_80_1+x_80_2+x_80_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_81_1+x_81_2+x_81_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_82_1+x_82_2+x_82_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_83_1+x_83_2+x_83_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_84_1+x_84_2+x_84_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_85_1+x_85_2+x_85_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_86_1+x_86_2+x_86_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_87_1+x_87_2+x_87_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_88_1+x_88_2+x_88_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_89_1+x_89_2+x_89_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_90_1+x_90_2+x_90_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_91_1+x_91_2+x_91_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_92_1+x_92_2+x_92_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_93_1+x_93_2+x_93_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_94_1+x_94_2+x_94_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_95_1+x_95_2+x_95_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_96_1+x_96_2+x_96_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_97_1+x_97_2+x_97_3,EQ,1),
+ docplex.mp.LinearConstraint[](x_98_1+x_98_2+x_98_3,EQ,1)]</pre>
 </div>
 
 </div>
@@ -14623,7 +14724,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">print_information</span><span class="p">()</span>
@@ -14647,10 +14748,10 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Model: Découpage éléctoral
- - number of variables: 72
-   - binary=72, integer=0, continuous=0
- - number of constraints: 5
-   - linear=5
+ - number of variables: 591
+   - binary=591, integer=0, continuous=0
+ - number of constraints: 98
+   - linear=98
  - parameters: defaults
  - objective: none
  - problem type is: MILP
@@ -14665,7 +14766,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Additionner les éléments sur les lignes</span>
@@ -14685,14 +14786,15 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[docplex.mp.LinearConstraint[](x_1_1+x_2_1+x_3_1+x_4_1+x_5_1,GE,1),
- docplex.mp.LinearConstraint[](x_1_2+x_2_2+x_3_2+x_4_2+x_5_2,GE,1)]</pre>
+<pre>[docplex.mp.LinearConstraint[](x_1_1+x_2_1+x_3_1+x_4_1+x_5_1+x_6_1+x_7_1+x_8_1+x_9_1+x_10_1+x_11_1+x_12_1+x_13_1+x_14_1+x_15_1+x_16_1+x_17_1+x_18_1+x_19_1+x_20_1+x_21_1+x_22_1+x_23_1+x_24_1+x_25_1+x_26_1+x_27_1+x_28_1+x_29_1+x_30_1+x_31_1+x_32_1+x_33_1+x_34_1+x_35_1+x_36_1+x_37_1+x_38_1+x_39_1+x_40_1+x_41_1+x_42_1+x_43_1+x_44_1+x_45_1+x_46_1+x_47_1+x_48_1+x_49_1+x_50_1+x_51_1+x_52_1+x_53_1+x_54_1+x_55_1+x_56_1+x_57_1+x_58_1+x_59_1+x_60_1+x_61_1+x_62_1+x_63_1+x_64_1+x_65_1+x_66_1+x_67_1+x_68_1+x_69_1+x_70_1+x_71_1+x_72_1+x_73_1+x_74_1+x_75_1+x_76_1+x_77_1+x_78_1+x_79_1+x_80_1+x_81_1+x_82_1+x_83_1+x_84_1+x_85_1+x_86_1+x_87_1+x_88_1+x_89_1+x_90_1+x_91_1+x_92_1+x_93_1+x_94_1+x_95_1+x_96_1+x_97_1+x_98_1,GE,1),
+ docplex.mp.LinearConstraint[](x_1_2+x_2_2+x_3_2+x_4_2+x_5_2+x_6_2+x_7_2+x_8_2+x_9_2+x_10_2+x_11_2+x_12_2+x_13_2+x_14_2+x_15_2+x_16_2+x_17_2+x_18_2+x_19_2+x_20_2+x_21_2+x_22_2+x_23_2+x_24_2+x_25_2+x_26_2+x_27_2+x_28_2+x_29_2+x_30_2+x_31_2+x_32_2+x_33_2+x_34_2+x_35_2+x_36_2+x_37_2+x_38_2+x_39_2+x_40_2+x_41_2+x_42_2+x_43_2+x_44_2+x_45_2+x_46_2+x_47_2+x_48_2+x_49_2+x_50_2+x_51_2+x_52_2+x_53_2+x_54_2+x_55_2+x_56_2+x_57_2+x_58_2+x_59_2+x_60_2+x_61_2+x_62_2+x_63_2+x_64_2+x_65_2+x_66_2+x_67_2+x_68_2+x_69_2+x_70_2+x_71_2+x_72_2+x_73_2+x_74_2+x_75_2+x_76_2+x_77_2+x_78_2+x_79_2+x_80_2+x_81_2+x_82_2+x_83_2+x_84_2+x_85_2+x_86_2+x_87_2+x_88_2+x_89_2+x_90_2+x_91_2+x_92_2+x_93_2+x_94_2+x_95_2+x_96_2+x_97_2+x_98_2,GE,1),
+ docplex.mp.LinearConstraint[](x_1_3+x_2_3+x_3_3+x_4_3+x_5_3+x_6_3+x_7_3+x_8_3+x_9_3+x_10_3+x_11_3+x_12_3+x_13_3+x_14_3+x_15_3+x_16_3+x_17_3+x_18_3+x_19_3+x_20_3+x_21_3+x_22_3+x_23_3+x_24_3+x_25_3+x_26_3+x_27_3+x_28_3+x_29_3+x_30_3+x_31_3+x_32_3+x_33_3+x_34_3+x_35_3+x_36_3+x_37_3+x_38_3+x_39_3+x_40_3+x_41_3+x_42_3+x_43_3+x_44_3+x_45_3+x_46_3+x_47_3+x_48_3+x_49_3+x_50_3+x_51_3+x_52_3+x_53_3+x_54_3+x_55_3+x_56_3+x_57_3+x_58_3+x_59_3+x_60_3+x_61_3+x_62_3+x_63_3+x_64_3+x_65_3+x_66_3+x_67_3+x_68_3+x_69_3+x_70_3+x_71_3+x_72_3+x_73_3+x_74_3+x_75_3+x_76_3+x_77_3+x_78_3+x_79_3+x_80_3+x_81_3+x_82_3+x_83_3+x_84_3+x_85_3+x_86_3+x_87_3+x_88_3+x_89_3+x_90_3+x_91_3+x_92_3+x_93_3+x_94_3+x_95_3+x_96_3+x_97_3+x_98_3,GE,1)]</pre>
 </div>
 
 </div>
@@ -14704,7 +14806,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">print_information</span><span class="p">()</span>
@@ -14728,10 +14830,10 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Model: Découpage éléctoral
- - number of variables: 72
-   - binary=72, integer=0, continuous=0
- - number of constraints: 7
-   - linear=7
+ - number of variables: 591
+   - binary=591, integer=0, continuous=0
+ - number of constraints: 101
+   - linear=101
  - parameters: defaults
  - objective: none
  - problem type is: MILP
@@ -14746,50 +14848,11 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Contraintes à élargir pcq peut-être trop contraignant</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="p">((</span><span class="mf">1.2</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">)</span><span class="o">/</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[docplex.mp.LinearConstraint[](5x_1_1+6x_2_1+5x_3_1+6x_4_1+7x_5_1,LE,17.4),
- docplex.mp.LinearConstraint[](5x_1_2+6x_2_2+5x_3_2+6x_4_2+7x_5_2,LE,17.4)]</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Contraintes à élargir pcq peut-être trop contraignant</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="p">((</span><span class="mf">0.8</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">)</span><span class="o">/</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="p">((</span><span class="mf">1.8</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">)</span><span class="o">/</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14811,8 +14874,9 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[docplex.mp.LinearConstraint[](5x_1_1+6x_2_1+5x_3_1+6x_4_1+7x_5_1,GE,11.600000000000001),
- docplex.mp.LinearConstraint[](5x_1_2+6x_2_2+5x_3_2+6x_4_2+7x_5_2,GE,11.600000000000001)]</pre>
+<pre>[docplex.mp.LinearConstraint[](1165x_1_1+634x_2_1+496x_3_1+3221x_4_1+180x_5_1+669x_6_1+685x_7_1+184x_8_1+197x_9_1+960x_10_1+1441x_11_1+536x_12_1+525x_13_1+442x_14_1+1211x_15_1+527x_16_1+354x_17_1+293x_18_1+167x_19_1+333x_20_1+2708x_21_1+201x_22_1+458x_23_1+120x_24_1+466x_25_1+2271x_26_1+734x_27_1+403x_28_1+311x_29_1+691x_30_1+119x_31_1+1097x_32_1+318x_33_1+363x_34_1+696x_35_1+156x_36_1+312x_37_1+267x_38_1+1024x_39_1+1895x_40_1+197x_41_1+108x_42_1+526x_43_1+368x_44_1+666x_45_1+12053x_46_1+237x_47_1+408x_48_1+492x_49_1+254x_50_1+492x_51_1+415x_52_1+633x_53_1+685x_54_1+1987x_55_1+682x_56_1+465x_57_1+670x_58_1+55x_59_1+464x_60_1+255x_61_1+194x_62_1+178x_63_1+173x_64_1+483x_65_1+675x_66_1+113x_67_1+118x_68_1+358x_69_1+227x_70_1+621x_71_1+562x_72_1+1124x_73_1+210x_74_1+672x_75_1+345x_76_1+298x_77_1+8237x_78_1+651x_79_1+104x_80_1+664x_81_1+1210x_82_1+2960x_83_1+6474x_84_1+287x_85_1+551x_86_1+303x_87_1+13115x_88_1+192x_89_1+466x_90_1+521x_91_1+331x_92_1+11719x_93_1+609x_94_1+3418x_95_1+664x_96_1+262x_97_1+175x_98_1,LE,66123.6),
+ docplex.mp.LinearConstraint[](1165x_1_2+634x_2_2+496x_3_2+3221x_4_2+180x_5_2+669x_6_2+685x_7_2+184x_8_2+197x_9_2+960x_10_2+1441x_11_2+536x_12_2+525x_13_2+442x_14_2+1211x_15_2+527x_16_2+354x_17_2+293x_18_2+167x_19_2+333x_20_2+2708x_21_2+201x_22_2+458x_23_2+120x_24_2+466x_25_2+2271x_26_2+734x_27_2+403x_28_2+311x_29_2+691x_30_2+119x_31_2+1097x_32_2+318x_33_2+363x_34_2+696x_35_2+156x_36_2+312x_37_2+267x_38_2+1024x_39_2+1895x_40_2+197x_41_2+108x_42_2+526x_43_2+368x_44_2+666x_45_2+12053x_46_2+237x_47_2+408x_48_2+492x_49_2+254x_50_2+492x_51_2+415x_52_2+633x_53_2+685x_54_2+1987x_55_2+682x_56_2+465x_57_2+670x_58_2+55x_59_2+464x_60_2+255x_61_2+194x_62_2+178x_63_2+173x_64_2+483x_65_2+675x_66_2+113x_67_2+118x_68_2+358x_69_2+227x_70_2+621x_71_2+562x_72_2+1124x_73_2+210x_74_2+672x_75_2+345x_76_2+298x_77_2+8237x_78_2+651x_79_2+104x_80_2+664x_81_2+1210x_82_2+2960x_83_2+6474x_84_2+287x_85_2+551x_86_2+303x_87_2+13115x_88_2+192x_89_2+466x_90_2+521x_91_2+331x_92_2+11719x_93_2+609x_94_2+3418x_95_2+664x_96_2+262x_97_2+175x_98_2,LE,66123.6),
+ docplex.mp.LinearConstraint[](1165x_1_3+634x_2_3+496x_3_3+3221x_4_3+180x_5_3+669x_6_3+685x_7_3+184x_8_3+197x_9_3+960x_10_3+1441x_11_3+536x_12_3+525x_13_3+442x_14_3+1211x_15_3+527x_16_3+354x_17_3+293x_18_3+167x_19_3+333x_20_3+2708x_21_3+201x_22_3+458x_23_3+120x_24_3+466x_25_3+2271x_26_3+734x_27_3+403x_28_3+311x_29_3+691x_30_3+119x_31_3+1097x_32_3+318x_33_3+363x_34_3+696x_35_3+156x_36_3+312x_37_3+267x_38_3+1024x_39_3+1895x_40_3+197x_41_3+108x_42_3+526x_43_3+368x_44_3+666x_45_3+12053x_46_3+237x_47_3+408x_48_3+492x_49_3+254x_50_3+492x_51_3+415x_52_3+633x_53_3+685x_54_3+1987x_55_3+682x_56_3+465x_57_3+670x_58_3+55x_59_3+464x_60_3+255x_61_3+194x_62_3+178x_63_3+173x_64_3+483x_65_3+675x_66_3+113x_67_3+118x_68_3+358x_69_3+227x_70_3+621x_71_3+562x_72_3+1124x_73_3+210x_74_3+672x_75_3+345x_76_3+298x_77_3+8237x_78_3+651x_79_3+104x_80_3+664x_81_3+1210x_82_3+2960x_83_3+6474x_84_3+287x_85_3+551x_86_3+303x_87_3+13115x_88_3+192x_89_3+466x_90_3+521x_91_3+331x_92_3+11719x_93_3+609x_94_3+3418x_95_3+664x_96_3+262x_97_3+175x_98_3,LE,66123.6)]</pre>
 </div>
 
 </div>
@@ -14827,7 +14891,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Contraintes à élargir pcq peut-être trop contraignant</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="p">((</span><span class="mf">0.2</span><span class="p">)</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">)</span><span class="o">/</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14849,8 +14914,48 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[docplex.mp.LinearConstraint[](5y_1_1+6y_2_1+5y_3_1+6y_4_1+7y_5_1,LE,4.500x_1_1+6.600x_2_1+6x_3_1+4.200x_4_1+9.800x_5_1),
- docplex.mp.LinearConstraint[](5y_1_2+6y_2_2+5y_3_2+6y_4_2+7y_5_2,LE,4.500x_1_2+6.600x_2_2+6x_3_2+4.200x_4_2+9.800x_5_2)]</pre>
+<pre>[docplex.mp.LinearConstraint[](1165x_1_1+634x_2_1+496x_3_1+3221x_4_1+180x_5_1+669x_6_1+685x_7_1+184x_8_1+197x_9_1+960x_10_1+1441x_11_1+536x_12_1+525x_13_1+442x_14_1+1211x_15_1+527x_16_1+354x_17_1+293x_18_1+167x_19_1+333x_20_1+2708x_21_1+201x_22_1+458x_23_1+120x_24_1+466x_25_1+2271x_26_1+734x_27_1+403x_28_1+311x_29_1+691x_30_1+119x_31_1+1097x_32_1+318x_33_1+363x_34_1+696x_35_1+156x_36_1+312x_37_1+267x_38_1+1024x_39_1+1895x_40_1+197x_41_1+108x_42_1+526x_43_1+368x_44_1+666x_45_1+12053x_46_1+237x_47_1+408x_48_1+492x_49_1+254x_50_1+492x_51_1+415x_52_1+633x_53_1+685x_54_1+1987x_55_1+682x_56_1+465x_57_1+670x_58_1+55x_59_1+464x_60_1+255x_61_1+194x_62_1+178x_63_1+173x_64_1+483x_65_1+675x_66_1+113x_67_1+118x_68_1+358x_69_1+227x_70_1+621x_71_1+562x_72_1+1124x_73_1+210x_74_1+672x_75_1+345x_76_1+298x_77_1+8237x_78_1+651x_79_1+104x_80_1+664x_81_1+1210x_82_1+2960x_83_1+6474x_84_1+287x_85_1+551x_86_1+303x_87_1+13115x_88_1+192x_89_1+466x_90_1+521x_91_1+331x_92_1+11719x_93_1+609x_94_1+3418x_95_1+664x_96_1+262x_97_1+175x_98_1,GE,7347.066666666667),
+ docplex.mp.LinearConstraint[](1165x_1_2+634x_2_2+496x_3_2+3221x_4_2+180x_5_2+669x_6_2+685x_7_2+184x_8_2+197x_9_2+960x_10_2+1441x_11_2+536x_12_2+525x_13_2+442x_14_2+1211x_15_2+527x_16_2+354x_17_2+293x_18_2+167x_19_2+333x_20_2+2708x_21_2+201x_22_2+458x_23_2+120x_24_2+466x_25_2+2271x_26_2+734x_27_2+403x_28_2+311x_29_2+691x_30_2+119x_31_2+1097x_32_2+318x_33_2+363x_34_2+696x_35_2+156x_36_2+312x_37_2+267x_38_2+1024x_39_2+1895x_40_2+197x_41_2+108x_42_2+526x_43_2+368x_44_2+666x_45_2+12053x_46_2+237x_47_2+408x_48_2+492x_49_2+254x_50_2+492x_51_2+415x_52_2+633x_53_2+685x_54_2+1987x_55_2+682x_56_2+465x_57_2+670x_58_2+55x_59_2+464x_60_2+255x_61_2+194x_62_2+178x_63_2+173x_64_2+483x_65_2+675x_66_2+113x_67_2+118x_68_2+358x_69_2+227x_70_2+621x_71_2+562x_72_2+1124x_73_2+210x_74_2+672x_75_2+345x_76_2+298x_77_2+8237x_78_2+651x_79_2+104x_80_2+664x_81_2+1210x_82_2+2960x_83_2+6474x_84_2+287x_85_2+551x_86_2+303x_87_2+13115x_88_2+192x_89_2+466x_90_2+521x_91_2+331x_92_2+11719x_93_2+609x_94_2+3418x_95_2+664x_96_2+262x_97_2+175x_98_2,GE,7347.066666666667),
+ docplex.mp.LinearConstraint[](1165x_1_3+634x_2_3+496x_3_3+3221x_4_3+180x_5_3+669x_6_3+685x_7_3+184x_8_3+197x_9_3+960x_10_3+1441x_11_3+536x_12_3+525x_13_3+442x_14_3+1211x_15_3+527x_16_3+354x_17_3+293x_18_3+167x_19_3+333x_20_3+2708x_21_3+201x_22_3+458x_23_3+120x_24_3+466x_25_3+2271x_26_3+734x_27_3+403x_28_3+311x_29_3+691x_30_3+119x_31_3+1097x_32_3+318x_33_3+363x_34_3+696x_35_3+156x_36_3+312x_37_3+267x_38_3+1024x_39_3+1895x_40_3+197x_41_3+108x_42_3+526x_43_3+368x_44_3+666x_45_3+12053x_46_3+237x_47_3+408x_48_3+492x_49_3+254x_50_3+492x_51_3+415x_52_3+633x_53_3+685x_54_3+1987x_55_3+682x_56_3+465x_57_3+670x_58_3+55x_59_3+464x_60_3+255x_61_3+194x_62_3+178x_63_3+173x_64_3+483x_65_3+675x_66_3+113x_67_3+118x_68_3+358x_69_3+227x_70_3+621x_71_3+562x_72_3+1124x_73_3+210x_74_3+672x_75_3+345x_76_3+298x_77_3+8237x_78_3+651x_79_3+104x_80_3+664x_81_3+1210x_82_3+2960x_83_3+6474x_84_3+287x_85_3+551x_86_3+303x_87_3+13115x_88_3+192x_89_3+466x_90_3+521x_91_3+331x_92_3+11719x_93_3+609x_94_3+3418x_95_3+664x_96_3+262x_97_3+175x_98_3,GE,7347.066666666667)]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">add_constraints</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">nbVi</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[docplex.mp.LinearConstraint[](1165y_1_1+634y_2_1+496y_3_1+3221y_4_1+180y_5_1+669y_6_1+685y_7_1+184y_8_1+197y_9_1+960y_10_1+1441y_11_1+536y_12_1+525y_13_1+442y_14_1+1211y_15_1+527y_16_1+354y_17_1+293y_18_1+167y_19_1+333y_20_1+2708y_21_1+201y_22_1+458y_23_1+120y_24_1+466y_25_1+2271y_26_1+734y_27_1+403y_28_1+311y_29_1+691y_30_1+119y_31_1+1097y_32_1+318y_33_1+363y_34_1+696y_35_1+156y_36_1+312y_37_1+267y_38_1+1024y_39_1+1895y_40_1+197y_41_1+108y_42_1+526y_43_1+368y_44_1+666y_45_1+12053y_46_1+237y_47_1+408y_48_1+492y_49_1+254y_50_1+492y_51_1+415y_52_1+633y_53_1+685y_54_1+1987y_55_1+682y_56_1+465y_57_1+670y_58_1+55y_59_1+464y_60_1+255y_61_1+194y_62_1+178y_63_1+173y_64_1+483y_65_1+675y_66_1+113y_67_1+118y_68_1+358y_69_1+227y_70_1+621y_71_1+562y_72_1+1124y_73_1+210y_74_1+672y_75_1+345y_76_1+298y_77_1+8237y_78_1+651y_79_1+104y_80_1+664y_81_1+1210y_82_1+2960y_83_1+6474y_84_1+287y_85_1+551y_86_1+303y_87_1+13115y_88_1+192y_89_1+466y_90_1+521y_91_1+331y_92_1+11719y_93_1+609y_94_1+3418y_95_1+664y_96_1+262y_97_1+175y_98_1,LE,1096.265x_1_1+663.164x_2_1+467.232x_3_1+3343.398x_4_1+191.700x_5_1+654.282x_6_1+756.240x_7_1+184.552x_8_1+219.655x_9_1+837.120x_10_1+1430.913x_11_1+520.456x_12_1+547.575x_13_1+475.592x_14_1+1275.183x_15_1+550.715x_16_1+358.956x_17_1+253.445x_18_1+162.825x_19_1+343.656x_20_1+2158.276x_21_1+183.111x_22_1+455.252x_23_1+113.160x_24_1+426.390x_25_1+2168.805x_26_1+673.078x_27_1+383.253x_28_1+326.239x_29_1+608.771x_30_1+110.075x_31_1+1064.090x_32_1+283.338x_33_1+330.693x_34_1+710.616x_35_1+165.048x_36_1+290.160x_37_1+286.491x_38_1+919.552x_39_1+2196.305x_40_1+178.088x_41_1+109.404x_42_1+526.526x_43_1+369.840x_44_1+660.672x_45_1+9835.248x_46_1+182.016x_47_1+337.416x_48_1+565.308x_49_1+279.908x_50_1+493.968x_51_1+385.950x_52_1+639.330x_53_1+645.270x_54_1+2040.649x_55_1+832.040x_56_1+472.905x_57_1+775.190x_58_1+57.970x_59_1+494.160x_60_1+274.125x_61_1+198.656x_62_1+180.314x_63_1+159.160x_64_1+462.714x_65_1+866.025x_66_1+132.323x_67_1+125.788x_68_1+413.848x_69_1+221.098x_70_1+686.826x_71_1+625.506x_72_1+1154.348x_73_1+221.970x_74_1+637.056x_75_1+382.950x_76_1+265.220x_77_1+8360.555x_78_1+511.686x_79_1+87.464x_80_1+690.560x_81_1+1074.480x_82_1+2803.120x_83_1+7037.238x_84_1+233.044x_85_1+467.799x_86_1+321.180x_87_1+14898.640x_88_1+186.432x_89_1+378.392x_90_1+555.907x_91_1+290.618x_92_1+10687.728x_93_1+457.359x_94_1+3414.582x_95_1+695.208x_96_1+286.366x_97_1+175.175x_98_1),
+ docplex.mp.LinearConstraint[](1165y_1_2+634y_2_2+496y_3_2+3221y_4_2+180y_5_2+669y_6_2+685y_7_2+184y_8_2+197y_9_2+960y_10_2+1441y_11_2+536y_12_2+525y_13_2+442y_14_2+1211y_15_2+527y_16_2+354y_17_2+293y_18_2+167y_19_2+333y_20_2+2708y_21_2+201y_22_2+458y_23_2+120y_24_2+466y_25_2+2271y_26_2+734y_27_2+403y_28_2+311y_29_2+691y_30_2+119y_31_2+1097y_32_2+318y_33_2+363y_34_2+696y_35_2+156y_36_2+312y_37_2+267y_38_2+1024y_39_2+1895y_40_2+197y_41_2+108y_42_2+526y_43_2+368y_44_2+666y_45_2+12053y_46_2+237y_47_2+408y_48_2+492y_49_2+254y_50_2+492y_51_2+415y_52_2+633y_53_2+685y_54_2+1987y_55_2+682y_56_2+465y_57_2+670y_58_2+55y_59_2+464y_60_2+255y_61_2+194y_62_2+178y_63_2+173y_64_2+483y_65_2+675y_66_2+113y_67_2+118y_68_2+358y_69_2+227y_70_2+621y_71_2+562y_72_2+1124y_73_2+210y_74_2+672y_75_2+345y_76_2+298y_77_2+8237y_78_2+651y_79_2+104y_80_2+664y_81_2+1210y_82_2+2960y_83_2+6474y_84_2+287y_85_2+551y_86_2+303y_87_2+13115y_88_2+192y_89_2+466y_90_2+521y_91_2+331y_92_2+11719y_93_2+609y_94_2+3418y_95_2+664y_96_2+262y_97_2+175y_98_2,LE,1096.265x_1_2+663.164x_2_2+467.232x_3_2+3343.398x_4_2+191.700x_5_2+654.282x_6_2+756.240x_7_2+184.552x_8_2+219.655x_9_2+837.120x_10_2+1430.913x_11_2+520.456x_12_2+547.575x_13_2+475.592x_14_2+1275.183x_15_2+550.715x_16_2+358.956x_17_2+253.445x_18_2+162.825x_19_2+343.656x_20_2+2158.276x_21_2+183.111x_22_2+455.252x_23_2+113.160x_24_2+426.390x_25_2+2168.805x_26_2+673.078x_27_2+383.253x_28_2+326.239x_29_2+608.771x_30_2+110.075x_31_2+1064.090x_32_2+283.338x_33_2+330.693x_34_2+710.616x_35_2+165.048x_36_2+290.160x_37_2+286.491x_38_2+919.552x_39_2+2196.305x_40_2+178.088x_41_2+109.404x_42_2+526.526x_43_2+369.840x_44_2+660.672x_45_2+9835.248x_46_2+182.016x_47_2+337.416x_48_2+565.308x_49_2+279.908x_50_2+493.968x_51_2+385.950x_52_2+639.330x_53_2+645.270x_54_2+2040.649x_55_2+832.040x_56_2+472.905x_57_2+775.190x_58_2+57.970x_59_2+494.160x_60_2+274.125x_61_2+198.656x_62_2+180.314x_63_2+159.160x_64_2+462.714x_65_2+866.025x_66_2+132.323x_67_2+125.788x_68_2+413.848x_69_2+221.098x_70_2+686.826x_71_2+625.506x_72_2+1154.348x_73_2+221.970x_74_2+637.056x_75_2+382.950x_76_2+265.220x_77_2+8360.555x_78_2+511.686x_79_2+87.464x_80_2+690.560x_81_2+1074.480x_82_2+2803.120x_83_2+7037.238x_84_2+233.044x_85_2+467.799x_86_2+321.180x_87_2+14898.640x_88_2+186.432x_89_2+378.392x_90_2+555.907x_91_2+290.618x_92_2+10687.728x_93_2+457.359x_94_2+3414.582x_95_2+695.208x_96_2+286.366x_97_2+175.175x_98_2),
+ docplex.mp.LinearConstraint[](1165y_1_3+634y_2_3+496y_3_3+3221y_4_3+180y_5_3+669y_6_3+685y_7_3+184y_8_3+197y_9_3+960y_10_3+1441y_11_3+536y_12_3+525y_13_3+442y_14_3+1211y_15_3+527y_16_3+354y_17_3+293y_18_3+167y_19_3+333y_20_3+2708y_21_3+201y_22_3+458y_23_3+120y_24_3+466y_25_3+2271y_26_3+734y_27_3+403y_28_3+311y_29_3+691y_30_3+119y_31_3+1097y_32_3+318y_33_3+363y_34_3+696y_35_3+156y_36_3+312y_37_3+267y_38_3+1024y_39_3+1895y_40_3+197y_41_3+108y_42_3+526y_43_3+368y_44_3+666y_45_3+12053y_46_3+237y_47_3+408y_48_3+492y_49_3+254y_50_3+492y_51_3+415y_52_3+633y_53_3+685y_54_3+1987y_55_3+682y_56_3+465y_57_3+670y_58_3+55y_59_3+464y_60_3+255y_61_3+194y_62_3+178y_63_3+173y_64_3+483y_65_3+675y_66_3+113y_67_3+118y_68_3+358y_69_3+227y_70_3+621y_71_3+562y_72_3+1124y_73_3+210y_74_3+672y_75_3+345y_76_3+298y_77_3+8237y_78_3+651y_79_3+104y_80_3+664y_81_3+1210y_82_3+2960y_83_3+6474y_84_3+287y_85_3+551y_86_3+303y_87_3+13115y_88_3+192y_89_3+466y_90_3+521y_91_3+331y_92_3+11719y_93_3+609y_94_3+3418y_95_3+664y_96_3+262y_97_3+175y_98_3,LE,1096.265x_1_3+663.164x_2_3+467.232x_3_3+3343.398x_4_3+191.700x_5_3+654.282x_6_3+756.240x_7_3+184.552x_8_3+219.655x_9_3+837.120x_10_3+1430.913x_11_3+520.456x_12_3+547.575x_13_3+475.592x_14_3+1275.183x_15_3+550.715x_16_3+358.956x_17_3+253.445x_18_3+162.825x_19_3+343.656x_20_3+2158.276x_21_3+183.111x_22_3+455.252x_23_3+113.160x_24_3+426.390x_25_3+2168.805x_26_3+673.078x_27_3+383.253x_28_3+326.239x_29_3+608.771x_30_3+110.075x_31_3+1064.090x_32_3+283.338x_33_3+330.693x_34_3+710.616x_35_3+165.048x_36_3+290.160x_37_3+286.491x_38_3+919.552x_39_3+2196.305x_40_3+178.088x_41_3+109.404x_42_3+526.526x_43_3+369.840x_44_3+660.672x_45_3+9835.248x_46_3+182.016x_47_3+337.416x_48_3+565.308x_49_3+279.908x_50_3+493.968x_51_3+385.950x_52_3+639.330x_53_3+645.270x_54_3+2040.649x_55_3+832.040x_56_3+472.905x_57_3+775.190x_58_3+57.970x_59_3+494.160x_60_3+274.125x_61_3+198.656x_62_3+180.314x_63_3+159.160x_64_3+462.714x_65_3+866.025x_66_3+132.323x_67_3+125.788x_68_3+413.848x_69_3+221.098x_70_3+686.826x_71_3+625.506x_72_3+1154.348x_73_3+221.970x_74_3+637.056x_75_3+382.950x_76_3+265.220x_77_3+8360.555x_78_3+511.686x_79_3+87.464x_80_3+690.560x_81_3+1074.480x_82_3+2803.120x_83_3+7037.238x_84_3+233.044x_85_3+467.799x_86_3+321.180x_87_3+14898.640x_88_3+186.432x_89_3+378.392x_90_3+555.907x_91_3+290.618x_92_3+10687.728x_93_3+457.359x_94_3+3414.582x_95_3+695.208x_96_3+286.366x_97_3+175.175x_98_3)]</pre>
 </div>
 
 </div>
@@ -14862,7 +14967,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
@@ -14879,7 +14984,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">print_information</span><span class="p">()</span>
@@ -14903,10 +15008,10 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Model: Découpage éléctoral
- - number of variables: 72
-   - binary=72, integer=0, continuous=0
- - number of constraints: 33
-   - linear=33
+ - number of variables: 591
+   - binary=591, integer=0, continuous=0
+ - number of constraints: 698
+   - linear=698
  - parameters: defaults
  - objective: none
  - problem type is: MILP
@@ -14921,7 +15026,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
@@ -14937,7 +15042,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">print_information</span><span class="p">()</span>
@@ -14961,10 +15066,10 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Model: Découpage éléctoral
- - number of variables: 72
-   - binary=72, integer=0, continuous=0
- - number of constraints: 43
-   - linear=43
+ - number of variables: 591
+   - binary=591, integer=0, continuous=0
+ - number of constraints: 992
+   - linear=992
  - parameters: defaults
  - objective: none
  - problem type is: MILP
@@ -14976,41 +15081,6 @@ a.anchor-link {
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">m</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
-            <span class="n">m</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                <span class="n">m</span><span class="o">.</span><span class="n">add_constraint</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -15019,7 +15089,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Fonction que l&#39;on cherche à optimiser si on veut faire perdre le camp A</span>
@@ -15040,7 +15110,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
@@ -15054,7 +15124,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sol</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
@@ -15079,24 +15149,104 @@ a.anchor-link {
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>solution for: Découpage éléctoral
 objective: 0
-x_1_2 = 1
-x_2_2 = 1
-x_3_2 = 1
+x_1_1 = 1
+x_2_1 = 1
+x_3_1 = 1
 x_4_1 = 1
 x_5_1 = 1
-w_1_1_2 = 1
-w_1_2_2 = 1
-w_1_3_2 = 1
-w_2_1_2 = 1
-w_2_2_2 = 1
-w_2_3_2 = 1
-w_3_1_2 = 1
-w_3_2_2 = 1
-w_3_3_2 = 1
-w_4_4_1 = 1
-w_4_5_1 = 1
-w_5_4_1 = 1
-w_5_5_1 = 1
+x_6_1 = 1
+x_7_1 = 1
+x_8_1 = 1
+x_9_1 = 1
+x_10_1 = 1
+x_11_1 = 1
+x_12_1 = 1
+x_13_1 = 1
+x_14_1 = 1
+x_15_1 = 1
+x_16_1 = 1
+x_17_1 = 1
+x_18_1 = 1
+x_19_1 = 1
+x_20_1 = 1
+x_21_1 = 1
+x_22_1 = 1
+x_23_1 = 1
+x_24_1 = 1
+x_25_1 = 1
+x_26_1 = 1
+x_27_1 = 1
+x_28_1 = 1
+x_29_1 = 1
+x_30_1 = 1
+x_31_1 = 1
+x_32_1 = 1
+x_33_1 = 1
+x_34_1 = 1
+x_35_1 = 1
+x_36_1 = 1
+x_37_1 = 1
+x_38_1 = 1
+x_39_1 = 1
+x_40_1 = 1
+x_41_1 = 1
+x_42_1 = 1
+x_43_1 = 1
+x_44_1 = 1
+x_45_1 = 1
+x_46_3 = 1
+x_47_1 = 1
+x_48_1 = 1
+x_49_1 = 1
+x_50_1 = 1
+x_51_1 = 1
+x_52_1 = 1
+x_53_1 = 1
+x_54_1 = 1
+x_55_1 = 1
+x_56_1 = 1
+x_57_1 = 1
+x_58_1 = 1
+x_59_1 = 1
+x_60_1 = 1
+x_61_1 = 1
+x_62_1 = 1
+x_63_1 = 1
+x_64_1 = 1
+x_65_1 = 1
+x_66_1 = 1
+x_67_1 = 1
+x_68_1 = 1
+x_69_1 = 1
+x_70_1 = 1
+x_71_1 = 1
+x_72_1 = 1
+x_73_1 = 1
+x_74_1 = 1
+x_75_1 = 1
+x_76_1 = 1
+x_77_1 = 1
+x_78_1 = 1
+x_79_2 = 1
+x_80_1 = 1
+x_81_2 = 1
+x_82_2 = 1
+x_83_2 = 1
+x_84_2 = 1
+x_85_1 = 1
+x_86_2 = 1
+x_87_2 = 1
+x_88_2 = 1
+x_89_1 = 1
+x_90_2 = 1
+x_91_2 = 1
+x_92_2 = 1
+x_93_2 = 1
+x_94_2 = 1
+x_95_2 = 1
+x_96_2 = 1
+x_97_2 = 1
+x_98_2 = 1
 </pre>
 </div>
 </div>
@@ -15113,7 +15263,7 @@ w_5_5_1 = 1
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
@@ -15127,7 +15277,7 @@ w_5_5_1 = 1
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">solmax</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
@@ -15141,7 +15291,7 @@ w_5_5_1 = 1
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">solmax</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
@@ -15166,31 +15316,194 @@ w_5_5_1 = 1
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>solution for: Découpage éléctoral
 objective: 2
-x_1_1 = 1
+x_1_3 = 1
 x_2_1 = 1
 x_3_1 = 1
-x_4_2 = 1
-x_5_2 = 1
-y_1_1 = 1
+x_4_3 = 1
+x_5_3 = 1
+x_6_1 = 1
+x_7_3 = 1
+x_8_1 = 1
+x_9_1 = 1
+x_10_3 = 1
+x_11_3 = 1
+x_12_2 = 1
+x_13_3 = 1
+x_14_3 = 1
+x_15_3 = 1
+x_16_3 = 1
+x_17_3 = 1
+x_18_3 = 1
+x_19_1 = 1
+x_20_3 = 1
+x_21_3 = 1
+x_22_1 = 1
+x_23_1 = 1
+x_24_1 = 1
+x_25_3 = 1
+x_26_1 = 1
+x_27_1 = 1
+x_28_3 = 1
+x_29_1 = 1
+x_30_1 = 1
+x_31_1 = 1
+x_32_3 = 1
+x_33_1 = 1
+x_34_3 = 1
+x_35_2 = 1
+x_36_1 = 1
+x_37_3 = 1
+x_38_1 = 1
+x_39_3 = 1
+x_40_3 = 1
+x_41_1 = 1
+x_42_3 = 1
+x_43_3 = 1
+x_44_1 = 1
+x_45_3 = 1
+x_46_2 = 1
+x_47_1 = 1
+x_48_1 = 1
+x_49_1 = 1
+x_50_1 = 1
+x_51_3 = 1
+x_52_3 = 1
+x_53_3 = 1
+x_54_3 = 1
+x_55_3 = 1
+x_56_3 = 1
+x_57_3 = 1
+x_58_3 = 1
+x_59_1 = 1
+x_60_3 = 1
+x_61_1 = 1
+x_62_1 = 1
+x_63_1 = 1
+x_64_1 = 1
+x_65_2 = 1
+x_66_3 = 1
+x_67_1 = 1
+x_68_1 = 1
+x_69_1 = 1
+x_70_1 = 1
+x_71_3 = 1
+x_72_3 = 1
+x_73_3 = 1
+x_74_1 = 1
+x_75_1 = 1
+x_76_2 = 1
+x_77_1 = 1
+x_78_1 = 1
+x_79_2 = 1
+x_80_1 = 1
+x_81_1 = 1
+x_82_1 = 1
+x_83_3 = 1
+x_84_3 = 1
+x_85_3 = 1
+x_86_3 = 1
+x_87_1 = 1
+x_88_1 = 1
+x_89_3 = 1
+x_90_2 = 1
+x_91_3 = 1
+x_92_2 = 1
+x_93_1 = 1
+x_94_2 = 1
+x_95_1 = 1
+x_96_3 = 1
+x_97_3 = 1
+x_98_2 = 1
+y_1_3 = 1
 y_2_1 = 1
 y_3_1 = 1
-y_4_2 = 1
-y_5_2 = 1
+y_4_3 = 1
+y_5_3 = 1
+y_6_1 = 1
+y_7_3 = 1
+y_8_1 = 1
+y_9_1 = 1
+y_10_3 = 1
+y_11_3 = 1
+y_13_3 = 1
+y_14_3 = 1
+y_15_3 = 1
+y_16_3 = 1
+y_17_3 = 1
+y_18_3 = 1
+y_19_1 = 1
+y_20_3 = 1
+y_21_3 = 1
+y_22_1 = 1
+y_23_1 = 1
+y_24_1 = 1
+y_25_3 = 1
+y_26_1 = 1
+y_27_1 = 1
+y_28_3 = 1
+y_29_1 = 1
+y_30_1 = 1
+y_31_1 = 1
+y_32_3 = 1
+y_33_1 = 1
+y_34_3 = 1
+y_36_1 = 1
+y_37_3 = 1
+y_38_1 = 1
+y_39_3 = 1
+y_40_3 = 1
+y_41_1 = 1
+y_42_3 = 1
+y_43_3 = 1
+y_44_1 = 1
+y_45_3 = 1
+y_47_1 = 1
+y_48_1 = 1
+y_49_1 = 1
+y_50_1 = 1
+y_51_3 = 1
+y_52_3 = 1
+y_53_3 = 1
+y_54_3 = 1
+y_55_3 = 1
+y_56_3 = 1
+y_57_3 = 1
+y_58_3 = 1
+y_59_1 = 1
+y_60_3 = 1
+y_61_1 = 1
+y_62_1 = 1
+y_63_1 = 1
+y_64_1 = 1
+y_66_3 = 1
+y_67_1 = 1
+y_68_1 = 1
+y_69_1 = 1
+y_70_1 = 1
+y_71_3 = 1
+y_72_3 = 1
+y_73_3 = 1
+y_74_1 = 1
+y_75_1 = 1
+y_77_1 = 1
+y_78_1 = 1
+y_80_1 = 1
+y_81_1 = 1
+y_82_1 = 1
+y_83_3 = 1
+y_84_3 = 1
+y_85_3 = 1
+y_86_3 = 1
+y_87_1 = 1
+y_88_1 = 1
+y_89_3 = 1
+y_91_3 = 1
+y_93_1 = 1
+y_95_1 = 1
+y_96_3 = 1
+y_97_3 = 1
 z_1 = 1
-z_2 = 1
-w_1_1_1 = 1
-w_1_2_1 = 1
-w_1_3_1 = 1
-w_2_1_1 = 1
-w_2_2_1 = 1
-w_2_3_1 = 1
-w_3_1_1 = 1
-w_3_2_1 = 1
-w_3_3_1 = 1
-w_4_4_2 = 1
-w_4_5_2 = 1
-w_5_4_2 = 1
-w_5_5_2 = 1
+z_3 = 1
 </pre>
 </div>
 </div>
@@ -15206,7 +15519,7 @@ w_5_5_2 = 1
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">solution_value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">solution_value</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="s2">&quot; = &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">solution_value</span><span class="p">)</span>
         <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">solution_value</span>
@@ -15229,24 +15542,393 @@ w_5_5_2 = 1
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>z _ 1 = 1.0
-x _ 1 _ 1  =  1.0
+<pre>1.0
+x _ 1 _ 1  =  0
 x _ 2 _ 1  =  1.0
 x _ 3 _ 1  =  1.0
 x _ 4 _ 1  =  0
 x _ 5 _ 1  =  0
-z _ 2 = 1.0
+x _ 6 _ 1  =  1.0
+x _ 7 _ 1  =  0
+x _ 8 _ 1  =  1.0
+x _ 9 _ 1  =  1.0
+x _ 10 _ 1  =  0
+x _ 11 _ 1  =  0
+x _ 12 _ 1  =  0
+x _ 13 _ 1  =  0
+x _ 14 _ 1  =  0
+x _ 15 _ 1  =  0
+x _ 16 _ 1  =  0
+x _ 17 _ 1  =  0
+x _ 18 _ 1  =  0
+x _ 19 _ 1  =  1.0
+x _ 20 _ 1  =  0
+x _ 21 _ 1  =  0
+x _ 22 _ 1  =  1.0
+x _ 23 _ 1  =  1.0
+x _ 24 _ 1  =  1.0
+x _ 25 _ 1  =  0
+x _ 26 _ 1  =  1.0
+x _ 27 _ 1  =  1.0
+x _ 28 _ 1  =  0
+x _ 29 _ 1  =  1.0
+x _ 30 _ 1  =  1.0
+x _ 31 _ 1  =  1.0
+x _ 32 _ 1  =  0
+x _ 33 _ 1  =  1.0
+x _ 34 _ 1  =  0
+x _ 35 _ 1  =  0
+x _ 36 _ 1  =  1.0
+x _ 37 _ 1  =  0
+x _ 38 _ 1  =  1.0
+x _ 39 _ 1  =  0
+x _ 40 _ 1  =  0
+x _ 41 _ 1  =  1.0
+x _ 42 _ 1  =  0
+x _ 43 _ 1  =  0
+x _ 44 _ 1  =  1.0
+x _ 45 _ 1  =  0
+x _ 46 _ 1  =  0
+x _ 47 _ 1  =  1.0
+x _ 48 _ 1  =  1.0
+x _ 49 _ 1  =  1.0
+x _ 50 _ 1  =  1.0
+x _ 51 _ 1  =  0
+x _ 52 _ 1  =  0
+x _ 53 _ 1  =  0
+x _ 54 _ 1  =  0
+x _ 55 _ 1  =  0
+x _ 56 _ 1  =  0
+x _ 57 _ 1  =  0
+x _ 58 _ 1  =  0
+x _ 59 _ 1  =  1.0
+x _ 60 _ 1  =  0
+x _ 61 _ 1  =  1.0
+x _ 62 _ 1  =  1.0
+x _ 63 _ 1  =  1.0
+x _ 64 _ 1  =  1.0
+x _ 65 _ 1  =  0
+x _ 66 _ 1  =  0
+x _ 67 _ 1  =  1.0
+x _ 68 _ 1  =  1.0
+x _ 69 _ 1  =  1.0
+x _ 70 _ 1  =  1.0
+x _ 71 _ 1  =  0
+x _ 72 _ 1  =  0
+x _ 73 _ 1  =  0
+x _ 74 _ 1  =  1.0
+x _ 75 _ 1  =  1.0
+x _ 76 _ 1  =  0
+x _ 77 _ 1  =  1.0
+x _ 78 _ 1  =  1.0
+x _ 79 _ 1  =  0
+x _ 80 _ 1  =  1.0
+x _ 81 _ 1  =  1.0
+x _ 82 _ 1  =  1.0
+x _ 83 _ 1  =  0
+x _ 84 _ 1  =  0
+x _ 85 _ 1  =  0
+x _ 86 _ 1  =  0
+x _ 87 _ 1  =  1.0
+x _ 88 _ 1  =  1.0
+x _ 89 _ 1  =  0
+x _ 90 _ 1  =  0
+x _ 91 _ 1  =  0
+x _ 92 _ 1  =  0
+x _ 93 _ 1  =  1.0
+x _ 94 _ 1  =  0
+x _ 95 _ 1  =  1.0
+x _ 96 _ 1  =  0
+x _ 97 _ 1  =  0
+x _ 98 _ 1  =  0
+0
 x _ 1 _ 2  =  0
 x _ 2 _ 2  =  0
 x _ 3 _ 2  =  0
-x _ 4 _ 2  =  1.0
-x _ 5 _ 2  =  1.0
+x _ 4 _ 2  =  0
+x _ 5 _ 2  =  0
+x _ 6 _ 2  =  0
+x _ 7 _ 2  =  0
+x _ 8 _ 2  =  0
+x _ 9 _ 2  =  0
+x _ 10 _ 2  =  0
+x _ 11 _ 2  =  0
+x _ 12 _ 2  =  1.0
+x _ 13 _ 2  =  0
+x _ 14 _ 2  =  0
+x _ 15 _ 2  =  0
+x _ 16 _ 2  =  0
+x _ 17 _ 2  =  0
+x _ 18 _ 2  =  0
+x _ 19 _ 2  =  0
+x _ 20 _ 2  =  0
+x _ 21 _ 2  =  0
+x _ 22 _ 2  =  0
+x _ 23 _ 2  =  0
+x _ 24 _ 2  =  0
+x _ 25 _ 2  =  0
+x _ 26 _ 2  =  0
+x _ 27 _ 2  =  0
+x _ 28 _ 2  =  0
+x _ 29 _ 2  =  0
+x _ 30 _ 2  =  0
+x _ 31 _ 2  =  0
+x _ 32 _ 2  =  0
+x _ 33 _ 2  =  0
+x _ 34 _ 2  =  0
+x _ 35 _ 2  =  1.0
+x _ 36 _ 2  =  0
+x _ 37 _ 2  =  0
+x _ 38 _ 2  =  0
+x _ 39 _ 2  =  0
+x _ 40 _ 2  =  0
+x _ 41 _ 2  =  0
+x _ 42 _ 2  =  0
+x _ 43 _ 2  =  0
+x _ 44 _ 2  =  0
+x _ 45 _ 2  =  0
+x _ 46 _ 2  =  1.0
+x _ 47 _ 2  =  0
+x _ 48 _ 2  =  0
+x _ 49 _ 2  =  0
+x _ 50 _ 2  =  0
+x _ 51 _ 2  =  0
+x _ 52 _ 2  =  0
+x _ 53 _ 2  =  0
+x _ 54 _ 2  =  0
+x _ 55 _ 2  =  0
+x _ 56 _ 2  =  0
+x _ 57 _ 2  =  0
+x _ 58 _ 2  =  0
+x _ 59 _ 2  =  0
+x _ 60 _ 2  =  0
+x _ 61 _ 2  =  0
+x _ 62 _ 2  =  0
+x _ 63 _ 2  =  0
+x _ 64 _ 2  =  0
+x _ 65 _ 2  =  1.0
+x _ 66 _ 2  =  0
+x _ 67 _ 2  =  0
+x _ 68 _ 2  =  0
+x _ 69 _ 2  =  0
+x _ 70 _ 2  =  0
+x _ 71 _ 2  =  0
+x _ 72 _ 2  =  0
+x _ 73 _ 2  =  0
+x _ 74 _ 2  =  0
+x _ 75 _ 2  =  0
+x _ 76 _ 2  =  1.0
+x _ 77 _ 2  =  0
+x _ 78 _ 2  =  0
+x _ 79 _ 2  =  1.0
+x _ 80 _ 2  =  0
+x _ 81 _ 2  =  0
+x _ 82 _ 2  =  0
+x _ 83 _ 2  =  0
+x _ 84 _ 2  =  0
+x _ 85 _ 2  =  0
+x _ 86 _ 2  =  0
+x _ 87 _ 2  =  0
+x _ 88 _ 2  =  0
+x _ 89 _ 2  =  0
+x _ 90 _ 2  =  1.0
+x _ 91 _ 2  =  0
+x _ 92 _ 2  =  1.0
+x _ 93 _ 2  =  0
+x _ 94 _ 2  =  1.0
+x _ 95 _ 2  =  0
+x _ 96 _ 2  =  0
+x _ 97 _ 2  =  0
+x _ 98 _ 2  =  1.0
+1.0
+x _ 1 _ 3  =  1.0
+x _ 2 _ 3  =  0
+x _ 3 _ 3  =  0
+x _ 4 _ 3  =  1.0
+x _ 5 _ 3  =  1.0
+x _ 6 _ 3  =  0
+x _ 7 _ 3  =  1.0
+x _ 8 _ 3  =  0
+x _ 9 _ 3  =  0
+x _ 10 _ 3  =  1.0
+x _ 11 _ 3  =  1.0
+x _ 12 _ 3  =  0
+x _ 13 _ 3  =  1.0
+x _ 14 _ 3  =  1.0
+x _ 15 _ 3  =  1.0
+x _ 16 _ 3  =  1.0
+x _ 17 _ 3  =  1.0
+x _ 18 _ 3  =  1.0
+x _ 19 _ 3  =  0
+x _ 20 _ 3  =  1.0
+x _ 21 _ 3  =  1.0
+x _ 22 _ 3  =  0
+x _ 23 _ 3  =  0
+x _ 24 _ 3  =  0
+x _ 25 _ 3  =  1.0
+x _ 26 _ 3  =  0
+x _ 27 _ 3  =  0
+x _ 28 _ 3  =  1.0
+x _ 29 _ 3  =  0
+x _ 30 _ 3  =  0
+x _ 31 _ 3  =  0
+x _ 32 _ 3  =  1.0
+x _ 33 _ 3  =  0
+x _ 34 _ 3  =  1.0
+x _ 35 _ 3  =  0
+x _ 36 _ 3  =  0
+x _ 37 _ 3  =  1.0
+x _ 38 _ 3  =  0
+x _ 39 _ 3  =  1.0
+x _ 40 _ 3  =  1.0
+x _ 41 _ 3  =  0
+x _ 42 _ 3  =  1.0
+x _ 43 _ 3  =  1.0
+x _ 44 _ 3  =  0
+x _ 45 _ 3  =  1.0
+x _ 46 _ 3  =  0
+x _ 47 _ 3  =  0
+x _ 48 _ 3  =  0
+x _ 49 _ 3  =  0
+x _ 50 _ 3  =  0
+x _ 51 _ 3  =  1.0
+x _ 52 _ 3  =  1.0
+x _ 53 _ 3  =  1.0
+x _ 54 _ 3  =  1.0
+x _ 55 _ 3  =  1.0
+x _ 56 _ 3  =  1.0
+x _ 57 _ 3  =  1.0
+x _ 58 _ 3  =  1.0
+x _ 59 _ 3  =  0
+x _ 60 _ 3  =  1.0
+x _ 61 _ 3  =  0
+x _ 62 _ 3  =  0
+x _ 63 _ 3  =  0
+x _ 64 _ 3  =  0
+x _ 65 _ 3  =  0
+x _ 66 _ 3  =  1.0
+x _ 67 _ 3  =  0
+x _ 68 _ 3  =  0
+x _ 69 _ 3  =  0
+x _ 70 _ 3  =  0
+x _ 71 _ 3  =  1.0
+x _ 72 _ 3  =  1.0
+x _ 73 _ 3  =  1.0
+x _ 74 _ 3  =  0
+x _ 75 _ 3  =  0
+x _ 76 _ 3  =  0
+x _ 77 _ 3  =  0
+x _ 78 _ 3  =  0
+x _ 79 _ 3  =  0
+x _ 80 _ 3  =  0
+x _ 81 _ 3  =  0
+x _ 82 _ 3  =  0
+x _ 83 _ 3  =  1.0
+x _ 84 _ 3  =  1.0
+x _ 85 _ 3  =  1.0
+x _ 86 _ 3  =  1.0
+x _ 87 _ 3  =  0
+x _ 88 _ 3  =  0
+x _ 89 _ 3  =  1.0
+x _ 90 _ 3  =  0
+x _ 91 _ 3  =  1.0
+x _ 92 _ 3  =  0
+x _ 93 _ 3  =  0
+x _ 94 _ 3  =  0
+x _ 95 _ 3  =  0
+x _ 96 _ 3  =  1.0
+x _ 97 _ 3  =  1.0
+x _ 98 _ 3  =  0
 </pre>
 </div>
 </div>
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
