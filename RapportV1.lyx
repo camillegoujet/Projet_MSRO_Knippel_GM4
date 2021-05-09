@@ -1975,6 +1975,10 @@ Ayant constaté l'efficacité de notre modélisation sur un jeu de données
  en introduisant un jeu de données plus important.
  Cela nous permet de nous rapprocher d'une situation complètement réaliste
  et donc de rendre notre modèle utile à tous.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2001,13 +2005,19 @@ literal "false"
 
 .
  Ici, les communes jouent donc le rôle des cantons dans notre modèle.
- Une étape importante avant d'appliquer le solveur à notre jeu de données
+\end_layout
+
+\begin_layout Standard
+Une étape importante avant d'appliquer le solveur à notre jeu de données
  a été de découper les plus grosses communes de la régions, car celles-ci
  ont une population plus importante que certaines circonscriptions.
  Ainsi, en se basant sur le découpage des communes que l'on trouve dans
  la réalité (on parle alors de fractions cantonales), la commune du Havre
  a été découpé en 6, celle de Rouen en 3, et celle de Dieppe en 2.
- Dernièrement, il nous fallait un pourcentage de votes fictif pour les parties
+\end_layout
+
+\begin_layout Standard
+Dernièrement, il nous fallait un pourcentage de votes fictif pour les parties
  A et B pour chaque communes du département.
  Nous avons simplement créé des données à partir d'une fonction gaussienne
  de moyenne 
@@ -2020,6 +2030,10 @@ literal "false"
 
 .
  Le jeu de données se trouve en annexe du rapport au format csv.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2035,7 +2049,10 @@ Une fois le jeu de données modélisé, nous avions donc un problème avec
  découpage actuel en Seine-Maritime.
  Le soucis a été que la version que nous avions de Cplex nous limitait dans
  le nombre de variables que nous pouvions créer.
- Nous avons donc, dans un premier temps, essayé sans les données sur les
+\end_layout
+
+\begin_layout Standard
+Nous avons donc, dans un premier temps, essayé sans les données sur les
  distances nécessitant 
 \begin_inset Formula $674^{2}$
 \end_inset
@@ -2056,6 +2073,10 @@ Une fois le jeu de données modélisé, nous avions donc un problème avec
 \end_inset
 
  circonscriptions.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2079,6 +2100,10 @@ Resolution_CPLEX_DecoupageElectoral
 \end_inset
 
  créé à partir du Jupyter Notebook que nous avons utilisé.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
