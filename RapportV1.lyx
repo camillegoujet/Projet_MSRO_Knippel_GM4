@@ -97,7 +97,8 @@ ISRAA BEN SASSI, CAMILLE GOUJET ET VICTOR LESUR
 \begin_inset Newline newline
 \end_inset
 
-À L'ATTENTION DE ARNAUD KNIPPEL
+À L'ATTENTION DE M.
+ ARNAUD KNIPPEL
 \begin_inset Newline newline
 \end_inset
 
@@ -143,13 +144,6 @@ Illustration du découpage électoral en France
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
@@ -174,7 +168,7 @@ Le découpage électoral est le mécanisme par lequel le territoire national
 \end_inset
 
 Ce découpage est l'objet récurrent de polémiques, sinon d'actions en justice.
- Car il est orchestré, par exemple aux Etats Unis, au niveau de chaque État
+ Car il est orchestré, par exemple aux États Unis, au niveau de chaque État
  par les gouverneurs et ceux-ci ont la fâcheuse tendance à faire en sorte
  de favoriser leur parti.
  Par exemple, en façonnant des circonscriptions qui fragmentent l'électorat
@@ -306,7 +300,15 @@ gerrymandering
 \end_inset
 
  nous vient des USA et fait référence à un découpage effectué par le gouverneur
- Elbridge Gerry.
+ Elbridge Gerry
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-5"
+literal "false"
+
+\end_inset
+
+.
  Ce découpage était si bizarre qu'il rappelait la forme d'une salamandre,
  d’où le mot-valise 
 \begin_inset Quotes fld
@@ -351,13 +353,11 @@ De nos jours avec des outils de recensement d'une plus grande précision
  République (soit en 1958, 1986 et 2010).
  Dans ces trois cas, le gouvernement n'a nécessité uniquement d'une majorité
  absolue au parlement et non d'une majorité qualifiée (celle-ci est nécessaire
- pour un changement de constitution par exemple)
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-source : https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm
-\end_layout
+ pour un changement de constitution par exemple) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-1"
+literal "false"
 
 \end_inset
 
@@ -372,13 +372,11 @@ essentiellement démographique
 \begin_inset Quotes frd
 \end_inset
 
-, comme l'indique le conseil constitutionnel
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-source : https://www.cairn.info/revue-pouvoirs-2013-3-page-117.htm
-\end_layout
+, comme l'indique le conseil constitutionnel 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-2"
+literal "false"
 
 \end_inset
 
@@ -423,10 +421,6 @@ gerrymandering
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -507,7 +501,7 @@ Chaque citoyen est rattaché à une circonscription et à une seule dans le
 
 \begin_layout Itemize
 6 circonscriptions gagnées par le parti A avec 53,3% des voix soit 3200
- voix pour A et 2800 voix pour B 
+ voix pour A et 2800 voix pour B
 \end_layout
 
 \begin_layout Itemize
@@ -1620,21 +1614,13 @@ Pour commencer, on se contentera de calculer la distance entre 2 cantons
  (2 noeuds du graphe associé au problème).
  Cela nous permettra en fait d'assurer l'obtention de circonscriptions bien
  formées et d'éviter les répartitions trop en longueur :
-\begin_inset Newline newline
-\end_inset
-
-
 \begin_inset Formula 
-\[
-x_{ij}\times x_{lj}\times d_{il}\leq D
-\]
+\begin{align*}
+x_{ij}\times x_{lj}\times d_{il} & \leq D
+\end{align*}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 où D = distance maximale que l'on se fixe pour la résolution de notre problème
  
 \end_layout
@@ -1720,41 +1706,25 @@ d_{il}\leq D
 \end{cases}$
 \end_inset
 
- 
-\begin_inset Newline newline
-\end_inset
 
+\end_layout
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Finalement, le problème s'écrit : 
-\begin_inset Newline newline
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\,\,\,
-\]
+Finalement, le problème s'écrit :
+\end_layout
 
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
+\begin_layout Standard
 \begin_inset Formula 
 \[
 \begin{cases}
+\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\\
 \stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
 \stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
 \stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
@@ -1895,14 +1865,6 @@ nbV_{5}=7 & pV_{5}=0.9
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \begin_inset Float figure
 placement H
 wide false
@@ -1936,38 +1898,11 @@ toy example
 
 \end_inset
 
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
 On a donc :
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\[
-\max\left(z\right)=z_{1}+z_{2}\,\,\,
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \begin_inset Formula 
 \[
 \begin{cases}
+\max\left(z\right)=z_{1}+z_{2}\\
 x_{i1}+x_{i2}=1 & \forall i\in\{1,\dots,5\}\\
 x_{1j}+x_{2j}+x_{3j}+x_{4j}+x_{5j}\geq1 & \forall j\in\{1,\dots,2\}\\
 x_{1j}nbV_{1}+x_{2j}nbV_{2}+x_{3j}nbV_{3}+x_{4j}nbV_{4}+x_{5j}nbV_{5}\,\,\leq\,\,\frac{1,20}{2}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,2\}\\
@@ -2011,7 +1946,7 @@ L'objectif est à présent de mettre ce programme linéaire sous la forme d'un
 
 
 \series bold
-Pour la résolution de ce problème, il faut ouvrir la page HTML 
+Pour voir la résolution de ce problème, il faut ouvrir la page HTML 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2031,7 +1966,7 @@ Resolution_CPLEX_DecoupageElectoral
 \end_layout
 
 \begin_layout Section
-Application du solveur sur un problème plus réaliste 
+Application du solveur sur un problème plus réaliste
 \end_layout
 
 \begin_layout Standard
@@ -2040,26 +1975,117 @@ Ayant constaté l'efficacité de notre modélisation sur un jeu de données
  en introduisant un jeu de données plus important.
  Cela nous permet de nous rapprocher d'une situation complètement réaliste
  et donc de rendre notre modèle utile à tous.
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Standard
+Comme jeu de données nous avons utilisé des données sur les communes de
+ la Seine-Maritime.
+ Ces données sont gratuitement accessibles sur le site de l'insee et permettent
+ de connaître la population de chaque commune du département 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-3"
+literal "false"
+
+\end_inset
+
+.
+ Nous avons aussi récupéré les coordonnées géographiques de chaque commune
+ pour pouvoir calculer les distances entre celles-ci 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-4-1"
+literal "false"
+
+\end_inset
+
+.
+ Ici, les communes jouent donc le rôle des cantons dans notre modèle.
+ Une étape importante avant d'appliquer le solveur à notre jeu de données
+ a été de découper les plus grosses communes de la régions, car celles-ci
+ ont une population plus importante que certaines circonscriptions.
+ Ainsi, en se basant sur le découpage des communes que l'on trouve dans
+ la réalité (on parle alors de fractions cantonales), la commune du Havre
+ a été découpé en 6, celle de Rouen en 3, et celle de Dieppe en 2.
+ Dernièrement, il nous fallait un pourcentage de votes fictif pour les parties
+ A et B pour chaque communes du département.
+ Nous avons simplement créé des données à partir d'une fonction gaussienne
+ de moyenne 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+ et d'écart type 
+\begin_inset Formula $\frac{1}{10}$
+\end_inset
+
+.
+ Le jeu de données se trouve en annexe du rapport au format csv.
+\end_layout
+
+\begin_layout Standard
+Une fois le jeu de données modélisé, nous avions donc un problème avec 
+\begin_inset Formula $674$
+\end_inset
+
+ cantons et nous voulions tester de créer 
+\begin_inset Formula $36$
+\end_inset
+
+ circonscriptions pour voir si nous allions obtenir un résultat proche du
+ découpage actuel en Seine-Maritime.
+ Le soucis a été que la version que nous avions de Cplex nous limitait dans
+ le nombre de variables que nous pouvions créer.
+ Nous avons donc, dans un premier temps, essayé sans les données sur les
+ distances nécessitant 
+\begin_inset Formula $674^{2}$
+\end_inset
+
+ variables en plus, soit 
+\begin_inset Formula $454276$
+\end_inset
+
+ variables.
+ Mais nous avions donc toujours trop de variables.
+ Nous avons donc été contraint de réduire la taille de notre jeu de données
+ à un problème avec 
+\begin_inset Formula $100$
+\end_inset
+
+ cantons et 
+\begin_inset Formula $3$
+\end_inset
+
+ circonscriptions.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Pour voir la résolution de ce problème, il faut ouvrir la page HTML
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\begin_inset Quotes fld
 \end_inset
 
 
-\begin_inset Newline newline
+\emph on
+Resolution_CPLEX_DecoupageElectoral
+\emph default
+-Seine-Maritime
+\begin_inset Quotes frd
 \end_inset
 
+ créé à partir du Jupyter Notebook que nous avons utilisé.
+\end_layout
 
-\begin_inset Newline newline
-\end_inset
-
-GO VICTOR 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
+\begin_layout Standard
+Pour aller plus loin sur ce jeu de données, il faudrait d'abord se procurer
+ une version moins restrictive de Cplex.
+ On pourrait ainsi étudier nos données plus finement et comparer avec ce
+ qui a été fait et proposé dans la réalité.
 \end_layout
 
 \begin_layout Part*
@@ -2076,7 +2102,7 @@ Bien que nos jeux de données soient trop pauvres pour ressortir des information
 En effet, le découpage et le partitionnement d'une circonscription peut
  paraître anodin.
  Il nécessite pourtant d'être traité avec une minutie et un détail certain
- car son rôle est d'une importance insoupsçonnée par la plupart des gens
+ car son rôle est d'une importance insoupçonnée par la plupart des gens
  et fondamentale dans le résultat d'un scrutin.
 \end_layout
 
@@ -2105,11 +2131,115 @@ C'est avec une énorme frustration que nous nous voyons dans l'obligation
 \end_inset
 
 Nous remercions Monsieur Knippel de nous avoir permis d'appliquer nos compétence
-s en optimisation et modélisation mathématique à des problèmes contemporains
+s en optimisation et modélisation mathématiques à des problèmes contemporains
  qui nous touchent et nous passionnent personnellement.
  Nous prévoyons d'enrichir nos jeux de données de quelques exemples d'élections
  passées afin de le perfectionner quand le temps le permettra.
- 
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "1"
+key "key-5"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Wikipédia Gerrymandering"
+target "https://en.wikipedia.org/wiki/Gerrymandering"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "2"
+key "key-1"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Site du conseil constitutionnel"
+target "https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "3"
+key "key-2"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Thomas Ehrhard \"Le découpage électoral des circonscriptions législatives : le parlement hors jeu ?\""
+target "https://www.cairn.info/revue-pouvoirs-2013-3-page-117.htm"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "4"
+key "key-3"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Site de l'insee"
+target "https://www.insee.fr/fr/statistiques/2525755?sommaire=2525768"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "5"
+key "key-4-1"
+literal "false"
+
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Coordonnées géographiques des villes Françaises"
+target "https://www.galichon.com/codesgeo/"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

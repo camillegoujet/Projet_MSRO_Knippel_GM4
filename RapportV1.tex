@@ -1,0 +1,742 @@
+%% LyX 2.3.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[oneside,french]{amsbook}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{luainputenc}
+\usepackage{geometry}
+\geometry{verbose,lmargin=2cm,rmargin=2cm}
+\usepackage{babel}
+\makeatletter
+\addto\extrasfrench{%
+   \providecommand{\og}{\leavevmode\flqq~}%
+   \providecommand{\fg}{\ifdim\lastskip>\z@\unskip\fi~\frqq}%
+}
+
+\makeatother
+\usepackage{float}
+\usepackage{endnotes}
+\usepackage{algorithm2e}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{stackrel}
+\usepackage{graphicx}
+\usepackage[unicode=true]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+\newcommand*\LyXThinSpace{\,\hspace{0pt}}
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{section}{chapter}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\let\footnote=\endnote
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{\protect\definitionname}
+\theoremstyle{remark}
+\newtheorem*{rem*}{\protect\remarkname}
+\theoremstyle{definition}
+\newtheorem*{example*}{\protect\examplename}
+\newenvironment{lyxcode}
+	{\par\begin{list}{}{
+		\setlength{\rightmargin}{\leftmargin}
+		\setlength{\listparindent}{0pt}% needed for AMS classes
+		\raggedright
+		\setlength{\itemsep}{0pt}
+		\setlength{\parsep}{0pt}
+		\normalfont\ttfamily}%
+	 \item[]}
+	{\end{list}}
+
+\makeatother
+
+\providecommand{\definitionname}{Définition}
+\providecommand{\examplename}{Exemple}
+\providecommand{\remarkname}{Remarque}
+\providecommand{\theoremname}{Théorème}
+
+\begin{document}
+\title{PROJET SEMESTRIEL : DÉCOUPAGE ÉLECTORAL}
+\author{ISRAA BEN SASSI, CAMILLE GOUJET ET VICTOR LESUR\\
+À L'ATTENTION DE M. ARNAUD KNIPPEL\\
+\\
+\begin{figure}[H]
+\includegraphics[scale=0.5]{cover-r4x3w1000-5f6115303c0f7-trump-et-edward}\caption{Illustration du découpage électoral en France}
+
+\end{figure}
+}
+
+\maketitle
+\tableofcontents{}
+
+\newpage{}
+\begin{abstract}
+Le découpage électoral est le mécanisme par lequel le territoire national
+est subdivisé en circonscriptions électorales, destinées à permettre
+et favoriser l'expression des citoyens par le vote. \\
+Ce découpage est l'objet récurrent de polémiques, sinon d'actions
+en justice. Car il est orchestré, par exemple aux États Unis, au niveau
+de chaque État par les gouverneurs et ceux-ci ont la fâcheuse tendance
+à faire en sorte de favoriser leur parti. Par exemple, en façonnant
+des circonscriptions qui fragmentent l'électorat de leur adversaire,
+pour limiter son nombre d'élus. Ou, au contraire, en rassemblant dans
+une seule et même circonscription un maximum de votes adverses : ainsi,
+même avec 80\% des voix, cela ne fera jamais qu'un seul élu dans la
+circonscription. C'est ce que l'on appelle \og gâcher des voix\fg .
+Il arrive ainsi qu'à l'échelle d'un pays, un parti a moins d'élus
+qu'un autre alors qu'il a eu plus de voix. Un exemple? Une certaine
+Hillary Clinton a perdu la présidentielle en 2016 avec plus de 2 millions
+de votes d'avance sur son adversaire.\\
+\\
+\\
+\textbf{Ce projet consiste à étudier une ou plusieurs méthodes de
+découpage électoral, et à essayer de comprendre et démontrer dans
+quelle mesure on peut influencer le résultat d'élections par ce découpage.}\\
+\\
+Dans un premier temps, nous nous intéresserons à l'histoire de ce
+mécanisme et redéfinirons quelques notions de base pour que la compréhension
+du lecteur pour le reste du projet soit optimale. \\
+Nous étudierons ensuite à partir de situations simples et faciles
+à modéliser de petites bases de données. À partir de celles-ci, nous
+modéliserons des programmes linéaires en nombres entiers que nous
+tenterons de résoudre pour en mesurer l'écart des résultats possibles
+et donc la manipulation partisane que l'on peut en faire pour un camp
+ou un autre..\\
+\\
+Nous généraliserons nos modèles à des bases de données de plus en
+plus conséquentes et complexes et en étudierons les aspects.\\
+\\
+Enfin, nous tenterons de remédier au problème d'équité qui pèse~sur
+les partis à chaque nouvelle élection en élaborant une modélisation
+la plus équitable et représentative possible.\\
+\\
+Afin de mener à bien ce projet, nous nous munirons d'un solveur tel
+que CPLEX pour nous assister dans la résolution de problèmes d'optimisation
+linéaire.
+
+\newpage{}
+\end{abstract}
+
+
+\part{PARTIE THÉORIQUE}
+
+\chapter{Introduction}
+
+\section{Histoire }
+
+Le découpage électoral partisan des circonscriptions, aussi connu
+sous le nom de $\lyxmathsym{«}\LyXThinSpace gerrymandering\LyXThinSpace\lyxmathsym{»}$,
+est une pratique qui n'est pas récente et qui est sûrement concomitante
+d'élections de représentants dans ces circonscriptions. Néanmoins,
+c'est avec l'apparition des démocraties représentatives modernes,
+d'abord les États-Unis puis la France, que la question est mis sur
+le devant de la scène. Ainsi, le terme \og gerrymandering\fg{} nous
+vient des USA et fait référence à un découpage effectué par le gouverneur
+Elbridge Gerry\cite{key-5}. Ce découpage était si bizarre qu'il rappelait
+la forme d'une salamandre, d\textquoteright où le mot-valise \og gerrymandering\fg{}
+(composé de \og Gerry\fg{} et de \og salamander\fg{} du français \og salamandre\fg ).
+
+De nos jours avec des outils de recensement d'une plus grande précision
+et des outils informatiques puissants, le découpage partisan fait
+toujours débat. En France, par exemple, il y a eu trois découpages
+électoraux sous la cinquième République (soit en 1958, 1986 et 2010).
+Dans ces trois cas, le gouvernement n'a nécessité uniquement d'une
+majorité absolue au parlement et non d'une majorité qualifiée (celle-ci
+est nécessaire pour un changement de constitution par exemple) \cite{key-1}.
+Ainsi, il est plus facile au gouvernement de procéder au gerrymandering.
+Néanmoins, le gouvernement ne peut faire ce qu'il veut. En France,
+tout découpage électoral doit être sur une base \og essentiellement
+démographique\fg , comme l'indique le conseil constitutionnel \cite{key-2}.
+De fait, comme nous le verrons plus tard, le nombre d'habitants d'une
+circonscription doit être compris entre 80 et 120\% de la moyenne
+des circonscriptions de la même région.
+
+\begin{figure}
+\includegraphics[scale=0.5]{The_Gerry-Mander_Edit}
+
+\caption{Illustration historique du phénomène du \og gerrymandering\fg}
+\end{figure}
+
+
+\section{Quelques définitions importantes}
+\begin{defn}
+\textbf{Découpage électoral} 
+
+Le découpage électoral est le mécanisme par lequel le territoire national
+est subdivisé en \emph{circonscriptions électorales}, destinées à
+permettre et favoriser l'expression des citoyens par le vote.\\
+\end{defn}
+
+\begin{rem*}
+En France, le mécanisme du découpage électoral est utilisé pour les
+élections législatives, les élections sénatoriales et les élections
+au Conseil départemental.
+\end{rem*}
+\begin{defn}
+\textbf{Circonscription électorale}
+
+La circonscription électorale est une division du territoire effectuée
+dans le cadre d'une élection. \\
+Chaque citoyen est rattaché à une circonscription et à une seule dans
+le cadre d'un vote. La circonscription peut être utilisée dans le
+cadre des scrutins majoritaires ou dans le cadre des scrutins de liste
+(scrutins proportionnels).
+\end{defn}
+
+\begin{example*}
+10 000 électeurs, 10 circonscriptions de 1 000 électeurs, deux partis
+A et B, le premier recueillant 4 000 suffrages et le second 6 000. 
+\end{example*}
+\begin{itemize}
+\item 6 circonscriptions gagnées par le parti A avec 53,3\% des voix soit
+3200 voix pour A et 2800 voix pour B
+\item 4 circonscriptions gagnées par le parti B avec 80\% des voix, soit
+800 voix pour A et 3200 voix pour B.
+\end{itemize}
+\textbf{Le parti B perd les élections bien qu'il soit largement majoritaire
+en nombre de voix.}\\
+\textbf{}\\
+
+
+\chapter{Modéliser le découpage}
+
+\section{Application sur l'exemple donné}
+
+Grâce à l'exemple ci-dessus, on remarque que le découpage électoral
+peut grandement influencer le résultat d'une élection. Bien modéliser
+ce découpage est alors essentiel; que notre but soit de favoriser
+un camp ou d'essayer de créer des conditions les plus équitables possible.
+Pour commencer, nous allons vous proposer la modélisation suivante
+:\\
+\\
+
+Chaque circonscription se décompose en \textquotedbl brique\textquotedbl{}
+élémentaire que sont les cantons. Ces cantons seront dans notre modèle
+assimilés à des n½uds d'un graphe. Chaque canton est relié par des
+arêtes aux autres cantons limitrophes. Pour simplifier, nous allons
+considérer seulement deux partis A et B. Ainsi, on attribua un poids
+à chaque n½ud correspondant à un réel entre 0 et 1 qui traduit le
+pourcentage de votants qui soutiennent le parti A. Donc si le poids
+est de 0, tous les votants soutiennent le parti B et si le poids est
+de 1, tous les votants soutiennent le parti A.\\
+\\
+
+\textbf{Créer les circonscriptions à partir du graphe revient à résoudre
+un problème de classification non supervisée.} En effet, chaque circonscription
+ayant un seul élu, on peut influencer le nombre d'élus obtenu par
+un parti en découpant différemment les circonscriptions.\\
+\\
+ Pour rajouter un minimum de réalisme, on peut exiger que les circonscriptions
+soit d'un seul tenant, c'est-à-dire rajouter une \textbf{contrainte
+de connexité entre les n½uds d'une même classe.}
+
+Si l'on reprend l'exemple précédent de \textbf{10 000 électeurs} à
+répartir sur \textbf{10 circonscriptions de 1 000 électeurs}, on peut
+imaginer que les électeurs se répartissent sur des \textbf{cantons
+de 200 électeurs} où 16 cantons soutiennent le parti B (poids 0),
+28 soutiennent le parti A (poids 1) et 6 sont des cantons de poids
+0,33. \\
+\\
+Alors on peut répartir ces cantons de façon à obtenir :
+
+- 4 circonscriptions avec un canton B et 4 cantons A 
+
+- 6 circonscriptions avec 2 cantons A, 2 cantons B et un canton de
+poids 0,33. \\
+\\
+Avec cette répartition, le parti B remporte une majorité de circonscriptions
+sans pour autant remporter le plus grand nombre de voix. Cette répartition
+est représentée par le graphe ci-dessous :
+
+\begin{figure}[H]
+\includegraphics[scale=0.6]{GrapheExemple}\caption{Graphe modélisant la situation}
+
+\end{figure}
+
+
+\section{Modélisation du découpage}
+
+\subsection{Problème d'optimisation}
+\begin{defn}
+Un problème d'optimisation combinatoire est défini par : 
+\end{defn}
+
+\begin{itemize}
+\item un énoncé
+\item une fonction économique 
+\item un sens. \\
+\end{itemize}
+%
+
+\subsubsection{Énoncé:}
+
+\paragraph{Dans notre cas, l'énoncé, c'est-à-dire les données, correspond au
+graphe $G=(X,U)$ décrit ci-dessus. Soit $X=\{x_{1},x_{2},\dots,x_{n}\}$
+l'ensemble des n½uds de notre graphe, tel que chaque $x_{i}$ correspond
+à un canton. On lui associe les variables $nbV_{i},pV_{i}$ qui sont
+respectivement le \textbf{nombre de votants} \textbf{du canton }et
+le \textbf{pourcentage/proportion de votants qui soutiennent le parti
+A}.\protect \\
+\protect \\
+}
+
+\textbf{Notre objectif est de définir un nombre $k$ de circonscriptions
+tel que $\forall j\in\{1,\dots,k\}$, $K_{j}$ est un ensemble connexe
+de $X,$ où un élément de $X$ n'appartient qu'à un seul $K_{j}$.}\\
+\\
+Plaçons nous dans un premier temps dans la situation où notre objectif
+est de \textbf{faire gagner le parti A} :\\
+\\
+ Nous pouvons commencer par définir la fonction $p$ qui calcule le
+\textbf{poids du parti A dans une circonscription donnée, soit la
+proportion de votants pour le parti A dans cette circonscription.}\\
+\textbf{}\\
+Le résultat $p(K_{j})$ nous donne en fait le rapport du nombre de
+personnes votant pour le parti A dans la circonscription $K_{j}$
+sur le nombre total de votants dans cette même circonscription : \\
+
+\begin{align*}
+p: & X\rightarrow\mathbb{R^{+}}\\
+ & K_{j}\mapsto p(K_{j})
+\end{align*}
+\[
+p(K_{j})=\frac{\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}\times pV_{i}}{\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}}
+\]
+
+
+\subsubsection{La fonction économique}
+\begin{lyxcode}
+\end{lyxcode}
+Ceci nous permet de définir la fonction économique $f$ suivante :
+\begin{align*}
+f: & X\rightarrow\mathbb{R^{+}}\\
+ & K_{j}\mapsto f(K_{j})
+\end{align*}
+
+\begin{align*}
+f(K_{j}) & =\begin{cases}
+1 & \text{si }p(K_{j})\geq0,5\\
+0 & \text{\text{sinon}}
+\end{cases}
+\end{align*}
+
+Ainsi la fonction $f$ nous dit si c'est le parti A remporte la circonscription
+$K_{j}$ ($f(K_{j})=1$) ou si c'est le parti B qui remporte la circonscription
+($f(K_{j})=0$). \\
+
+
+\subsubsection{Sens}
+
+Si notre objectif est de faire gagner le plus de circonscriptions
+au parti A, on peut définir le problème suivant :
+\[
+max\stackrel[j=1]{k}{\sum}f(K_{j})
+\]
+
+Inversement, si notre objectif est de faire gagner le plus de circonscriptions
+au parti B, il suffit de poser :
+\[
+min\stackrel[j=1]{k}{\sum}f(K_{j})
+\]
+
+Remarquons que dans notre formulation, nous avons posé une contrainte
+de façon à ce que les circonscriptions soient d'un seul tenant mais
+nous n'avons pas imposé de contrainte de taille sur les circonscriptions.
+\\
+Pour cela, nous pouvons nous inspirer des contraintes qui existent
+sur la taille des circonscriptions en France. Celles-ci sont un peu
+abstraites mais recommande des tailles de circonscriptions (en nombre
+de votants) significativement égales.\\
+\\
+\textbf{La règle que nous nous fixons alors est que le nombre de votants
+d'une circonscription doit être compris entre $80\%$ et $120\%$
+du nombre moyen de votants} \textbf{dans une circonscription}.\\
+\\
+On peut ainsi définir la contrainte suivante pour un $K_{j}$ donné
+: 
+\[
+\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i}\leq\stackrel[i=1,x_{i}\in K_{j}]{n}{\sum}nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i}
+\]
+
+Notons aussi que si notre objectif n'est pas de favoriser un camp
+ou un autre, alors l'utilisation de la fonction $f$ n'a pas d\textquoteright intérêt.
+\\
+Il faudrait définir une nouvelle fonction économique tout en gardant
+la contrainte sur la taille que l'on vient d'énoncer.
+
+\subsection{Le choix de variables\protect \\
+}
+
+Afin de pouvoir formuler le problème sous forme d'un problème mathématique,
+nous avons besoin de définir les variables que nous allons utiliser.
+\\
+Définissons simplement les variables binaires $x_{ij}$ tel que pour
+le $i^{\grave{e}me}$ canton et la $j^{\grave{e}me}$ circonscription,
+on ait :
+\[
+x_{ij}=\begin{cases}
+1 & \text{si }x_{i}\in K_{j}\\
+0 & \text{sinon}
+\end{cases}
+\]
+
+On peut remarquer que cette variable traduit l'appartenance d'un canton
+à une circonscription. Ce qui implique de devoir énoncer ces deux
+contraintes suivantes :
+\begin{align*}
+\forall i\in\{1,\dots,n\}, & \stackrel[j=1]{k}{\sum}x_{ij}=1\\
+\forall j\in\{1,\dots,k\}, & \stackrel[i=1]{n}{\sum}x_{ij}\geq1
+\end{align*}
+
+La première imposant à chaque canton d'appartenir à une et une seule
+circonscription et la seconde obligeant chaque circonscription à contenir
+au-moins un canton. \\
+Cette dernière contrainte peut par ailleurs être modifiée pour forcer
+les circonscriptions à\emph{ }chacune contenir, un nombre de cantons
+que l'on pourra définir.\\
+
+En explicitant les variables de la sorte, on peut alors redéfinir
+la fonction $p(K_{j})$ précédente :
+
+\[
+p(K_{j})=\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}
+\]
+
+Et ainsi reformuler notre problème mathématique sous la forme suivante
+:
+\begin{align*}
+ & \max\left(z\right)=\stackrel[j=1]{k}{\sum}\lfloor2\left(\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\right)\rfloor\\
+ & \begin{cases}
+\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
+\end{cases}
+\end{align*}
+\\
+\\
+Afin d'appliquer des algorithmes rapides d'optimisation (par exemple
+ceux du logiciel CPLEX), il nous faut maintenant linéariser la formule
+du problème. \\
+\\
+Pour cela, nous voulons prioritairement changer le \emph{quotient}
+de la formule en \emph{produit} (plus gérable pour la résolution de
+programmations linéaires) :\\
+\\
+\textbf{\emph{1ère étape :}}\\
+\\
+Posons tout d'abord $z_{j}=\begin{cases}
+1 & si\,\,\,\,\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}\geq0.5\\
+0 & si\,\,\,\,\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}<0.5
+\end{cases}\,\,\,\,$,\\
+\\
+On peut remarquer que $\forall j\in\{1,\dots,k\},$\textbf{$z_{j}\leq\frac{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}}{\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}}+\frac{1}{2}$}
+,\\
+Multiplions maintenant notre inégalité par $\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}$
+:\\
+\\
+\[
+z_{j}\times\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}
+\]
+\\
+Ainsi, nous obtenons une condition quadratique.\\
+\\
+\textbf{\emph{2ème étape :}}\\
+\\
+La deuxième étape consiste à transformer notre condition quadratique
+en condition linéaire.\\
+Pour cela, on introduit 3 nouvelles contraintes impliquant une nouvelle
+variable $y_{ij}$ .\\
+L'objectif de l'introduction de cette variable est d'obtenir le même
+comportement que si on gardait la formule avec le produit des $z_{j}$avec
+les $x_{ij}$ mais dans une formulation linéaire.\\
+\\
+Posons alors $\begin{cases}
+y_{ij}\leq z_{j}\\
+y_{ij}\leq x_{ij}\\
+y_{ij}\geq z_{j}+x_{ij}-1
+\end{cases}$ ,\\
+\\
+Ainsi, le problème devient :\\
+\[
+\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\,\,\,
+\]
+\\
+\[
+\begin{cases}
+\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,k\}\\
+y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq z_{j} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq x_{ij} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}
+\end{cases}
+\]
+\\
+Finalement, on obtient une formulation mathématique de notre problème
+sous forme linéaire.\\
+\\
+La dernière contrainte qu'il nous manque est celle de la connexité.
+C'est-à-dire que pour tout couple de sommets appartenant à une même
+classe, il existe un chemin pour aller de l'un à l'autre ne contenant
+que des sommets de leur classe d'appartenance. \\
+\\
+\textbf{\emph{3e étape :}}\\
+\textbf{Contrainte de connexité }\\
+\\
+Pour expliciter cette notion, posons 
+\[
+G_{j}=(K_{j},U_{j})
+\]
+ où $G_{j}$ le sous-graphe représentant la circonscription $j$,
+\\
+~~~~~~$K_{j}$ l'ensemble des sommets d'une circonscription
+\\
+~~~~~~$U_{j}$ l'ensemble des arcs reliant les sommets de $K_{j}$\\
+\\
+Nous voulons que $\forall j\in\{1,\dots,k\}$ et $\forall(x_{i},x_{i'})\in K_{j}^{2}$
+$\exists$un chemin entre $x_{i}\,\,et\,\,x_{i'}$dans $G_{j}$.\\
+\\
+Pour commencer, on se contentera de calculer la distance entre 2 cantons
+(2 noeuds du graphe associé au problème). Cela nous permettra en fait
+d'assurer l'obtention de circonscriptions bien formées et d'éviter
+les répartitions trop en longueur :\\
+\[
+x_{ij}\times x_{lj}\times d_{il}\leq D
+\]
+
+où D = distance maximale que l'on se fixe pour la résolution de notre
+problème 
+
+où $d_{il}$= distance entre les sommets $i$ et $l$ du graphe\\
+
+Les distances $d_{il}$seront des données du problème.\\
+\\
+Il ne nous reste plus alors qu'à linéariser cette dernière contrainte
+pour atteindre la formulation finale de notre problème. Pour cela,
+de la même façon que nous avons rajouté la variable $y_{ij}$ lors
+de l'étape 2, nous introduisons ici la variable $w_{ijl}$ telle que
+:\\
+\\
+$\begin{cases}
+w_{ijl}\leq x_{ij}\\
+w_{ijl}\leq x_{lj}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1
+\end{cases}$ , \\
+\\
+Donc pour la contrainte de connexité/répartition homogène des cantons
+dans une circonscritpion donne:\\
+$\begin{cases}
+w_{ijl}\leq x_{ij}\\
+w_{ijl}\leq x_{kj}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1\\
+d_{il}\leq D
+\end{cases}$ \\
+\\
+\\
+Finalement, le problème s'écrit : \\
+
+\[
+\max\left(z\right)=\stackrel[j=1]{k}{\sum}z_{j}\,\,\,
+\]
+\\
+\[
+\begin{cases}
+\stackrel[j=1]{k}{\sum}x_{ij}=1 & \forall i\in\{1,\dots,n\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\geq1 & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\leq\frac{1,20}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\geq\frac{0,8}{k}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,k\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,k\}\\
+y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+\stackrel[i=1]{n}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{n}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq z_{j} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\leq x_{ij} & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,k\}\\
+d_{il}\leq D & \forall i,l\in\{1,\dots,n\}{{}^2}\\
+w_{ijl}\leq x_{ij} & \forall(i,l,j)\in\{1,\dots,n\}{{}^2}\times\{1,\dots,k\}\\
+w_{ijl}\leq x_{lj} & \forall(i,l,j)\in\{1,\dots,n\}{{}^2}\times\{1,\dots,k\}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1 & \forall(i,l,j)\in\{1,\dots,n\}{{}^2}\times\{1,\dots,k\}
+\end{cases}
+\]
+
+
+\part{PARTIE PRATIQUE}
+
+\chapter{Utilisation d'un solveur }
+
+\section{Application du solveur sur un \emph{toy example}}
+
+Nous décidons d'utiliser CPLEX via l'API Python. \\
+\\
+Afin de prendre en main ce solveur, nous allons tout d'abord essayer
+de résoudre le problème sur un \emph{toy example.}\\
+On décide de le construire nous-mêmes pour pouvoir vérifier les résultats
+en introduisant peu de valeurs et des valeurs simples.\\
+\\
+On rappelle que l'on a $n\,cantons$ et $k\,circonscriptions$.\\
+Les données $nbV_{i},pV_{i}$ appartenant au canton $i$ respectivement
+le nombre de votants du canton et le pourcentage/proportion de votants
+qui soutiennent le parti A.\\
+\\
+Ici, on choisit donc :\\
+\\
+$\begin{cases}
+2\,circonscriptions & ==>k=2\\
+5\,cantons & ==>n=5
+\end{cases}$\\
+\\
+Pour les $nbV_{i},pV_{i},$on choisit arbitrairement :\\
+$\begin{cases}
+nbV_{1}=5 & pV_{1}=0.4\\
+nbV_{2}=6 & pV_{2}=0.6\\
+nbV_{3}=5 & pV_{3}=0.7\\
+nbV_{4}=6 & pV_{4}=0.2\\
+nbV_{5}=7 & pV_{5}=0.9
+\end{cases}$\\
+\\
+\\
+\begin{figure}[H]
+\includegraphics[scale=0.5]{\string"Toy Example\string".png}\caption{Situation initiale à résoudre avec un \emph{toy example} }
+\end{figure}
+\\
+\\
+\\
+On a donc :\\
+\[
+\max\left(z\right)=z_{1}+z_{2}\,\,\,
+\]
+\\
+\[
+\begin{cases}
+x_{i1}+x_{i2}=1 & \forall i\in\{1,\dots,5\}\\
+x_{1j}+x_{2j}+x_{3j}+x_{4j}+x_{5j}\geq1 & \forall j\in\{1,\dots,2\}\\
+x_{1j}nbV_{1}+x_{2j}nbV_{2}+x_{3j}nbV_{3}+x_{4j}nbV_{4}+x_{5j}nbV_{5}\,\,\leq\,\,\frac{1,20}{2}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,2\}\\
+x_{1j}nbV_{1}+x_{2j}nbV_{2}+x_{3j}nbV_{3}+x_{4j}nbV_{4}+x_{5j}nbV_{5\,\,}\geq\,\,\frac{0,8}{2}\stackrel[i=1]{n}{\sum}nbV_{i} & \forall j\in\{1,\dots,2\}\\
+x_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,n\}\times\{1,\dots,2\}\\
+z_{j}\in\left\{ 0,1\right\}  & \forall j\in\{1,\dots,2\}\\
+y_{ij}\in\left\{ 0,1\right\}  & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+\stackrel[i=1]{5}{\sum}y_{ij}\times nbV_{i}\leq\stackrel[i=1]{5}{\sum}x_{ij}\times nbV_{i}\times pV_{i}+\frac{1}{2}\stackrel[i=1]{5}{\sum}x_{ij}\times nbV_{i} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\leq z_{j} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\leq x_{ij} & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+y_{ij}\geq z_{j}+x_{ij}-1 & \forall(i,j)\in\{1,\dots,5\}\times\{1,\dots,2\}\\
+d_{il}\leq D & \forall i,l\in\{1,\dots,5\}{{}^2}\\
+w_{ijl}\leq x_{ij} & \forall(i,l,j)\in\{1,\dots,5\}{{}^2}\times\{1,\dots,2\}\\
+w_{ijl}\leq x_{lj} & \forall(i,l,j)\in\{1,\dots,5\}{{}^2}\times\{1,\dots,2\}\\
+w_{ijl}\geq x_{lj}+x_{ij}-1 & \forall(i,l,j)\in\{1,\dots,5\}{{}^2}\times\{1,\dots,2\}
+\end{cases}
+\]
+\\
+\\
+L'objectif est à présent de mettre ce programme linéaire sous la forme
+d'un problème résoluble en machine.\\
+\\
+\\
+\textbf{Pour voir la résolution de ce problème, il faut ouvrir la
+page HTML \og}\textbf{\emph{Resolution\_CPLEX\_DecoupageElectoral}}\textbf{\fg{}
+crée à partir du Jupyter Notebook que nous avons utilisé.}\\
+
+
+\section{Application du solveur sur un problème plus réaliste}
+
+Ayant constaté l'efficacité de notre modélisation sur un jeu de données
+simple, on veut maintenant élargir les possibilités que l'on peut
+en faire en introduisant un jeu de données plus important. Cela nous
+permet de nous rapprocher d'une situation complètement réaliste et
+donc de rendre notre modèle utile à tous.
+
+Comme jeu de données nous avons utilisé des données sur les communes
+de la Seine-Maritime. Ces données sont gratuitement accessibles sur
+le site de l'insee et permettent de connaître la population de chaque
+commune du département \cite{key-3}. Nous avons aussi récupéré les
+coordonnées géographiques de chaque commune pour pouvoir calculer
+les distances entre celles-ci \cite{key-4-1}. Ici, les communes jouent
+donc le rôle des cantons dans notre modèle. Une étape importante avant
+d'appliquer le solveur à notre jeu de données a été de découper les
+plus grosses communes de la régions, car celles-ci ont une population
+plus importante que certaines circonscriptions. Ainsi, en se basant
+sur le découpage des communes que l'on trouve dans la réalité (on
+parle alors de fractions cantonales), la commune du Havre a été découpé
+en 6, celle de Rouen en 3, et celle de Dieppe en 2. Dernièrement,
+il nous fallait un pourcentage de votes fictif pour les parties A
+et B pour chaque communes du département. Nous avons simplement créé
+des données à partir d'une fonction gaussienne de moyenne $\frac{1}{2}$
+et d'écart type $\frac{1}{10}$. Le jeu de données se trouve en annexe
+du rapport au format csv.
+
+Une fois le jeu de données modélisé, nous avions donc un problème
+avec $674$ cantons et nous voulions tester de créer $36$ circonscriptions
+pour voir si nous allions obtenir un résultat proche du découpage
+actuel en Seine-Maritime. Le soucis a été que la version que nous
+avions de Cplex nous limitait dans le nombre de variables que nous
+pouvions créer. Nous avons donc, dans un premier temps, essayé sans
+les données sur les distances nécessitant $674^{2}$ variables en
+plus, soit $454276$ variables. Mais nous avions donc toujours trop
+de variables. Nous avons donc été contraint de réduire la taille de
+notre jeu de données à un problème avec $100$ cantons et $3$ circonscriptions.
+
+\textbf{Pour voir la résolution de ce problème, il faut ouvrir la
+page HTML \og}\textbf{\emph{Resolution\_CPLEX\_DecoupageElectoral}}\textbf{-Seine-Maritime\fg{}
+créé à partir du Jupyter Notebook que nous avons utilisé.}
+
+Pour aller plus loin sur ce jeu de données, il faudrait d'abord se
+procurer une version moins restrictive de Cplex. On pourrait ainsi
+étudier nos données plus finement et comparer avec ce qui a été fait
+et proposé dans la réalité.
+
+\part*{Conclusion}
+
+Bien que nos jeux de données soient trop pauvres pour ressortir des
+informations pertinentes qui pourraient être appliquées lors d'une
+réelle élection politique, notre modèle mathématique de découpage
+électoral est globalement réussi.
+
+En effet, le découpage et le partitionnement d'une circonscription
+peut paraître anodin. Il nécessite pourtant d'être traité avec une
+minutie et un détail certain car son rôle est d'une importance insoupçonnée
+par la plupart des gens et fondamentale dans le résultat d'un scrutin.
+
+Notre travail a permis de mettre en évidence qu'avec la même situation
+mais un découpage différent, on pouvait former la victoire écrasante
+du parti A à sa défaite en quelques modifications.\\
+\\
+C'est avec une énorme frustration que nous nous voyons dans l'obligation
+de clore notre travail ici pour le moment n'ayant pas eu l'opportunité
+d'aborder ensemble ni des situations engageant plus de 2 partis politiques
+ni d'enrichir les connaissances dans ce domaine en allant plus loin
+et en proposant un modèle de découpage qui se voudrait le moins subjectif
+et partisan possible.\\
+\\
+Nous remercions Monsieur Knippel de nous avoir permis d'appliquer
+nos compétences en optimisation et modélisation mathématiques à des
+problèmes contemporains qui nous touchent et nous passionnent personnellement.
+Nous prévoyons d'enrichir nos jeux de données de quelques exemples
+d'élections passées afin de le perfectionner quand le temps le permettra.
+\begin{thebibliography}{1}
+\bibitem[1]{key-5}\href{https://en.wikipedia.org/wiki/Gerrymandering}{Wikipédia Gerrymandering}
+
+\bibitem[2]{key-1}\href{https://www.conseil-constitutionnel.fr/decision/1986/86208DC.htm}{Site du conseil constitutionnel}
+
+\bibitem[3]{key-2}\href{https://www.cairn.info/revue-pouvoirs-2013-3-page-117.htm}{Thomas Ehrhard "Le découpage électoral des circonscriptions législatives : le parlement hors jeu ?"}
+
+\bibitem[4]{key-3}\href{https://www.insee.fr/fr/statistiques/2525755\%3Fsommaire\%3D2525768}{Site de l'insee}
+
+\bibitem[5]{key-4-1}\href{https://www.galichon.com/codesgeo/}{Coordonnées géographiques des villes Françaises}
+\end{thebibliography}
+
+\end{document}
